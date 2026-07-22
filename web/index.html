@@ -197,6 +197,10 @@ tr.funded td{background:color-mix(in oklab,var(--earned) 6%,transparent)}
 
 <script>
 const $=s=>document.querySelector(s), fmt=(x,d=3)=>Number(x||0).toFixed(d), pct=x=>(x*100).toFixed(1)+"%";
+// HTML-escape EVERY untrusted string before it reaches innerHTML. merit-state /
+// SafeMolt content is agent-authored (candidate titles, handles, topics, rationales)
+// and must be treated as hostile — a post titled <img onerror=…> must not execute.
+const esc=s=>String(s==null?"":s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
 const RAW_BASE="https://raw.githubusercontent.com/Merit-AO/merit-state/main/";
 const KIND_COLOR={founder:"var(--earned)",human:"var(--human)",newcomer:"var(--muted)",sybil:"var(--clip)",ring:"var(--clip)",sleeper:"var(--clip)",agent:"var(--signal)"};
 
@@ -208,13 +212,14 @@ $("#themebtn").onclick=()=>{const r=document.documentElement;
 // ---------- state ----------
 let DS=null, SEL=null, TOPIC=null, RID=1, SOURCES=[];
 const Q=new URLSearchParams(location.search); let firstLoad=true;
-let SERVER=Q.get("server")||"", SERVER_OK=false;   // "" = same-origin (served by the sim server)
+const SERVER="";        // same-origin ONLY — a ?server= param would let a crafted link
+let SERVER_OK=false;    // point a viewer's browser at an attacker endpoint (XSS/exfil)
 async function probeServer(){
   try{ const h=await fetch(SERVER+"/api/health",{cache:"no-store"}); SERVER_OK=h.ok; }
   catch(e){ SERVER_OK=false; }
   $("#whatif").hidden=!SERVER_OK;
   if(SERVER_OK){ try{const j=await (await fetch(SERVER+"/api/health")).json();
-    $("#wi-preset").innerHTML=(j.presets||["baseline"]).map(p=>`<option>${p}</option>`).join("");}catch(e){} }
+    $("#wi-preset").innerHTML=(j.presets||["baseline"]).map(p=>`<option>${esc(p)}</option>`).join("");}catch(e){} }
 }
 function pushUrl(){ const q=new URLSearchParams();
   q.set("src",$("#src").value); if(SEL)q.set("sel",SEL); if(TOPIC)q.set("topic",TOPIC);
@@ -262,7 +267,7 @@ async function load(){
   const id=$("#src").value, src=SOURCES.find(s=>s.id===id);
   $("#detail").innerHTML=`<div class="empty">loading…</div>`;
   try{ DS = src.kind==="real" ? await loadReal() : await loadSim(src.file); }
-  catch(e){ $("#detail").innerHTML=`<div class="empty">failed to load: ${e.message}</div>`; return; }
+  catch(e){ $("#detail").innerHTML=`<div class="empty">failed to load: ${esc(e.message)}</div>`; return; }
   applyDS();
 }
 function applyDS(){
@@ -273,14 +278,14 @@ function applyDS(){
   $("#badge").className="badge "+(isSim?"sim":"real"); $("#badge").textContent=isSim?"simulated":"real";
   const prov=$("#prov"); prov.className="provenance "+(isSim?"sim":"real");
   prov.innerHTML=isSim
-    ? `<span class="badge sim">simulated</span> Synthetic identities on the <b>real engine</b> — not live state. <b>${DS.scenario?.name}</b>: ${DS.scenario?.description||""}`
-    : `<span class="badge real">real</span> Live from <a href="https://github.com/Merit-AO/merit-state" target="_blank" rel="noopener">Merit-AO/merit-state</a>. ${DS.note?("<b>"+DS.note+"</b>"):""}`;
+    ? `<span class="badge sim">simulated</span> Synthetic identities on the <b>real engine</b> — not live state. <b>${esc(DS.scenario?.name)}</b>: ${esc(DS.scenario?.description||"")}`
+    : `<span class="badge real">real</span> Live from <a href="https://github.com/Merit-AO/merit-state" target="_blank" rel="noopener">Merit-AO/merit-state</a>. ${DS.note?("<b>"+esc(DS.note)+"</b>"):""}`;
   $("#srcsub").textContent=`${DS.rounds.length} round${DS.rounds.length!==1?"s":""} · ${DS.agents.length} participants`;
   $("#footsrc").textContent=isSim?("sim seed "+(DS.scenario?.seed)):("merit-state · "+DS.rounds.length+" rounds");
   $("#metricspanel").hidden=!isSim || !DS.metrics;
   // topics
   $("#topics").innerHTML=`<button class="pill" data-t="" aria-pressed="true">all topics</button>`+
-    DS.topics.map(t=>`<button class="pill" data-t="${t}" aria-pressed="false">${t}</button>`).join("");
+    DS.topics.map(t=>`<button class="pill" data-t="${esc(t)}" aria-pressed="false">${esc(t)}</button>`).join("");
   $("#topics").querySelectorAll(".pill").forEach(b=>b.onclick=()=>{TOPIC=b.dataset.t||null;
     $("#topics").querySelectorAll(".pill").forEach(x=>x.setAttribute("aria-pressed",x===b));draw();});
   if(firstLoad){
@@ -326,15 +331,15 @@ function drawStage(){
       edges+=`<line x1="${pos[pid][0]}" y1="${pos[pid][1]}" x2="${pos[t][0]}" y2="${pos[t][1]}" stroke="var(--edge)" stroke-width="${Math.min(3,1+w)}"/>`;}}});
   P.forEach(pid=>{const[x,y]=pos[pid],r=rad(pid),col=KIND_COLOR[kindOf(pid)]||"var(--signal)",on=SEL===pid;
     const lab=pid.length>9?pid.slice(0,7)+"…":pid;
-    nodes+=`<g class="node" data-pid="${pid}" transform="translate(${x},${y})">
+    nodes+=`<g class="node" data-pid="${esc(pid)}" transform="translate(${x},${y})">
       <circle r="${r}" fill="${col}" fill-opacity="${on?.95:.72}" stroke="${on?'var(--ink)':col}" stroke-width="${on?2.5:1}"/>
-      <text text-anchor="middle" y="${r+13}" font-size="11" fill="var(--ink)" font-weight="600">${lab}</text>
+      <text text-anchor="middle" y="${r+13}" font-size="11" fill="var(--ink)" font-weight="600">${esc(lab)}</text>
       <text text-anchor="middle" y="4" font-size="${Math.min(13,r*0.6)}" fill="var(--surface)" font-weight="700">${((sh[pid]||0)*100).toFixed(0)}</text></g>`;});
   svg.innerHTML=edges+nodes;
   svg.querySelectorAll(".node").forEach(g=>{
     g.onclick=()=>{SEL=g.dataset.pid;draw();};
     g.onmousemove=e=>{const pid=g.dataset.pid;
-      $("#tip").innerHTML=`<b>${pid}</b><br>weight ${fmt(rw[pid],4)} · share ${pct(sh[pid]||0)}<br>cap ${fmt(cp[pid],2)} MERIT`;
+      $("#tip").innerHTML=`<b>${esc(pid)}</b><br>weight ${fmt(rw[pid],4)} · share ${pct(sh[pid]||0)}<br>cap ${fmt(cp[pid],2)} MERIT`;
       const t=$("#tip");t.style.opacity=1;t.style.left=(e.clientX+14)+"px";t.style.top=(e.clientY+14)+"px";};
     g.onmouseleave=()=>$("#tip").style.opacity=0;
   });
@@ -371,17 +376,17 @@ function drawDetail(){
       real round-logs yet — showing raw participant state. Weight/cap below are the engine's precomputed values.</div>`;
   }
   // topic trust
-  const tv=pt.topic_vouches||{}; const tvItems=Object.entries(tv).flatMap(([tp,e])=>Object.entries(e).map(([t,w])=>`${t}·${tp} ${fmt(w,1)}`));
+  const tv=pt.topic_vouches||{}; const tvItems=Object.entries(tv).flatMap(([tp,e])=>Object.entries(e).map(([t,w])=>`${esc(t)}·${esc(tp)} ${fmt(w,1)}`));
   // vote/outcome history (this round)
   const votes=(r&&r.votes||[]).filter(v=>v.voter===SEL);
   const cmeta=(r&&r.candidates)? Object.fromEntries(r.candidates.map(c=>[c.candidate_id,c])):{};
   const acts=votes.length? votes.map(v=>{const c=cmeta[v.candidate];
     return `<div style="display:flex;justify-content:space-between;gap:8px;border-bottom:1px dashed var(--grid);padding:3px 0;font-family:var(--mono);font-size:11.5px">
-      <span>${c?c.title.slice(0,34):v.candidate}</span><span>conf ${fmt(v.confidence,2)}${v.outcome!=null?` · out ${fmt(v.outcome,2)}`:""}</span></div>`;}).join("")
+      <span>${esc(c?c.title.slice(0,34):v.candidate)}</span><span>conf ${fmt(v.confidence,2)}${v.outcome!=null?` · out ${fmt(v.outcome,2)}`:""}</span></div>`;}).join("")
     : `<div style="font-family:var(--mono);font-size:11px;color:var(--muted)">no votes this round</div>`;
   d.innerHTML=`
     <div class="dhead"><div class="dot" style="background:${col}"></div>
-      <div><div class="nm">${SEL}</div><div class="role">${kindOf(SEL)}${pt.is_founder?" · anchor":""}</div></div></div>
+      <div><div class="nm">${esc(SEL)}</div><div class="role">${esc(kindOf(SEL))}${pt.is_founder?" · anchor":""}</div></div></div>
     <div class="stats">
       <div class="stat"><div class="k">raw weight</div><div class="v">${fmt(rw[SEL],3)}</div></div>
       <div class="stat"><div class="k">voting share</div><div class="v">${pct(sh[SEL]||0)}</div></div>
@@ -404,12 +409,12 @@ function drawTally(){
   const mx=Math.max(...cands.map(c=>r.scores[c]),1e-6);
   const vByCand={}; (r.votes||[]).forEach(v=>{(vByCand[v.candidate]=vByCand[v.candidate]||{})[v.voter]=v.confidence;});
   $("#tally thead").innerHTML=`<tr><th class="cand">contribution</th><th>topic</th>`+
-    voters.map(v=>`<th>${v.length>7?v.slice(0,6)+"…":v}</th>`).join("")+`<th>score</th><th>paid</th></tr>`;
+    voters.map(v=>`<th>${esc(v.length>7?v.slice(0,6)+"…":v)}</th>`).join("")+`<th>score</th><th>paid</th></tr>`;
   $("#tally tbody").innerHTML=cands.sort((a,b)=>r.scores[b]-r.scores[a]).map(c=>{
     const cm=cmeta[c], paid=r.paid?.[c]||0, isW=paid>0, topic=(r.candidate_topics||{})[c]||"—";
     const cells=voters.map(v=>`<td>${vByCand[c]?.[v]!=null?fmt(vByCand[c][v],2):"·"}</td>`).join("");
-    return `<tr class="${isW?'funded':''}"><td class="cand"><div class="t">${cm?cm.title:c}</div><div class="m">${cm?cm.author:""}${cm&&cm.true_quality!=null?` · q=${fmt(cm.true_quality,2)}`:""}</div></td>
-      <td><span class="tp">${topic}</span></td>${cells}
+    return `<tr class="${isW?'funded':''}"><td class="cand"><div class="t">${esc(cm?cm.title:c)}</div><div class="m">${esc(cm?cm.author:"")}${cm&&cm.true_quality!=null?` · q=${fmt(cm.true_quality,2)}`:""}</div></td>
+      <td><span class="tp">${esc(topic)}</span></td>${cells}
       <td class="scorecell"><div class="scorebar" style="width:${(r.scores[c]/mx)*100}%"></div><span>${fmt(r.scores[c],3)}</span></td>
       <td class="pay ${paid>0?'':'zero'}">${paid>0?fmt(paid,3):'—'}${r.clipped?.[c]?' ✂':''}</td></tr>`;
   }).join("")||`<tr><td class="cand" style="color:var(--muted)">no candidates in this topic</td></tr>`;
@@ -419,7 +424,7 @@ function drawTally(){
 function drawMetrics(){
   if(!DS.metrics){ $("#metricspanel").hidden=true; return; }
   $("#metricspanel").hidden=false; const m=DS.metrics;
-  const ttt=Object.entries(m.time_to_trust||{}).filter(([,r])=>r).map(([p,r])=>`${p}:r${r}`).join(" · ")||"—";
+  const ttt=Object.entries(m.time_to_trust||{}).filter(([,r])=>r).map(([p,r])=>`${esc(p)}:r${r}`).join(" · ")||"—";
   const capWarn=(m.peak_adversarial_share||0)>=0.15;
   $("#mgrid").innerHTML=`
     <div class="metric"><div class="k">time-to-trust</div><div class="v" style="font-size:14px">${ttt}</div></div>
@@ -428,10 +433,10 @@ function drawMetrics(){
     <div class="metric"><div class="k">rounds</div><div class="v">${m.rounds}</div></div>`;
   let v=[];
   if(m.adversarial_pids?.length){ v.push(capWarn
-    ? `⚠️ Adversaries (${m.adversarial_pids.join(", ")}) peaked at <b>${pct(m.peak_adversarial_share)}</b> share${m.adversary_committed_a_payout?" and committed a payout":""} — inspect the faucet + tether.`
+    ? `⚠️ Adversaries (${esc(m.adversarial_pids.join(", "))}) peaked at <b>${pct(m.peak_adversarial_share)}</b> share${m.adversary_committed_a_payout?" and committed a payout":""} — inspect the faucet + tether.`
     : `✅ Capture resisted — adversaries peaked at ${pct(m.peak_adversarial_share)} and never committed a payout.`);}
   const climbers=Object.entries(m.time_to_trust||{}).filter(([,r])=>r).map(([p])=>p);
-  if(climbers.length) v.push(`✅ Earned ascension — ${climbers.join(", ")} climbed past the delegate floor.`);
+  if(climbers.length) v.push(`✅ Earned ascension — ${esc(climbers.join(", "))} climbed past the delegate floor.`);
   $("#verdict").innerHTML=v.join("<br>")||"—";
 }
 

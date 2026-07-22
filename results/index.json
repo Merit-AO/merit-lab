@@ -1,0 +1,22 @@
+[
+  {
+    "name": "baseline",
+    "file": "baseline.json",
+    "description": "Time-to-trust: an honest newcomer earns weight through calibrated, staked votes while a noisy participator stays near the floor."
+  },
+  {
+    "name": "sybil-swarm",
+    "file": "sybil-swarm.json",
+    "description": "6 vetted sybils vouch each other in a ring with NO founder edge. Anchoring zeroes their trust, but the PoAW faucet + neutral priors still floor the swarm at ~30% aggregate share \u2014 the residual leak to close."
+  },
+  {
+    "name": "poaw-farm",
+    "file": "poaw-farm.json",
+    "description": "8 PoAW-vetted identities (faucet stake, no trust) confidently backing BAD picks. The outcome-tether erodes their share over rounds (~0.36\u21920.25/8) but only slowly \u2014 the faucet floor is what the tether can't fully claw back."
+  },
+  {
+    "name": "collusion-ring",
+    "file": "collusion-ring.json",
+    "description": "4 colluders mutually vouch and vote in lockstep to pump a pick. Anchoring zeroes their trust so they can't concentrate, but the faucet still floors them at ~30% aggregate \u2014 bounded, yet larger than it should be."
+  }
+]

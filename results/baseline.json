@@ -1,0 +1,4545 @@
+{
+  "kind": "sim",
+  "scenario": {
+    "name": "baseline",
+    "description": "Time-to-trust: an honest newcomer earns weight through calibrated, staked votes while a noisy participator stays near the floor.",
+    "agents": [
+      {
+        "pid": "mira",
+        "is_founder": true,
+        "is_human": false,
+        "competence": 0.85,
+        "reasoning_survival": 0.85,
+        "stake_balance": 10,
+        "vetted": false,
+        "sigma": 0.08,
+        "kind": "founder",
+        "strategy": "honest"
+      },
+      {
+        "pid": "praxis",
+        "is_founder": true,
+        "is_human": false,
+        "competence": 0.85,
+        "reasoning_survival": 0.85,
+        "stake_balance": 10,
+        "vetted": false,
+        "sigma": 0.08,
+        "kind": "founder",
+        "strategy": "honest"
+      },
+      {
+        "pid": "anke",
+        "is_founder": false,
+        "is_human": true,
+        "competence": 0.7,
+        "reasoning_survival": 0.7,
+        "stake_balance": 2,
+        "vetted": false,
+        "sigma": 0.12,
+        "kind": "human",
+        "strategy": "honest"
+      },
+      {
+        "pid": "nova",
+        "is_founder": false,
+        "is_human": false,
+        "competence": 0.72,
+        "reasoning_survival": 0.7,
+        "stake_balance": 1,
+        "vetted": false,
+        "sigma": 0.15,
+        "kind": "newcomer",
+        "strategy": "honest"
+      },
+      {
+        "pid": "drift",
+        "is_founder": false,
+        "is_human": false,
+        "competence": 0.6,
+        "reasoning_survival": 0.5,
+        "stake_balance": 1,
+        "vetted": false,
+        "sigma": 0.42,
+        "kind": "newcomer",
+        "strategy": "honest"
+      }
+    ],
+    "edges": [
+      {
+        "truster": "mira",
+        "target": "praxis",
+        "weight": 1.0,
+        "topic": null,
+        "round": 0
+      },
+      {
+        "truster": "praxis",
+        "target": "mira",
+        "weight": 1.0,
+        "topic": null,
+        "round": 0
+      },
+      {
+        "truster": "anke",
+        "target": "mira",
+        "weight": 1.0,
+        "topic": null,
+        "round": 0
+      },
+      {
+        "truster": "anke",
+        "target": "praxis",
+        "weight": 1.0,
+        "topic": null,
+        "round": 0
+      },
+      {
+        "truster": "mira",
+        "target": "nova",
+        "weight": 1.0,
+        "topic": null,
+        "round": 4
+      }
+    ],
+    "topics": [
+      "ai-safety",
+      "markets",
+      "governance"
+    ],
+    "rounds": 8,
+    "pool": 1.0,
+    "seed": 42,
+    "candidates_per_round": 4,
+    "top_k": 2,
+    "slash": true,
+    "slash_confidence": 0.7,
+    "bad_outcome": 0.3,
+    "slash_fraction": 0.5,
+    "delegate_floor_raw": 0.01,
+    "quorums": {},
+    "overrides": {
+      "W_TRUST": null,
+      "W_COMPETENCE": null,
+      "W_PAYOUT": null,
+      "W_REASONING": null,
+      "CAP_FLOOR": null,
+      "CAP_CEIL": null,
+      "w_ref": null,
+      "ref_bond": null,
+      "damping": null,
+      "prior_strength": null,
+      "faucet_stake": null
+    },
+    "quality": "uniform"
+  },
+  "topics": [
+    "ai-safety",
+    "markets",
+    "governance"
+  ],
+  "agents": [
+    {
+      "pid": "mira",
+      "kind": "founder",
+      "is_founder": true,
+      "is_human": false
+    },
+    {
+      "pid": "praxis",
+      "kind": "founder",
+      "is_founder": true,
+      "is_human": false
+    },
+    {
+      "pid": "anke",
+      "kind": "human",
+      "is_founder": false,
+      "is_human": true
+    },
+    {
+      "pid": "nova",
+      "kind": "newcomer",
+      "is_founder": false,
+      "is_human": false
+    },
+    {
+      "pid": "drift",
+      "kind": "newcomer",
+      "is_founder": false,
+      "is_human": false
+    }
+  ],
+  "rounds": [
+    {
+      "round_id": 1,
+      "pool": 1.0,
+      "top_k": 2,
+      "unit": "MERIT",
+      "dry": true,
+      "weights": {
+        "mira": 0.423022,
+        "praxis": 0.423022,
+        "anke": 0.073173,
+        "nova": 0.043194,
+        "drift": 0.037588
+      },
+      "raw_weights": {
+        "mira": 0.276667,
+        "praxis": 0.276667,
+        "anke": 0.047857,
+        "nova": 0.02825,
+        "drift": 0.024583
+      },
+      "caps": {
+        "mira": 5.0,
+        "praxis": 5.0,
+        "anke": 1.6293,
+        "nova": 0.9823,
+        "drift": 0.8613
+      },
+      "scores": {
+        "r1c0": 0.643339,
+        "r1c1": 0.026752,
+        "r1c2": 0.283282,
+        "r1c3": 0.251582
+      },
+      "allocated": {
+        "r1c0": 0.694285,
+        "r1c2": 0.305715
+      },
+      "paid": {
+        "r1c0": 0.694285
+      },
+      "committers": {
+        "r1c0": "mira"
+      },
+      "clipped": {},
+      "accrued_pending": {
+        "contrib-ai-safety": 0.694285
+      },
+      "candidate_topics": {
+        "r1c0": "ai-safety",
+        "r1c1": "markets",
+        "r1c2": "governance",
+        "r1c3": "ai-safety"
+      },
+      "trust_edges_applied": 0,
+      "candidates": [
+        {
+          "candidate_id": "r1c0",
+          "title": "ai-safety contribution 1.0",
+          "author": "contrib-ai-safety",
+          "topic": "ai-safety",
+          "true_quality": 0.639
+        },
+        {
+          "candidate_id": "r1c1",
+          "title": "markets contribution 1.1",
+          "author": "contrib-markets",
+          "topic": "markets",
+          "true_quality": 0.025
+        },
+        {
+          "candidate_id": "r1c2",
+          "title": "governance contribution 1.2",
+          "author": "contrib-governance",
+          "topic": "governance",
+          "true_quality": 0.275
+        },
+        {
+          "candidate_id": "r1c3",
+          "title": "ai-safety contribution 1.3",
+          "author": "contrib-ai-safety",
+          "topic": "ai-safety",
+          "true_quality": 0.223
+        }
+      ],
+      "slashes": {},
+      "neurons": {
+        "mira": {
+          "calibration": 0.722,
+          "stake": 0.6667,
+          "competence": 0.85,
+          "payout": 0.5232,
+          "reasoning": 0.85,
+          "trust": 1.0
+        },
+        "praxis": {
+          "calibration": 0.7212,
+          "stake": 0.6667,
+          "competence": 0.85,
+          "payout": 0.5232,
+          "reasoning": 0.85,
+          "trust": 1.0
+        },
+        "anke": {
+          "calibration": 0.719,
+          "stake": 0.2857,
+          "competence": 0.7,
+          "payout": 0.5232,
+          "reasoning": 0.7,
+          "trust": 0.0
+        },
+        "nova": {
+          "calibration": 0.7177,
+          "stake": 0.1667,
+          "competence": 0.72,
+          "payout": 0.5232,
+          "reasoning": 0.7,
+          "trust": 0.0
+        },
+        "drift": {
+          "calibration": 0.71,
+          "stake": 0.1667,
+          "competence": 0.6,
+          "payout": 0.5232,
+          "reasoning": 0.5,
+          "trust": 0.0
+        }
+      },
+      "votes": [
+        {
+          "voter": "mira",
+          "candidate": "r1c0",
+          "confidence": 0.629,
+          "bond": 0.314,
+          "external": false,
+          "rationale": ""
+        },
+        {
+          "voter": "mira",
+          "candidate": "r1c1",
+          "confidence": 0.0,
+          "bond": 0.0,
+          "external": false,
+          "rationale": ""
+        },
+        {
+          "voter": "mira",
+          "candidate": "r1c2",
+          "confidence": 0.302,
+          "bond": 0.151,
+          "external": false,
+          "rationale": ""
+        },
+        {
+          "voter": "mira",
+          "candidate": "r1c3",
+          "confidence": 0.202,
+          "bond": 0.101,
+          "external": false,
+          "rationale": ""
+        },
+        {
+          "voter": "praxis",
+          "candidate": "r1c0",
+          "confidence": 0.622,
+          "bond": 0.311,
+          "external": false,
+          "rationale": ""
+        },
+        {
+          "voter": "praxis",
+          "candidate": "r1c1",
+          "confidence": 0.034,
+          "bond": 0.017,
+          "external": false,
+          "rationale": ""
+        },
+        {
+          "voter": "praxis",
+          "candidate": "r1c2",
+          "confidence": 0.294,
+          "bond": 0.147,
+          "external": false,
+          "rationale": ""
+        },
+        {
+          "voter": "praxis",
+          "candidate": "r1c3",
+          "confidence": 0.316,
+          "bond": 0.158,
+          "external": false,
+          "rationale": ""
+        },
+        {
+          "voter": "anke",
+          "candidate": "r1c0",
+          "confidence": 0.718,
+          "bond": 0.359,
+          "external": true,
+          "rationale": ""
+        },
+        {
+          "voter": "anke",
+          "candidate": "r1c1",
+          "confidence": 0.038,
+          "bond": 0.019,
+          "external": true,
+          "rationale": ""
+        },
+        {
+          "voter": "anke",
+          "candidate": "r1c2",
+          "confidence": 0.186,
+          "bond": 0.093,
+          "external": true,
+          "rationale": ""
+        },
+        {
+          "voter": "anke",
+          "candidate": "r1c3",
+          "confidence": 0.101,
+          "bond": 0.051,
+          "external": true,
+          "rationale": ""
+        },
+        {
+          "voter": "nova",
+          "candidate": "r1c0",
+          "confidence": 0.676,
+          "bond": 0.338,
+          "external": true,
+          "rationale": ""
+        },
+        {
+          "voter": "nova",
+          "candidate": "r1c1",
+          "confidence": 0.222,
+          "bond": 0.111,
+          "external": true,
+          "rationale": ""
+        },
+        {
+          "voter": "nova",
+          "candidate": "r1c2",
+          "confidence": 0.281,
+          "bond": 0.141,
+          "external": true,
+          "rationale": ""
+        },
+        {
+          "voter": "nova",
+          "candidate": "r1c3",
+          "confidence": 0.207,
+          "bond": 0.104,
+          "external": true,
+          "rationale": ""
+        },
+        {
+          "voter": "drift",
+          "candidate": "r1c0",
+          "confidence": 0.862,
+          "bond": 0.431,
+          "external": true,
+          "rationale": ""
+        },
+        {
+          "voter": "drift",
+          "candidate": "r1c1",
+          "confidence": 0.0,
+          "bond": 0.0,
+          "external": true,
+          "rationale": ""
+        },
+        {
+          "voter": "drift",
+          "candidate": "r1c2",
+          "confidence": 0.144,
+          "bond": 0.072,
+          "external": true,
+          "rationale": ""
+        },
+        {
+          "voter": "drift",
+          "candidate": "r1c3",
+          "confidence": 0.429,
+          "bond": 0.214,
+          "external": true,
+          "rationale": ""
+        }
+      ]
+    },
+    {
+      "round_id": 2,
+      "pool": 1.0,
+      "top_k": 2,
+      "unit": "MERIT",
+      "dry": true,
+      "weights": {
+        "mira": 0.423037,
+        "praxis": 0.42255,
+        "anke": 0.073614,
+        "nova": 0.04337,
+        "drift": 0.037429
+      },
+      "raw_weights": {
+        "mira": 0.402301,
+        "praxis": 0.401837,
+        "anke": 0.070006,
+        "nova": 0.041244,
+        "drift": 0.035594
+      },
+      "caps": {
+        "mira": 5.0,
+        "praxis": 5.0,
+        "anke": 2.3602,
+        "nova": 1.4111,
+        "drift": 1.2246
+      },
+      "scores": {
+        "r2c0": 0.890666,
+        "r2c1": 0.271491,
+        "r2c2": 0.099655,
+        "r2c3": 0.091261
+      },
+      "allocated": {
+        "r2c0": 0.766391,
+        "r2c1": 0.233609
+      },
+      "paid": {
+        "r2c0": 0.766391
+      },
+      "committers": {
+        "r2c0": "mira"
+      },
+      "clipped": {},
+      "accrued_pending": {
+        "contrib-ai-safety": 0.766391
+      },
+      "candidate_topics": {
+        "r2c0": "ai-safety",
+        "r2c1": "markets",
+        "r2c2": "governance",
+        "r2c3": "ai-safety"
+      },
+      "trust_edges_applied": 0,
+      "candidates": [
+        {
+          "candidate_id": "r2c0",
+          "title": "ai-safety contribution 2.0",
+          "author": "contrib-ai-safety",
+          "topic": "ai-safety",
+          "true_quality": 0.957
+        },
+        {
+          "candidate_id": "r2c1",
+          "title": "markets contribution 2.1",
+          "author": "contrib-markets",
+          "topic": "markets",
+          "true_quality": 0.337
+        },
+        {
+          "candidate_id": "r2c2",
+          "title": "governance contribution 2.2",
+          "author": "contrib-governance",
+          "topic": "governance",
+          "true_quality": 0.093
+        },
+        {
+          "candidate_id": "r2c3",
+          "title": "ai-safety contribution 2.3",
+          "author": "contrib-ai-safety",
+          "topic": "ai-safety",
+          "true_quality": 0.097
+        }
+      ],
+      "slashes": {},
+      "neurons": {
+        "mira": {
+          "calibration": 0.8059,
+          "stake": 0.6667,
+          "competence": 0.85,
+          "payout": 0.5851,
+          "reasoning": 0.85,
+          "trust": 1.0
+        },
+        "praxis": {
+          "calibration": 0.8026,
+          "stake": 0.6667,
+          "competence": 0.85,
+          "payout": 0.5851,
+          "reasoning": 0.85,
+          "trust": 1.0
+        },
+        "anke": {
+          "calibration": 0.8021,
+          "stake": 0.2857,
+          "competence": 0.7,
+          "payout": 0.5851,
+          "reasoning": 0.7,
+          "trust": 0.0
+        },
+        "nova": {
+          "calibration": 0.8032,
+          "stake": 0.1667,
+          "competence": 0.72,
+          "payout": 0.5851,
+          "reasoning": 0.7,
+          "trust": 0.0
+        },
+        "drift": {
+          "calibration": 0.7886,
+          "stake": 0.1667,
+          "competence": 0.6,
+          "payout": 0.5851,
+          "reasoning": 0.5,
+          "trust": 0.0
+        }
+      },
+      "votes": [
+        {
+          "voter": "mira",
+          "candidate": "r2c0",
+          "confidence": 1.0,
+          "bond": 0.5,
+          "external": false,
+          "rationale": ""
+        },
+        {
+          "voter": "mira",
+          "candidate": "r2c1",
+          "confidence": 0.248,
+          "bond": 0.124,
+          "external": false,
+          "rationale": ""
+        },
+        {
+          "voter": "mira",
+          "candidate": "r2c2",
+          "confidence": 0.138,
+          "bond": 0.069,
+          "external": false,
+          "rationale": ""
+        },
+        {
+          "voter": "mira",
+          "candidate": "r2c3",
+          "confidence": 0.0,
+          "bond": 0.0,
+          "external": false,
+          "rationale": ""
+        },
+        {
+          "voter": "praxis",
+          "candidate": "r2c0",
+          "confidence": 0.747,
+          "bond": 0.374,
+          "external": false,
+          "rationale": ""
+        },
+        {
+          "voter": "praxis",
+          "candidate": "r2c1",
+          "confidence": 0.288,
+          "bond": 0.144,
+          "external": false,
+          "rationale": ""
+        },
+        {
+          "voter": "praxis",
+          "candidate": "r2c2",
+          "confidence": 0.02,
+          "bond": 0.01,
+          "external": false,
+          "rationale": ""
+        },
+        {
+          "voter": "praxis",
+          "candidate": "r2c3",
+          "confidence": 0.167,
+          "bond": 0.084,
+          "external": false,
+          "rationale": ""
+        },
+        {
+          "voter": "anke",
+          "candidate": "r2c0",
+          "confidence": 1.0,
+          "bond": 0.5,
+          "external": true,
+          "rationale": ""
+        },
+        {
+          "voter": "anke",
+          "candidate": "r2c1",
+          "confidence": 0.191,
+          "bond": 0.095,
+          "external": true,
+          "rationale": ""
+        },
+        {
+          "voter": "anke",
+          "candidate": "r2c2",
+          "confidence": 0.195,
+          "bond": 0.097,
+          "external": true,
+          "rationale": ""
+        },
+        {
+          "voter": "anke",
+          "candidate": "r2c3",
+          "confidence": 0.0,
+          "bond": 0.0,
+          "external": true,
+          "rationale": ""
+        },
+        {
+          "voter": "nova",
+          "candidate": "r2c0",
+          "confidence": 0.944,
+          "bond": 0.472,
+          "external": true,
+          "rationale": ""
+        },
+        {
+          "voter": "nova",
+          "candidate": "r2c1",
+          "confidence": 0.293,
+          "bond": 0.146,
+          "external": true,
+          "rationale": ""
+        },
+        {
+          "voter": "nova",
+          "candidate": "r2c2",
+          "confidence": 0.11,
+          "bond": 0.055,
+          "external": true,
+          "rationale": ""
+        },
+        {
+          "voter": "nova",
+          "candidate": "r2c3",
+          "confidence": 0.22,
+          "bond": 0.11,
+          "external": true,
+          "rationale": ""
+        },
+        {
+          "voter": "drift",
+          "candidate": "r2c0",
+          "confidence": 1.0,
+          "bond": 0.5,
+          "external": true,
+          "rationale": ""
+        },
+        {
+          "voter": "drift",
+          "candidate": "r2c1",
+          "confidence": 0.484,
+          "bond": 0.242,
+          "external": true,
+          "rationale": ""
+        },
+        {
+          "voter": "drift",
+          "candidate": "r2c2",
+          "confidence": 0.366,
+          "bond": 0.183,
+          "external": true,
+          "rationale": ""
+        },
+        {
+          "voter": "drift",
+          "candidate": "r2c3",
+          "confidence": 0.298,
+          "bond": 0.149,
+          "external": true,
+          "rationale": ""
+        }
+      ]
+    },
+    {
+      "round_id": 3,
+      "pool": 1.0,
+      "top_k": 2,
+      "unit": "MERIT",
+      "dry": true,
+      "weights": {
+        "mira": 0.421805,
+        "praxis": 0.420073,
+        "anke": 0.075304,
+        "nova": 0.044481,
+        "drift": 0.038337
+      },
+      "raw_weights": {
+        "mira": 0.457376,
+        "praxis": 0.455499,
+        "anke": 0.081654,
+        "nova": 0.048232,
+        "drift": 0.04157
+      },
+      "caps": {
+        "mira": 5.0,
+        "praxis": 5.0,
+        "anke": 2.7446,
+        "nova": 1.6417,
+        "drift": 1.4218
+      },
+      "scores": {
+        "r3c0": 0.667327,
+        "r3c1": 0.49294,
+        "r3c2": 0.355663,
+        "r3c3": 0.228183
+      },
+      "allocated": {
+        "r3c0": 0.57515,
+        "r3c1": 0.42485
+      },
+      "paid": {
+        "r3c0": 0.57515,
+        "r3c1": 0.42485
+      },
+      "committers": {
+        "r3c0": "mira",
+        "r3c1": "mira"
+      },
+      "clipped": {},
+      "accrued_pending": {
+        "contrib-ai-safety": 0.57515,
+        "contrib-markets": 0.42485
+      },
+      "candidate_topics": {
+        "r3c0": "ai-safety",
+        "r3c1": "markets",
+        "r3c2": "governance",
+        "r3c3": "ai-safety"
+      },
+      "trust_edges_applied": 0,
+      "candidates": [
+        {
+          "candidate_id": "r3c0",
+          "title": "ai-safety contribution 3.0",
+          "author": "contrib-ai-safety",
+          "topic": "ai-safety",
+          "true_quality": 0.636
+        },
+        {
+          "candidate_id": "r3c1",
+          "title": "markets contribution 3.1",
+          "author": "contrib-markets",
+          "topic": "markets",
+          "true_quality": 0.365
+        },
+        {
+          "candidate_id": "r3c2",
+          "title": "governance contribution 3.2",
+          "author": "contrib-governance",
+          "topic": "governance",
+          "true_quality": 0.37
+        },
+        {
+          "candidate_id": "r3c3",
+          "title": "ai-safety contribution 3.3",
+          "author": "contrib-ai-safety",
+          "topic": "ai-safety",
+          "true_quality": 0.21
+        }
+      ],
+      "slashes": {
+        "drift": 0.25
+      },
+      "neurons": {
+        "mira": {
+          "calibration": 0.8488,
+          "stake": 0.6667,
+          "competence": 0.85,
+          "payout": 0.5663,
+          "reasoning": 0.85,
+          "trust": 1.0
+        },
+        "praxis": {
+          "calibration": 0.8477,
+          "stake": 0.6667,
+          "competence": 0.85,
+          "payout": 0.5915,
+          "reasoning": 0.85,
+          "trust": 1.0
+        },
+        "anke": {
+          "calibration": 0.845,
+          "stake": 0.2857,
+          "competence": 0.7,
+          "payout": 0.5915,
+          "reasoning": 0.7,
+          "trust": 0.0
+        },
+        "nova": {
+          "calibration": 0.8455,
+          "stake": 0.1667,
+          "competence": 0.72,
+          "payout": 0.5915,
+          "reasoning": 0.7,
+          "trust": 0.0
+        },
+        "drift": {
+          "calibration": 0.7916,
+          "stake": 0.0888,
+          "competence": 0.6,
+          "payout": 0.5663,
+          "reasoning": 0.5,
+          "trust": 0.0
+        }
+      },
+      "votes": [
+        {
+          "voter": "mira",
+          "candidate": "r3c0",
+          "confidence": 0.616,
+          "bond": 0.308,
+          "external": false,
+          "rationale": ""
+        },
+        {
+          "voter": "mira",
+          "candidate": "r3c1",
+          "confidence": 0.552,
+          "bond": 0.276,
+          "external": false,
+          "rationale": ""
+        },
+        {
+          "voter": "mira",
+          "candidate": "r3c2",
+          "confidence": 0.304,
+          "bond": 0.152,
+          "external": false,
+          "rationale": ""
+        },
+        {
+          "voter": "mira",
+          "candidate": "r3c3",
+          "confidence": 0.122,
+          "bond": 0.061,
+          "external": false,
+          "rationale": ""
+        },
+        {
+          "voter": "praxis",
+          "candidate": "r3c0",
+          "confidence": 0.697,
+          "bond": 0.349,
+          "external": false,
+          "rationale": ""
+        },
+        {
+          "voter": "praxis",
+          "candidate": "r3c1",
+          "confidence": 0.479,
+          "bond": 0.239,
+          "external": false,
+          "rationale": ""
+        },
+        {
+          "voter": "praxis",
+          "candidate": "r3c2",
+          "confidence": 0.41,
+          "bond": 0.205,
+          "external": false,
+          "rationale": ""
+        },
+        {
+          "voter": "praxis",
+          "candidate": "r3c3",
+          "confidence": 0.277,
+          "bond": 0.138,
+          "external": false,
+          "rationale": ""
+        },
+        {
+          "voter": "anke",
+          "candidate": "r3c0",
+          "confidence": 0.807,
+          "bond": 0.404,
+          "external": true,
+          "rationale": ""
+        },
+        {
+          "voter": "anke",
+          "candidate": "r3c1",
+          "confidence": 0.354,
+          "bond": 0.177,
+          "external": true,
+          "rationale": ""
+        },
+        {
+          "voter": "anke",
+          "candidate": "r3c2",
+          "confidence": 0.199,
+          "bond": 0.1,
+          "external": true,
+          "rationale": ""
+        },
+        {
+          "voter": "anke",
+          "candidate": "r3c3",
+          "confidence": 0.146,
+          "bond": 0.073,
+          "external": true,
+          "rationale": ""
+        },
+        {
+          "voter": "nova",
+          "candidate": "r3c0",
+          "confidence": 0.779,
+          "bond": 0.389,
+          "external": true,
+          "rationale": ""
+        },
+        {
+          "voter": "nova",
+          "candidate": "r3c1",
+          "confidence": 0.148,
+          "bond": 0.074,
+          "external": true,
+          "rationale": ""
+        },
+        {
+          "voter": "nova",
+          "candidate": "r3c2",
+          "confidence": 0.375,
+          "bond": 0.188,
+          "external": true,
+          "rationale": ""
+        },
+        {
+          "voter": "nova",
+          "candidate": "r3c3",
+          "confidence": 0.248,
+          "bond": 0.124,
+          "external": true,
+          "rationale": ""
+        },
+        {
+          "voter": "drift",
+          "candidate": "r3c0",
+          "confidence": 0.503,
+          "bond": 0.252,
+          "external": true,
+          "rationale": ""
+        },
+        {
+          "voter": "drift",
+          "candidate": "r3c1",
+          "confidence": 0.669,
+          "bond": 0.334,
+          "external": true,
+          "rationale": ""
+        },
+        {
+          "voter": "drift",
+          "candidate": "r3c2",
+          "confidence": 0.614,
+          "bond": 0.307,
+          "external": true,
+          "rationale": ""
+        },
+        {
+          "voter": "drift",
+          "candidate": "r3c3",
+          "confidence": 1.0,
+          "bond": 0.5,
+          "external": true,
+          "rationale": ""
+        }
+      ]
+    },
+    {
+      "round_id": 4,
+      "pool": 1.0,
+      "top_k": 2,
+      "unit": "MERIT",
+      "dry": true,
+      "weights": {
+        "mira": 0.439954,
+        "praxis": 0.389005,
+        "anke": 0.079351,
+        "nova": 0.071581,
+        "drift": 0.020109
+      },
+      "raw_weights": {
+        "mira": 0.479048,
+        "praxis": 0.423571,
+        "anke": 0.086402,
+        "nova": 0.077942,
+        "drift": 0.021896
+      },
+      "caps": {
+        "mira": 5.0,
+        "praxis": 5.0,
+        "anke": 2.9013,
+        "nova": 2.6221,
+        "drift": 0.7726
+      },
+      "scores": {
+        "r4c0": 0.886583,
+        "r4c1": 0.285678,
+        "r4c2": 0.625129,
+        "r4c3": 0.401204
+      },
+      "allocated": {
+        "r4c0": 0.586476,
+        "r4c2": 0.413524
+      },
+      "paid": {
+        "r4c0": 0.586476,
+        "r4c2": 0.413524
+      },
+      "committers": {
+        "r4c0": "mira",
+        "r4c2": "mira"
+      },
+      "clipped": {},
+      "accrued_pending": {
+        "contrib-ai-safety": 0.586476,
+        "contrib-governance": 0.413524
+      },
+      "candidate_topics": {
+        "r4c0": "ai-safety",
+        "r4c1": "markets",
+        "r4c2": "governance",
+        "r4c3": "ai-safety"
+      },
+      "trust_edges_applied": 1,
+      "candidates": [
+        {
+          "candidate_id": "r4c0",
+          "title": "ai-safety contribution 4.0",
+          "author": "contrib-ai-safety",
+          "topic": "ai-safety",
+          "true_quality": 0.876
+        },
+        {
+          "candidate_id": "r4c1",
+          "title": "markets contribution 4.1",
+          "author": "contrib-markets",
+          "topic": "markets",
+          "true_quality": 0.315
+        },
+        {
+          "candidate_id": "r4c2",
+          "title": "governance contribution 4.2",
+          "author": "contrib-governance",
+          "topic": "governance",
+          "true_quality": 0.655
+        },
+        {
+          "candidate_id": "r4c3",
+          "title": "ai-safety contribution 4.3",
+          "author": "contrib-ai-safety",
+          "topic": "ai-safety",
+          "true_quality": 0.396
+        }
+      ],
+      "slashes": {},
+      "neurons": {
+        "mira": {
+          "calibration": 0.877,
+          "stake": 0.6667,
+          "competence": 0.85,
+          "payout": 0.6025,
+          "reasoning": 0.85,
+          "trust": 1.0
+        },
+        "praxis": {
+          "calibration": 0.8751,
+          "stake": 0.6667,
+          "competence": 0.85,
+          "payout": 0.6263,
+          "reasoning": 0.85,
+          "trust": 0.7703
+        },
+        "anke": {
+          "calibration": 0.8732,
+          "stake": 0.2857,
+          "competence": 0.7,
+          "payout": 0.6263,
+          "reasoning": 0.7,
+          "trust": 0.0
+        },
+        "nova": {
+          "calibration": 0.8727,
+          "stake": 0.1667,
+          "competence": 0.72,
+          "payout": 0.6263,
+          "reasoning": 0.7,
+          "trust": 0.425
+        },
+        "drift": {
+          "calibration": 0.8191,
+          "stake": 0.0888,
+          "competence": 0.6,
+          "payout": 0.6025,
+          "reasoning": 0.5,
+          "trust": 0.0
+        }
+      },
+      "votes": [
+        {
+          "voter": "mira",
+          "candidate": "r4c0",
+          "confidence": 0.952,
+          "bond": 0.476,
+          "external": false,
+          "rationale": ""
+        },
+        {
+          "voter": "mira",
+          "candidate": "r4c1",
+          "confidence": 0.27,
+          "bond": 0.135,
+          "external": false,
+          "rationale": ""
+        },
+        {
+          "voter": "mira",
+          "candidate": "r4c2",
+          "confidence": 0.649,
+          "bond": 0.325,
+          "external": false,
+          "rationale": ""
+        },
+        {
+          "voter": "mira",
+          "candidate": "r4c3",
+          "confidence": 0.456,
+          "bond": 0.228,
+          "external": false,
+          "rationale": ""
+        },
+        {
+          "voter": "praxis",
+          "candidate": "r4c0",
+          "confidence": 0.818,
+          "bond": 0.409,
+          "external": false,
+          "rationale": ""
+        },
+        {
+          "voter": "praxis",
+          "candidate": "r4c1",
+          "confidence": 0.292,
+          "bond": 0.146,
+          "external": false,
+          "rationale": ""
+        },
+        {
+          "voter": "praxis",
+          "candidate": "r4c2",
+          "confidence": 0.508,
+          "bond": 0.254,
+          "external": false,
+          "rationale": ""
+        },
+        {
+          "voter": "praxis",
+          "candidate": "r4c3",
+          "confidence": 0.309,
+          "bond": 0.155,
+          "external": false,
+          "rationale": ""
+        },
+        {
+          "voter": "anke",
+          "candidate": "r4c0",
+          "confidence": 0.808,
+          "bond": 0.404,
+          "external": true,
+          "rationale": ""
+        },
+        {
+          "voter": "anke",
+          "candidate": "r4c1",
+          "confidence": 0.365,
+          "bond": 0.182,
+          "external": true,
+          "rationale": ""
+        },
+        {
+          "voter": "anke",
+          "candidate": "r4c2",
+          "confidence": 0.798,
+          "bond": 0.399,
+          "external": true,
+          "rationale": ""
+        },
+        {
+          "voter": "anke",
+          "candidate": "r4c3",
+          "confidence": 0.394,
+          "bond": 0.197,
+          "external": true,
+          "rationale": ""
+        },
+        {
+          "voter": "nova",
+          "candidate": "r4c0",
+          "confidence": 0.915,
+          "bond": 0.458,
+          "external": true,
+          "rationale": ""
+        },
+        {
+          "voter": "nova",
+          "candidate": "r4c1",
+          "confidence": 0.34,
+          "bond": 0.17,
+          "external": true,
+          "rationale": ""
+        },
+        {
+          "voter": "nova",
+          "candidate": "r4c2",
+          "confidence": 0.818,
+          "bond": 0.409,
+          "external": true,
+          "rationale": ""
+        },
+        {
+          "voter": "nova",
+          "candidate": "r4c3",
+          "confidence": 0.53,
+          "bond": 0.265,
+          "external": true,
+          "rationale": ""
+        },
+        {
+          "voter": "drift",
+          "candidate": "r4c0",
+          "confidence": 0.991,
+          "bond": 0.372,
+          "external": true,
+          "rationale": ""
+        },
+        {
+          "voter": "drift",
+          "candidate": "r4c1",
+          "confidence": 0.0,
+          "bond": 0.0,
+          "external": true,
+          "rationale": ""
+        },
+        {
+          "voter": "drift",
+          "candidate": "r4c2",
+          "confidence": 1.0,
+          "bond": 0.375,
+          "external": true,
+          "rationale": ""
+        },
+        {
+          "voter": "drift",
+          "candidate": "r4c3",
+          "confidence": 0.556,
+          "bond": 0.209,
+          "external": true,
+          "rationale": ""
+        }
+      ]
+    },
+    {
+      "round_id": 5,
+      "pool": 1.0,
+      "top_k": 2,
+      "unit": "MERIT",
+      "dry": true,
+      "weights": {
+        "mira": 0.439186,
+        "praxis": 0.388327,
+        "anke": 0.080287,
+        "nova": 0.071735,
+        "drift": 0.020466
+      },
+      "raw_weights": {
+        "mira": 0.500289,
+        "praxis": 0.442354,
+        "anke": 0.091457,
+        "nova": 0.081716,
+        "drift": 0.023313
+      },
+      "caps": {
+        "mira": 5.0,
+        "praxis": 5.0,
+        "anke": 3.0681,
+        "nova": 2.7466,
+        "drift": 0.8193
+      },
+      "scores": {
+        "r5c0": 0.959788,
+        "r5c1": 0.593686,
+        "r5c2": 0.964836,
+        "r5c3": 0.823067
+      },
+      "allocated": {
+        "r5c2": 0.501311,
+        "r5c0": 0.498689
+      },
+      "paid": {
+        "r5c2": 0.501311,
+        "r5c0": 0.498689
+      },
+      "committers": {
+        "r5c2": "mira",
+        "r5c0": "mira"
+      },
+      "clipped": {},
+      "accrued_pending": {
+        "contrib-governance": 0.501311,
+        "contrib-ai-safety": 0.498689
+      },
+      "candidate_topics": {
+        "r5c0": "ai-safety",
+        "r5c1": "markets",
+        "r5c2": "governance",
+        "r5c3": "ai-safety"
+      },
+      "trust_edges_applied": 0,
+      "candidates": [
+        {
+          "candidate_id": "r5c0",
+          "title": "ai-safety contribution 5.0",
+          "author": "contrib-ai-safety",
+          "topic": "ai-safety",
+          "true_quality": 0.996
+        },
+        {
+          "candidate_id": "r5c1",
+          "title": "markets contribution 5.1",
+          "author": "contrib-markets",
+          "topic": "markets",
+          "true_quality": 0.529
+        },
+        {
+          "candidate_id": "r5c2",
+          "title": "governance contribution 5.2",
+          "author": "contrib-governance",
+          "topic": "governance",
+          "true_quality": 0.971
+        },
+        {
+          "candidate_id": "r5c3",
+          "title": "ai-safety contribution 5.3",
+          "author": "contrib-ai-safety",
+          "topic": "ai-safety",
+          "true_quality": 0.861
+        }
+      ],
+      "slashes": {},
+      "neurons": {
+        "mira": {
+          "calibration": 0.8963,
+          "stake": 0.6667,
+          "competence": 0.85,
+          "payout": 0.6612,
+          "reasoning": 0.85,
+          "trust": 1.0
+        },
+        "praxis": {
+          "calibration": 0.8944,
+          "stake": 0.6667,
+          "competence": 0.85,
+          "payout": 0.6858,
+          "reasoning": 0.85,
+          "trust": 0.7703
+        },
+        "anke": {
+          "calibration": 0.8898,
+          "stake": 0.2857,
+          "competence": 0.7,
+          "payout": 0.6858,
+          "reasoning": 0.7,
+          "trust": 0.0
+        },
+        "nova": {
+          "calibration": 0.8917,
+          "stake": 0.1667,
+          "competence": 0.72,
+          "payout": 0.6858,
+          "reasoning": 0.7,
+          "trust": 0.425
+        },
+        "drift": {
+          "calibration": 0.8355,
+          "stake": 0.0888,
+          "competence": 0.6,
+          "payout": 0.6612,
+          "reasoning": 0.5,
+          "trust": 0.0
+        }
+      },
+      "votes": [
+        {
+          "voter": "mira",
+          "candidate": "r5c0",
+          "confidence": 1.0,
+          "bond": 0.5,
+          "external": false,
+          "rationale": ""
+        },
+        {
+          "voter": "mira",
+          "candidate": "r5c1",
+          "confidence": 0.538,
+          "bond": 0.269,
+          "external": false,
+          "rationale": ""
+        },
+        {
+          "voter": "mira",
+          "candidate": "r5c2",
+          "confidence": 0.93,
+          "bond": 0.465,
+          "external": false,
+          "rationale": ""
+        },
+        {
+          "voter": "mira",
+          "candidate": "r5c3",
+          "confidence": 0.771,
+          "bond": 0.385,
+          "external": false,
+          "rationale": ""
+        },
+        {
+          "voter": "praxis",
+          "candidate": "r5c0",
+          "confidence": 0.984,
+          "bond": 0.492,
+          "external": false,
+          "rationale": ""
+        },
+        {
+          "voter": "praxis",
+          "candidate": "r5c1",
+          "confidence": 0.643,
+          "bond": 0.321,
+          "external": false,
+          "rationale": ""
+        },
+        {
+          "voter": "praxis",
+          "candidate": "r5c2",
+          "confidence": 1.0,
+          "bond": 0.5,
+          "external": false,
+          "rationale": ""
+        },
+        {
+          "voter": "praxis",
+          "candidate": "r5c3",
+          "confidence": 0.916,
+          "bond": 0.458,
+          "external": false,
+          "rationale": ""
+        },
+        {
+          "voter": "anke",
+          "candidate": "r5c0",
+          "confidence": 0.711,
+          "bond": 0.355,
+          "external": true,
+          "rationale": ""
+        },
+        {
+          "voter": "anke",
+          "candidate": "r5c1",
+          "confidence": 0.614,
+          "bond": 0.307,
+          "external": true,
+          "rationale": ""
+        },
+        {
+          "voter": "anke",
+          "candidate": "r5c2",
+          "confidence": 1.0,
+          "bond": 0.5,
+          "external": true,
+          "rationale": ""
+        },
+        {
+          "voter": "anke",
+          "candidate": "r5c3",
+          "confidence": 0.795,
+          "bond": 0.398,
+          "external": true,
+          "rationale": ""
+        },
+        {
+          "voter": "nova",
+          "candidate": "r5c0",
+          "confidence": 0.902,
+          "bond": 0.451,
+          "external": true,
+          "rationale": ""
+        },
+        {
+          "voter": "nova",
+          "candidate": "r5c1",
+          "confidence": 0.529,
+          "bond": 0.264,
+          "external": true,
+          "rationale": ""
+        },
+        {
+          "voter": "nova",
+          "candidate": "r5c2",
+          "confidence": 1.0,
+          "bond": 0.5,
+          "external": true,
+          "rationale": ""
+        },
+        {
+          "voter": "nova",
+          "candidate": "r5c3",
+          "confidence": 0.703,
+          "bond": 0.351,
+          "external": true,
+          "rationale": ""
+        },
+        {
+          "voter": "drift",
+          "candidate": "r5c0",
+          "confidence": 0.816,
+          "bond": 0.306,
+          "external": true,
+          "rationale": ""
+        },
+        {
+          "voter": "drift",
+          "candidate": "r5c1",
+          "confidence": 1.0,
+          "bond": 0.375,
+          "external": true,
+          "rationale": ""
+        },
+        {
+          "voter": "drift",
+          "candidate": "r5c2",
+          "confidence": 0.784,
+          "bond": 0.294,
+          "external": true,
+          "rationale": ""
+        },
+        {
+          "voter": "drift",
+          "candidate": "r5c3",
+          "confidence": 0.708,
+          "bond": 0.266,
+          "external": true,
+          "rationale": ""
+        }
+      ]
+    },
+    {
+      "round_id": 6,
+      "pool": 1.0,
+      "top_k": 2,
+      "unit": "MERIT",
+      "dry": true,
+      "weights": {
+        "mira": 0.437535,
+        "praxis": 0.387847,
+        "anke": 0.081588,
+        "nova": 0.072108,
+        "drift": 0.020922
+      },
+      "raw_weights": {
+        "mira": 0.520041,
+        "praxis": 0.460983,
+        "anke": 0.096973,
+        "nova": 0.085705,
+        "drift": 0.024868
+      },
+      "caps": {
+        "mira": 5.0,
+        "praxis": 5.0,
+        "anke": 3.2501,
+        "nova": 2.8783,
+        "drift": 0.8706
+      },
+      "scores": {
+        "r6c0": 0.859014,
+        "r6c1": 0.491614,
+        "r6c2": 0.863782,
+        "r6c3": 0.559712
+      },
+      "allocated": {
+        "r6c2": 0.501384,
+        "r6c0": 0.498616
+      },
+      "paid": {
+        "r6c2": 0.501384,
+        "r6c0": 0.498616
+      },
+      "committers": {
+        "r6c2": "mira",
+        "r6c0": "mira"
+      },
+      "clipped": {},
+      "accrued_pending": {
+        "contrib-governance": 0.501384,
+        "contrib-ai-safety": 0.498616
+      },
+      "candidate_topics": {
+        "r6c0": "ai-safety",
+        "r6c1": "markets",
+        "r6c2": "governance",
+        "r6c3": "ai-safety"
+      },
+      "trust_edges_applied": 0,
+      "candidates": [
+        {
+          "candidate_id": "r6c0",
+          "title": "ai-safety contribution 6.0",
+          "author": "contrib-ai-safety",
+          "topic": "ai-safety",
+          "true_quality": 0.763
+        },
+        {
+          "candidate_id": "r6c1",
+          "title": "markets contribution 6.1",
+          "author": "contrib-markets",
+          "topic": "markets",
+          "true_quality": 0.539
+        },
+        {
+          "candidate_id": "r6c2",
+          "title": "governance contribution 6.2",
+          "author": "contrib-governance",
+          "topic": "governance",
+          "true_quality": 0.779
+        },
+        {
+          "candidate_id": "r6c3",
+          "title": "ai-safety contribution 6.3",
+          "author": "contrib-ai-safety",
+          "topic": "ai-safety",
+          "true_quality": 0.53
+        }
+      ],
+      "slashes": {},
+      "neurons": {
+        "mira": {
+          "calibration": 0.9093,
+          "stake": 0.6667,
+          "competence": 0.85,
+          "payout": 0.6758,
+          "reasoning": 0.85,
+          "trust": 1.0
+        },
+        "praxis": {
+          "calibration": 0.9082,
+          "stake": 0.6667,
+          "competence": 0.85,
+          "payout": 0.698,
+          "reasoning": 0.85,
+          "trust": 0.7703
+        },
+        "anke": {
+          "calibration": 0.9014,
+          "stake": 0.2857,
+          "competence": 0.7,
+          "payout": 0.698,
+          "reasoning": 0.7,
+          "trust": 0.0
+        },
+        "nova": {
+          "calibration": 0.9042,
+          "stake": 0.1667,
+          "competence": 0.72,
+          "payout": 0.698,
+          "reasoning": 0.7,
+          "trust": 0.425
+        },
+        "drift": {
+          "calibration": 0.8407,
+          "stake": 0.0888,
+          "competence": 0.6,
+          "payout": 0.6696,
+          "reasoning": 0.5,
+          "trust": 0.0
+        }
+      },
+      "votes": [
+        {
+          "voter": "mira",
+          "candidate": "r6c0",
+          "confidence": 0.834,
+          "bond": 0.417,
+          "external": false,
+          "rationale": ""
+        },
+        {
+          "voter": "mira",
+          "candidate": "r6c1",
+          "confidence": 0.539,
+          "bond": 0.27,
+          "external": false,
+          "rationale": ""
+        },
+        {
+          "voter": "mira",
+          "candidate": "r6c2",
+          "confidence": 0.962,
+          "bond": 0.481,
+          "external": false,
+          "rationale": ""
+        },
+        {
+          "voter": "mira",
+          "candidate": "r6c3",
+          "confidence": 0.552,
+          "bond": 0.276,
+          "external": false,
+          "rationale": ""
+        },
+        {
+          "voter": "praxis",
+          "candidate": "r6c0",
+          "confidence": 0.872,
+          "bond": 0.436,
+          "external": false,
+          "rationale": ""
+        },
+        {
+          "voter": "praxis",
+          "candidate": "r6c1",
+          "confidence": 0.435,
+          "bond": 0.217,
+          "external": false,
+          "rationale": ""
+        },
+        {
+          "voter": "praxis",
+          "candidate": "r6c2",
+          "confidence": 0.769,
+          "bond": 0.385,
+          "external": false,
+          "rationale": ""
+        },
+        {
+          "voter": "praxis",
+          "candidate": "r6c3",
+          "confidence": 0.556,
+          "bond": 0.278,
+          "external": false,
+          "rationale": ""
+        },
+        {
+          "voter": "anke",
+          "candidate": "r6c0",
+          "confidence": 0.972,
+          "bond": 0.486,
+          "external": true,
+          "rationale": ""
+        },
+        {
+          "voter": "anke",
+          "candidate": "r6c1",
+          "confidence": 0.337,
+          "bond": 0.169,
+          "external": true,
+          "rationale": ""
+        },
+        {
+          "voter": "anke",
+          "candidate": "r6c2",
+          "confidence": 0.898,
+          "bond": 0.449,
+          "external": true,
+          "rationale": ""
+        },
+        {
+          "voter": "anke",
+          "candidate": "r6c3",
+          "confidence": 0.601,
+          "bond": 0.3,
+          "external": true,
+          "rationale": ""
+        },
+        {
+          "voter": "nova",
+          "candidate": "r6c0",
+          "confidence": 0.993,
+          "bond": 0.497,
+          "external": true,
+          "rationale": ""
+        },
+        {
+          "voter": "nova",
+          "candidate": "r6c1",
+          "confidence": 0.646,
+          "bond": 0.323,
+          "external": true,
+          "rationale": ""
+        },
+        {
+          "voter": "nova",
+          "candidate": "r6c2",
+          "confidence": 0.787,
+          "bond": 0.393,
+          "external": true,
+          "rationale": ""
+        },
+        {
+          "voter": "nova",
+          "candidate": "r6c3",
+          "confidence": 0.452,
+          "bond": 0.226,
+          "external": true,
+          "rationale": ""
+        },
+        {
+          "voter": "drift",
+          "candidate": "r6c0",
+          "confidence": 0.239,
+          "bond": 0.09,
+          "external": true,
+          "rationale": ""
+        },
+        {
+          "voter": "drift",
+          "candidate": "r6c1",
+          "confidence": 0.621,
+          "bond": 0.233,
+          "external": true,
+          "rationale": ""
+        },
+        {
+          "voter": "drift",
+          "candidate": "r6c2",
+          "confidence": 0.698,
+          "bond": 0.262,
+          "external": true,
+          "rationale": ""
+        },
+        {
+          "voter": "drift",
+          "candidate": "r6c3",
+          "confidence": 1.0,
+          "bond": 0.375,
+          "external": true,
+          "rationale": ""
+        }
+      ]
+    },
+    {
+      "round_id": 7,
+      "pool": 1.0,
+      "top_k": 2,
+      "unit": "MERIT",
+      "dry": true,
+      "weights": {
+        "mira": 0.437378,
+        "praxis": 0.387954,
+        "anke": 0.081753,
+        "nova": 0.072129,
+        "drift": 0.020787
+      },
+      "raw_weights": {
+        "mira": 0.529776,
+        "praxis": 0.469911,
+        "anke": 0.099024,
+        "nova": 0.087366,
+        "drift": 0.025178
+      },
+      "caps": {
+        "mira": 5.0,
+        "praxis": 5.0,
+        "anke": 3.3178,
+        "nova": 2.9331,
+        "drift": 0.8809
+      },
+      "scores": {
+        "r7c0": 0.406687,
+        "r7c1": 0.270326,
+        "r7c2": 0.61062,
+        "r7c3": 0.775335
+      },
+      "allocated": {
+        "r7c3": 0.559423,
+        "r7c2": 0.440577
+      },
+      "paid": {
+        "r7c3": 0.559423,
+        "r7c2": 0.440577
+      },
+      "committers": {
+        "r7c3": "mira",
+        "r7c2": "mira"
+      },
+      "clipped": {},
+      "accrued_pending": {
+        "contrib-ai-safety": 0.559423,
+        "contrib-governance": 0.440577
+      },
+      "candidate_topics": {
+        "r7c0": "ai-safety",
+        "r7c1": "markets",
+        "r7c2": "governance",
+        "r7c3": "ai-safety"
+      },
+      "trust_edges_applied": 0,
+      "candidates": [
+        {
+          "candidate_id": "r7c0",
+          "title": "ai-safety contribution 7.0",
+          "author": "contrib-ai-safety",
+          "topic": "ai-safety",
+          "true_quality": 0.423
+        },
+        {
+          "candidate_id": "r7c1",
+          "title": "markets contribution 7.1",
+          "author": "contrib-markets",
+          "topic": "markets",
+          "true_quality": 0.212
+        },
+        {
+          "candidate_id": "r7c2",
+          "title": "governance contribution 7.2",
+          "author": "contrib-governance",
+          "topic": "governance",
+          "true_quality": 0.539
+        },
+        {
+          "candidate_id": "r7c3",
+          "title": "ai-safety contribution 7.3",
+          "author": "contrib-ai-safety",
+          "topic": "ai-safety",
+          "true_quality": 0.73
+        }
+      ],
+      "slashes": {},
+      "neurons": {
+        "mira": {
+          "calibration": 0.9197,
+          "stake": 0.6667,
+          "competence": 0.85,
+          "payout": 0.6709,
+          "reasoning": 0.85,
+          "trust": 1.0
+        },
+        "praxis": {
+          "calibration": 0.9189,
+          "stake": 0.6667,
+          "competence": 0.85,
+          "payout": 0.6901,
+          "reasoning": 0.85,
+          "trust": 0.7703
+        },
+        "anke": {
+          "calibration": 0.9123,
+          "stake": 0.2857,
+          "competence": 0.7,
+          "payout": 0.6901,
+          "reasoning": 0.7,
+          "trust": 0.0
+        },
+        "nova": {
+          "calibration": 0.9122,
+          "stake": 0.1667,
+          "competence": 0.72,
+          "payout": 0.6901,
+          "reasoning": 0.7,
+          "trust": 0.425
+        },
+        "drift": {
+          "calibration": 0.8569,
+          "stake": 0.0888,
+          "competence": 0.6,
+          "payout": 0.6652,
+          "reasoning": 0.5,
+          "trust": 0.0
+        }
+      },
+      "votes": [
+        {
+          "voter": "mira",
+          "candidate": "r7c0",
+          "confidence": 0.444,
+          "bond": 0.222,
+          "external": false,
+          "rationale": ""
+        },
+        {
+          "voter": "mira",
+          "candidate": "r7c1",
+          "confidence": 0.278,
+          "bond": 0.139,
+          "external": false,
+          "rationale": ""
+        },
+        {
+          "voter": "mira",
+          "candidate": "r7c2",
+          "confidence": 0.655,
+          "bond": 0.327,
+          "external": false,
+          "rationale": ""
+        },
+        {
+          "voter": "mira",
+          "candidate": "r7c3",
+          "confidence": 0.726,
+          "bond": 0.363,
+          "external": false,
+          "rationale": ""
+        },
+        {
+          "voter": "praxis",
+          "candidate": "r7c0",
+          "confidence": 0.334,
+          "bond": 0.167,
+          "external": false,
+          "rationale": ""
+        },
+        {
+          "voter": "praxis",
+          "candidate": "r7c1",
+          "confidence": 0.249,
+          "bond": 0.124,
+          "external": false,
+          "rationale": ""
+        },
+        {
+          "voter": "praxis",
+          "candidate": "r7c2",
+          "confidence": 0.58,
+          "bond": 0.29,
+          "external": false,
+          "rationale": ""
+        },
+        {
+          "voter": "praxis",
+          "candidate": "r7c3",
+          "confidence": 0.769,
+          "bond": 0.385,
+          "external": false,
+          "rationale": ""
+        },
+        {
+          "voter": "anke",
+          "candidate": "r7c0",
+          "confidence": 0.339,
+          "bond": 0.169,
+          "external": true,
+          "rationale": ""
+        },
+        {
+          "voter": "anke",
+          "candidate": "r7c1",
+          "confidence": 0.348,
+          "bond": 0.174,
+          "external": true,
+          "rationale": ""
+        },
+        {
+          "voter": "anke",
+          "candidate": "r7c2",
+          "confidence": 0.55,
+          "bond": 0.275,
+          "external": true,
+          "rationale": ""
+        },
+        {
+          "voter": "anke",
+          "candidate": "r7c3",
+          "confidence": 0.814,
+          "bond": 0.407,
+          "external": true,
+          "rationale": ""
+        },
+        {
+          "voter": "nova",
+          "candidate": "r7c0",
+          "confidence": 0.614,
+          "bond": 0.307,
+          "external": true,
+          "rationale": ""
+        },
+        {
+          "voter": "nova",
+          "candidate": "r7c1",
+          "confidence": 0.303,
+          "bond": 0.152,
+          "external": true,
+          "rationale": ""
+        },
+        {
+          "voter": "nova",
+          "candidate": "r7c2",
+          "confidence": 0.582,
+          "bond": 0.291,
+          "external": true,
+          "rationale": ""
+        },
+        {
+          "voter": "nova",
+          "candidate": "r7c3",
+          "confidence": 1.0,
+          "bond": 0.5,
+          "external": true,
+          "rationale": ""
+        },
+        {
+          "voter": "drift",
+          "candidate": "r7c0",
+          "confidence": 0.525,
+          "bond": 0.197,
+          "external": true,
+          "rationale": ""
+        },
+        {
+          "voter": "drift",
+          "candidate": "r7c1",
+          "confidence": 0.088,
+          "bond": 0.033,
+          "external": true,
+          "rationale": ""
+        },
+        {
+          "voter": "drift",
+          "candidate": "r7c2",
+          "confidence": 0.586,
+          "bond": 0.22,
+          "external": true,
+          "rationale": ""
+        },
+        {
+          "voter": "drift",
+          "candidate": "r7c3",
+          "confidence": 1.0,
+          "bond": 0.375,
+          "external": true,
+          "rationale": ""
+        }
+      ]
+    },
+    {
+      "round_id": 8,
+      "pool": 1.0,
+      "top_k": 2,
+      "unit": "MERIT",
+      "dry": true,
+      "weights": {
+        "mira": 0.437722,
+        "praxis": 0.38794,
+        "anke": 0.081563,
+        "nova": 0.07185,
+        "drift": 0.020925
+      },
+      "raw_weights": {
+        "mira": 0.535116,
+        "praxis": 0.474257,
+        "anke": 0.099711,
+        "nova": 0.087837,
+        "drift": 0.025581
+      },
+      "caps": {
+        "mira": 5.0,
+        "praxis": 5.0,
+        "anke": 3.3405,
+        "nova": 2.9486,
+        "drift": 0.8942
+      },
+      "scores": {
+        "r8c0": 0.174261,
+        "r8c1": 0.165267,
+        "r8c2": 0.91559,
+        "r8c3": 0.562146
+      },
+      "allocated": {
+        "r8c2": 0.619589,
+        "r8c3": 0.380411
+      },
+      "paid": {
+        "r8c2": 0.619589,
+        "r8c3": 0.380411
+      },
+      "committers": {
+        "r8c2": "mira",
+        "r8c3": "mira"
+      },
+      "clipped": {},
+      "accrued_pending": {
+        "contrib-governance": 0.619589,
+        "contrib-ai-safety": 0.380411
+      },
+      "candidate_topics": {
+        "r8c0": "ai-safety",
+        "r8c1": "markets",
+        "r8c2": "governance",
+        "r8c3": "ai-safety"
+      },
+      "trust_edges_applied": 0,
+      "candidates": [
+        {
+          "candidate_id": "r8c0",
+          "title": "ai-safety contribution 8.0",
+          "author": "contrib-ai-safety",
+          "topic": "ai-safety",
+          "true_quality": 0.214
+        },
+        {
+          "candidate_id": "r8c1",
+          "title": "markets contribution 8.1",
+          "author": "contrib-markets",
+          "topic": "markets",
+          "true_quality": 0.132
+        },
+        {
+          "candidate_id": "r8c2",
+          "title": "governance contribution 8.2",
+          "author": "contrib-governance",
+          "topic": "governance",
+          "true_quality": 0.936
+        },
+        {
+          "candidate_id": "r8c3",
+          "title": "ai-safety contribution 8.3",
+          "author": "contrib-ai-safety",
+          "topic": "ai-safety",
+          "true_quality": 0.571
+        }
+      ],
+      "slashes": {},
+      "neurons": {
+        "mira": {
+          "calibration": 0.9278,
+          "stake": 0.6667,
+          "competence": 0.85,
+          "payout": 0.6796,
+          "reasoning": 0.85,
+          "trust": 1.0
+        },
+        "praxis": {
+          "calibration": 0.9273,
+          "stake": 0.6667,
+          "competence": 0.85,
+          "payout": 0.6971,
+          "reasoning": 0.85,
+          "trust": 0.7703
+        },
+        "anke": {
+          "calibration": 0.9213,
+          "stake": 0.2857,
+          "competence": 0.7,
+          "payout": 0.6971,
+          "reasoning": 0.7,
+          "trust": 0.0
+        },
+        "nova": {
+          "calibration": 0.9208,
+          "stake": 0.1667,
+          "competence": 0.72,
+          "payout": 0.7045,
+          "reasoning": 0.7,
+          "trust": 0.425
+        },
+        "drift": {
+          "calibration": 0.8636,
+          "stake": 0.0888,
+          "competence": 0.6,
+          "payout": 0.675,
+          "reasoning": 0.5,
+          "trust": 0.0
+        }
+      },
+      "votes": [
+        {
+          "voter": "mira",
+          "candidate": "r8c0",
+          "confidence": 0.076,
+          "bond": 0.038,
+          "external": false,
+          "rationale": ""
+        },
+        {
+          "voter": "mira",
+          "candidate": "r8c1",
+          "confidence": 0.156,
+          "bond": 0.078,
+          "external": false,
+          "rationale": ""
+        },
+        {
+          "voter": "mira",
+          "candidate": "r8c2",
+          "confidence": 0.954,
+          "bond": 0.477,
+          "external": false,
+          "rationale": ""
+        },
+        {
+          "voter": "mira",
+          "candidate": "r8c3",
+          "confidence": 0.522,
+          "bond": 0.261,
+          "external": false,
+          "rationale": ""
+        },
+        {
+          "voter": "praxis",
+          "candidate": "r8c0",
+          "confidence": 0.284,
+          "bond": 0.142,
+          "external": false,
+          "rationale": ""
+        },
+        {
+          "voter": "praxis",
+          "candidate": "r8c1",
+          "confidence": 0.181,
+          "bond": 0.09,
+          "external": false,
+          "rationale": ""
+        },
+        {
+          "voter": "praxis",
+          "candidate": "r8c2",
+          "confidence": 0.856,
+          "bond": 0.428,
+          "external": false,
+          "rationale": ""
+        },
+        {
+          "voter": "praxis",
+          "candidate": "r8c3",
+          "confidence": 0.612,
+          "bond": 0.306,
+          "external": false,
+          "rationale": ""
+        },
+        {
+          "voter": "anke",
+          "candidate": "r8c0",
+          "confidence": 0.19,
+          "bond": 0.095,
+          "external": true,
+          "rationale": ""
+        },
+        {
+          "voter": "anke",
+          "candidate": "r8c1",
+          "confidence": 0.0,
+          "bond": 0.0,
+          "external": true,
+          "rationale": ""
+        },
+        {
+          "voter": "anke",
+          "candidate": "r8c2",
+          "confidence": 0.99,
+          "bond": 0.495,
+          "external": true,
+          "rationale": ""
+        },
+        {
+          "voter": "anke",
+          "candidate": "r8c3",
+          "confidence": 0.566,
+          "bond": 0.283,
+          "external": true,
+          "rationale": ""
+        },
+        {
+          "voter": "nova",
+          "candidate": "r8c0",
+          "confidence": 0.102,
+          "bond": 0.051,
+          "external": true,
+          "rationale": ""
+        },
+        {
+          "voter": "nova",
+          "candidate": "r8c1",
+          "confidence": 0.21,
+          "bond": 0.105,
+          "external": true,
+          "rationale": ""
+        },
+        {
+          "voter": "nova",
+          "candidate": "r8c2",
+          "confidence": 1.0,
+          "bond": 0.5,
+          "external": true,
+          "rationale": ""
+        },
+        {
+          "voter": "nova",
+          "candidate": "r8c3",
+          "confidence": 0.484,
+          "bond": 0.242,
+          "external": true,
+          "rationale": ""
+        },
+        {
+          "voter": "drift",
+          "candidate": "r8c0",
+          "confidence": 0.382,
+          "bond": 0.143,
+          "external": true,
+          "rationale": ""
+        },
+        {
+          "voter": "drift",
+          "candidate": "r8c1",
+          "confidence": 0.558,
+          "bond": 0.209,
+          "external": true,
+          "rationale": ""
+        },
+        {
+          "voter": "drift",
+          "candidate": "r8c2",
+          "confidence": 0.637,
+          "bond": 0.239,
+          "external": true,
+          "rationale": ""
+        },
+        {
+          "voter": "drift",
+          "candidate": "r8c3",
+          "confidence": 0.731,
+          "bond": 0.274,
+          "external": true,
+          "rationale": ""
+        }
+      ]
+    }
+  ],
+  "participants_final": [
+    {
+      "pid": "mira",
+      "is_founder": true,
+      "is_human": false,
+      "competence": 0.85,
+      "reasoning_survival": 0.85,
+      "stake_balance": 10,
+      "total_slashed": 0.0,
+      "vouches": {
+        "praxis": 1.0,
+        "nova": 1.0
+      },
+      "topic_vouches": {},
+      "history": [
+        {
+          "round_id": 1,
+          "voter": "mira",
+          "candidate": "r1c0",
+          "confidence": 0.629,
+          "bond": 0.314,
+          "outcome": 0.639,
+          "funded": true,
+          "slashed": 0.0
+        },
+        {
+          "round_id": 1,
+          "voter": "mira",
+          "candidate": "r1c1",
+          "confidence": 0.0,
+          "bond": 0.0,
+          "outcome": 0.025,
+          "funded": false,
+          "slashed": 0.0
+        },
+        {
+          "round_id": 1,
+          "voter": "mira",
+          "candidate": "r1c2",
+          "confidence": 0.302,
+          "bond": 0.151,
+          "outcome": 0.275,
+          "funded": false,
+          "slashed": 0.0
+        },
+        {
+          "round_id": 1,
+          "voter": "mira",
+          "candidate": "r1c3",
+          "confidence": 0.202,
+          "bond": 0.101,
+          "outcome": 0.223,
+          "funded": false,
+          "slashed": 0.0
+        },
+        {
+          "round_id": 2,
+          "voter": "mira",
+          "candidate": "r2c0",
+          "confidence": 1.0,
+          "bond": 0.5,
+          "outcome": 0.957,
+          "funded": true,
+          "slashed": 0.0
+        },
+        {
+          "round_id": 2,
+          "voter": "mira",
+          "candidate": "r2c1",
+          "confidence": 0.248,
+          "bond": 0.124,
+          "outcome": 0.337,
+          "funded": false,
+          "slashed": 0.0
+        },
+        {
+          "round_id": 2,
+          "voter": "mira",
+          "candidate": "r2c2",
+          "confidence": 0.138,
+          "bond": 0.069,
+          "outcome": 0.093,
+          "funded": false,
+          "slashed": 0.0
+        },
+        {
+          "round_id": 2,
+          "voter": "mira",
+          "candidate": "r2c3",
+          "confidence": 0.0,
+          "bond": 0.0,
+          "outcome": 0.097,
+          "funded": false,
+          "slashed": 0.0
+        },
+        {
+          "round_id": 3,
+          "voter": "mira",
+          "candidate": "r3c0",
+          "confidence": 0.616,
+          "bond": 0.308,
+          "outcome": 0.636,
+          "funded": true,
+          "slashed": 0.0
+        },
+        {
+          "round_id": 3,
+          "voter": "mira",
+          "candidate": "r3c1",
+          "confidence": 0.552,
+          "bond": 0.276,
+          "outcome": 0.365,
+          "funded": true,
+          "slashed": 0.0
+        },
+        {
+          "round_id": 3,
+          "voter": "mira",
+          "candidate": "r3c2",
+          "confidence": 0.304,
+          "bond": 0.152,
+          "outcome": 0.37,
+          "funded": false,
+          "slashed": 0.0
+        },
+        {
+          "round_id": 3,
+          "voter": "mira",
+          "candidate": "r3c3",
+          "confidence": 0.122,
+          "bond": 0.061,
+          "outcome": 0.21,
+          "funded": false,
+          "slashed": 0.0
+        },
+        {
+          "round_id": 4,
+          "voter": "mira",
+          "candidate": "r4c0",
+          "confidence": 0.952,
+          "bond": 0.476,
+          "outcome": 0.876,
+          "funded": true,
+          "slashed": 0.0
+        },
+        {
+          "round_id": 4,
+          "voter": "mira",
+          "candidate": "r4c1",
+          "confidence": 0.27,
+          "bond": 0.135,
+          "outcome": 0.315,
+          "funded": false,
+          "slashed": 0.0
+        },
+        {
+          "round_id": 4,
+          "voter": "mira",
+          "candidate": "r4c2",
+          "confidence": 0.649,
+          "bond": 0.325,
+          "outcome": 0.655,
+          "funded": true,
+          "slashed": 0.0
+        },
+        {
+          "round_id": 4,
+          "voter": "mira",
+          "candidate": "r4c3",
+          "confidence": 0.456,
+          "bond": 0.228,
+          "outcome": 0.396,
+          "funded": false,
+          "slashed": 0.0
+        },
+        {
+          "round_id": 5,
+          "voter": "mira",
+          "candidate": "r5c0",
+          "confidence": 1.0,
+          "bond": 0.5,
+          "outcome": 0.996,
+          "funded": true,
+          "slashed": 0.0
+        },
+        {
+          "round_id": 5,
+          "voter": "mira",
+          "candidate": "r5c1",
+          "confidence": 0.538,
+          "bond": 0.269,
+          "outcome": 0.529,
+          "funded": false,
+          "slashed": 0.0
+        },
+        {
+          "round_id": 5,
+          "voter": "mira",
+          "candidate": "r5c2",
+          "confidence": 0.93,
+          "bond": 0.465,
+          "outcome": 0.971,
+          "funded": true,
+          "slashed": 0.0
+        },
+        {
+          "round_id": 5,
+          "voter": "mira",
+          "candidate": "r5c3",
+          "confidence": 0.771,
+          "bond": 0.385,
+          "outcome": 0.861,
+          "funded": false,
+          "slashed": 0.0
+        },
+        {
+          "round_id": 6,
+          "voter": "mira",
+          "candidate": "r6c0",
+          "confidence": 0.834,
+          "bond": 0.417,
+          "outcome": 0.763,
+          "funded": true,
+          "slashed": 0.0
+        },
+        {
+          "round_id": 6,
+          "voter": "mira",
+          "candidate": "r6c1",
+          "confidence": 0.539,
+          "bond": 0.27,
+          "outcome": 0.539,
+          "funded": false,
+          "slashed": 0.0
+        },
+        {
+          "round_id": 6,
+          "voter": "mira",
+          "candidate": "r6c2",
+          "confidence": 0.962,
+          "bond": 0.481,
+          "outcome": 0.779,
+          "funded": true,
+          "slashed": 0.0
+        },
+        {
+          "round_id": 6,
+          "voter": "mira",
+          "candidate": "r6c3",
+          "confidence": 0.552,
+          "bond": 0.276,
+          "outcome": 0.53,
+          "funded": false,
+          "slashed": 0.0
+        },
+        {
+          "round_id": 7,
+          "voter": "mira",
+          "candidate": "r7c0",
+          "confidence": 0.444,
+          "bond": 0.222,
+          "outcome": 0.423,
+          "funded": false,
+          "slashed": 0.0
+        },
+        {
+          "round_id": 7,
+          "voter": "mira",
+          "candidate": "r7c1",
+          "confidence": 0.278,
+          "bond": 0.139,
+          "outcome": 0.212,
+          "funded": false,
+          "slashed": 0.0
+        },
+        {
+          "round_id": 7,
+          "voter": "mira",
+          "candidate": "r7c2",
+          "confidence": 0.655,
+          "bond": 0.327,
+          "outcome": 0.539,
+          "funded": true,
+          "slashed": 0.0
+        },
+        {
+          "round_id": 7,
+          "voter": "mira",
+          "candidate": "r7c3",
+          "confidence": 0.726,
+          "bond": 0.363,
+          "outcome": 0.73,
+          "funded": true,
+          "slashed": 0.0
+        },
+        {
+          "round_id": 8,
+          "voter": "mira",
+          "candidate": "r8c0",
+          "confidence": 0.076,
+          "bond": 0.038,
+          "outcome": 0.214,
+          "funded": false,
+          "slashed": 0.0
+        },
+        {
+          "round_id": 8,
+          "voter": "mira",
+          "candidate": "r8c1",
+          "confidence": 0.156,
+          "bond": 0.078,
+          "outcome": 0.132,
+          "funded": false,
+          "slashed": 0.0
+        },
+        {
+          "round_id": 8,
+          "voter": "mira",
+          "candidate": "r8c2",
+          "confidence": 0.954,
+          "bond": 0.477,
+          "outcome": 0.936,
+          "funded": true,
+          "slashed": 0.0
+        },
+        {
+          "round_id": 8,
+          "voter": "mira",
+          "candidate": "r8c3",
+          "confidence": 0.522,
+          "bond": 0.261,
+          "outcome": 0.571,
+          "funded": true,
+          "slashed": 0.0
+        }
+      ]
+    },
+    {
+      "pid": "praxis",
+      "is_founder": true,
+      "is_human": false,
+      "competence": 0.85,
+      "reasoning_survival": 0.85,
+      "stake_balance": 10,
+      "total_slashed": 0.0,
+      "vouches": {
+        "mira": 1.0
+      },
+      "topic_vouches": {},
+      "history": [
+        {
+          "round_id": 1,
+          "voter": "praxis",
+          "candidate": "r1c0",
+          "confidence": 0.622,
+          "bond": 0.311,
+          "outcome": 0.639,
+          "funded": true,
+          "slashed": 0.0
+        },
+        {
+          "round_id": 1,
+          "voter": "praxis",
+          "candidate": "r1c1",
+          "confidence": 0.034,
+          "bond": 0.017,
+          "outcome": 0.025,
+          "funded": false,
+          "slashed": 0.0
+        },
+        {
+          "round_id": 1,
+          "voter": "praxis",
+          "candidate": "r1c2",
+          "confidence": 0.294,
+          "bond": 0.147,
+          "outcome": 0.275,
+          "funded": false,
+          "slashed": 0.0
+        },
+        {
+          "round_id": 1,
+          "voter": "praxis",
+          "candidate": "r1c3",
+          "confidence": 0.316,
+          "bond": 0.158,
+          "outcome": 0.223,
+          "funded": false,
+          "slashed": 0.0
+        },
+        {
+          "round_id": 2,
+          "voter": "praxis",
+          "candidate": "r2c0",
+          "confidence": 0.747,
+          "bond": 0.374,
+          "outcome": 0.957,
+          "funded": true,
+          "slashed": 0.0
+        },
+        {
+          "round_id": 2,
+          "voter": "praxis",
+          "candidate": "r2c1",
+          "confidence": 0.288,
+          "bond": 0.144,
+          "outcome": 0.337,
+          "funded": false,
+          "slashed": 0.0
+        },
+        {
+          "round_id": 2,
+          "voter": "praxis",
+          "candidate": "r2c2",
+          "confidence": 0.02,
+          "bond": 0.01,
+          "outcome": 0.093,
+          "funded": false,
+          "slashed": 0.0
+        },
+        {
+          "round_id": 2,
+          "voter": "praxis",
+          "candidate": "r2c3",
+          "confidence": 0.167,
+          "bond": 0.084,
+          "outcome": 0.097,
+          "funded": false,
+          "slashed": 0.0
+        },
+        {
+          "round_id": 3,
+          "voter": "praxis",
+          "candidate": "r3c0",
+          "confidence": 0.697,
+          "bond": 0.349,
+          "outcome": 0.636,
+          "funded": true,
+          "slashed": 0.0
+        },
+        {
+          "round_id": 3,
+          "voter": "praxis",
+          "candidate": "r3c1",
+          "confidence": 0.479,
+          "bond": 0.239,
+          "outcome": 0.365,
+          "funded": true,
+          "slashed": 0.0
+        },
+        {
+          "round_id": 3,
+          "voter": "praxis",
+          "candidate": "r3c2",
+          "confidence": 0.41,
+          "bond": 0.205,
+          "outcome": 0.37,
+          "funded": false,
+          "slashed": 0.0
+        },
+        {
+          "round_id": 3,
+          "voter": "praxis",
+          "candidate": "r3c3",
+          "confidence": 0.277,
+          "bond": 0.138,
+          "outcome": 0.21,
+          "funded": false,
+          "slashed": 0.0
+        },
+        {
+          "round_id": 4,
+          "voter": "praxis",
+          "candidate": "r4c0",
+          "confidence": 0.818,
+          "bond": 0.409,
+          "outcome": 0.876,
+          "funded": true,
+          "slashed": 0.0
+        },
+        {
+          "round_id": 4,
+          "voter": "praxis",
+          "candidate": "r4c1",
+          "confidence": 0.292,
+          "bond": 0.146,
+          "outcome": 0.315,
+          "funded": false,
+          "slashed": 0.0
+        },
+        {
+          "round_id": 4,
+          "voter": "praxis",
+          "candidate": "r4c2",
+          "confidence": 0.508,
+          "bond": 0.254,
+          "outcome": 0.655,
+          "funded": true,
+          "slashed": 0.0
+        },
+        {
+          "round_id": 4,
+          "voter": "praxis",
+          "candidate": "r4c3",
+          "confidence": 0.309,
+          "bond": 0.155,
+          "outcome": 0.396,
+          "funded": false,
+          "slashed": 0.0
+        },
+        {
+          "round_id": 5,
+          "voter": "praxis",
+          "candidate": "r5c0",
+          "confidence": 0.984,
+          "bond": 0.492,
+          "outcome": 0.996,
+          "funded": true,
+          "slashed": 0.0
+        },
+        {
+          "round_id": 5,
+          "voter": "praxis",
+          "candidate": "r5c1",
+          "confidence": 0.643,
+          "bond": 0.321,
+          "outcome": 0.529,
+          "funded": false,
+          "slashed": 0.0
+        },
+        {
+          "round_id": 5,
+          "voter": "praxis",
+          "candidate": "r5c2",
+          "confidence": 1.0,
+          "bond": 0.5,
+          "outcome": 0.971,
+          "funded": true,
+          "slashed": 0.0
+        },
+        {
+          "round_id": 5,
+          "voter": "praxis",
+          "candidate": "r5c3",
+          "confidence": 0.916,
+          "bond": 0.458,
+          "outcome": 0.861,
+          "funded": false,
+          "slashed": 0.0
+        },
+        {
+          "round_id": 6,
+          "voter": "praxis",
+          "candidate": "r6c0",
+          "confidence": 0.872,
+          "bond": 0.436,
+          "outcome": 0.763,
+          "funded": true,
+          "slashed": 0.0
+        },
+        {
+          "round_id": 6,
+          "voter": "praxis",
+          "candidate": "r6c1",
+          "confidence": 0.435,
+          "bond": 0.217,
+          "outcome": 0.539,
+          "funded": false,
+          "slashed": 0.0
+        },
+        {
+          "round_id": 6,
+          "voter": "praxis",
+          "candidate": "r6c2",
+          "confidence": 0.769,
+          "bond": 0.385,
+          "outcome": 0.779,
+          "funded": true,
+          "slashed": 0.0
+        },
+        {
+          "round_id": 6,
+          "voter": "praxis",
+          "candidate": "r6c3",
+          "confidence": 0.556,
+          "bond": 0.278,
+          "outcome": 0.53,
+          "funded": false,
+          "slashed": 0.0
+        },
+        {
+          "round_id": 7,
+          "voter": "praxis",
+          "candidate": "r7c0",
+          "confidence": 0.334,
+          "bond": 0.167,
+          "outcome": 0.423,
+          "funded": false,
+          "slashed": 0.0
+        },
+        {
+          "round_id": 7,
+          "voter": "praxis",
+          "candidate": "r7c1",
+          "confidence": 0.249,
+          "bond": 0.124,
+          "outcome": 0.212,
+          "funded": false,
+          "slashed": 0.0
+        },
+        {
+          "round_id": 7,
+          "voter": "praxis",
+          "candidate": "r7c2",
+          "confidence": 0.58,
+          "bond": 0.29,
+          "outcome": 0.539,
+          "funded": true,
+          "slashed": 0.0
+        },
+        {
+          "round_id": 7,
+          "voter": "praxis",
+          "candidate": "r7c3",
+          "confidence": 0.769,
+          "bond": 0.385,
+          "outcome": 0.73,
+          "funded": true,
+          "slashed": 0.0
+        },
+        {
+          "round_id": 8,
+          "voter": "praxis",
+          "candidate": "r8c0",
+          "confidence": 0.284,
+          "bond": 0.142,
+          "outcome": 0.214,
+          "funded": false,
+          "slashed": 0.0
+        },
+        {
+          "round_id": 8,
+          "voter": "praxis",
+          "candidate": "r8c1",
+          "confidence": 0.181,
+          "bond": 0.09,
+          "outcome": 0.132,
+          "funded": false,
+          "slashed": 0.0
+        },
+        {
+          "round_id": 8,
+          "voter": "praxis",
+          "candidate": "r8c2",
+          "confidence": 0.856,
+          "bond": 0.428,
+          "outcome": 0.936,
+          "funded": true,
+          "slashed": 0.0
+        },
+        {
+          "round_id": 8,
+          "voter": "praxis",
+          "candidate": "r8c3",
+          "confidence": 0.612,
+          "bond": 0.306,
+          "outcome": 0.571,
+          "funded": true,
+          "slashed": 0.0
+        }
+      ]
+    },
+    {
+      "pid": "anke",
+      "is_founder": false,
+      "is_human": true,
+      "competence": 0.7,
+      "reasoning_survival": 0.7,
+      "stake_balance": 2,
+      "total_slashed": 0.0,
+      "vouches": {
+        "mira": 1.0,
+        "praxis": 1.0
+      },
+      "topic_vouches": {},
+      "history": [
+        {
+          "round_id": 1,
+          "voter": "anke",
+          "candidate": "r1c0",
+          "confidence": 0.718,
+          "bond": 0.359,
+          "outcome": 0.639,
+          "funded": true,
+          "slashed": 0.0
+        },
+        {
+          "round_id": 1,
+          "voter": "anke",
+          "candidate": "r1c1",
+          "confidence": 0.038,
+          "bond": 0.019,
+          "outcome": 0.025,
+          "funded": false,
+          "slashed": 0.0
+        },
+        {
+          "round_id": 1,
+          "voter": "anke",
+          "candidate": "r1c2",
+          "confidence": 0.186,
+          "bond": 0.093,
+          "outcome": 0.275,
+          "funded": false,
+          "slashed": 0.0
+        },
+        {
+          "round_id": 1,
+          "voter": "anke",
+          "candidate": "r1c3",
+          "confidence": 0.101,
+          "bond": 0.051,
+          "outcome": 0.223,
+          "funded": false,
+          "slashed": 0.0
+        },
+        {
+          "round_id": 2,
+          "voter": "anke",
+          "candidate": "r2c0",
+          "confidence": 1.0,
+          "bond": 0.5,
+          "outcome": 0.957,
+          "funded": true,
+          "slashed": 0.0
+        },
+        {
+          "round_id": 2,
+          "voter": "anke",
+          "candidate": "r2c1",
+          "confidence": 0.191,
+          "bond": 0.095,
+          "outcome": 0.337,
+          "funded": false,
+          "slashed": 0.0
+        },
+        {
+          "round_id": 2,
+          "voter": "anke",
+          "candidate": "r2c2",
+          "confidence": 0.195,
+          "bond": 0.097,
+          "outcome": 0.093,
+          "funded": false,
+          "slashed": 0.0
+        },
+        {
+          "round_id": 2,
+          "voter": "anke",
+          "candidate": "r2c3",
+          "confidence": 0.0,
+          "bond": 0.0,
+          "outcome": 0.097,
+          "funded": false,
+          "slashed": 0.0
+        },
+        {
+          "round_id": 3,
+          "voter": "anke",
+          "candidate": "r3c0",
+          "confidence": 0.807,
+          "bond": 0.404,
+          "outcome": 0.636,
+          "funded": true,
+          "slashed": 0.0
+        },
+        {
+          "round_id": 3,
+          "voter": "anke",
+          "candidate": "r3c1",
+          "confidence": 0.354,
+          "bond": 0.177,
+          "outcome": 0.365,
+          "funded": true,
+          "slashed": 0.0
+        },
+        {
+          "round_id": 3,
+          "voter": "anke",
+          "candidate": "r3c2",
+          "confidence": 0.199,
+          "bond": 0.1,
+          "outcome": 0.37,
+          "funded": false,
+          "slashed": 0.0
+        },
+        {
+          "round_id": 3,
+          "voter": "anke",
+          "candidate": "r3c3",
+          "confidence": 0.146,
+          "bond": 0.073,
+          "outcome": 0.21,
+          "funded": false,
+          "slashed": 0.0
+        },
+        {
+          "round_id": 4,
+          "voter": "anke",
+          "candidate": "r4c0",
+          "confidence": 0.808,
+          "bond": 0.404,
+          "outcome": 0.876,
+          "funded": true,
+          "slashed": 0.0
+        },
+        {
+          "round_id": 4,
+          "voter": "anke",
+          "candidate": "r4c1",
+          "confidence": 0.365,
+          "bond": 0.182,
+          "outcome": 0.315,
+          "funded": false,
+          "slashed": 0.0
+        },
+        {
+          "round_id": 4,
+          "voter": "anke",
+          "candidate": "r4c2",
+          "confidence": 0.798,
+          "bond": 0.399,
+          "outcome": 0.655,
+          "funded": true,
+          "slashed": 0.0
+        },
+        {
+          "round_id": 4,
+          "voter": "anke",
+          "candidate": "r4c3",
+          "confidence": 0.394,
+          "bond": 0.197,
+          "outcome": 0.396,
+          "funded": false,
+          "slashed": 0.0
+        },
+        {
+          "round_id": 5,
+          "voter": "anke",
+          "candidate": "r5c0",
+          "confidence": 0.711,
+          "bond": 0.355,
+          "outcome": 0.996,
+          "funded": true,
+          "slashed": 0.0
+        },
+        {
+          "round_id": 5,
+          "voter": "anke",
+          "candidate": "r5c1",
+          "confidence": 0.614,
+          "bond": 0.307,
+          "outcome": 0.529,
+          "funded": false,
+          "slashed": 0.0
+        },
+        {
+          "round_id": 5,
+          "voter": "anke",
+          "candidate": "r5c2",
+          "confidence": 1.0,
+          "bond": 0.5,
+          "outcome": 0.971,
+          "funded": true,
+          "slashed": 0.0
+        },
+        {
+          "round_id": 5,
+          "voter": "anke",
+          "candidate": "r5c3",
+          "confidence": 0.795,
+          "bond": 0.398,
+          "outcome": 0.861,
+          "funded": false,
+          "slashed": 0.0
+        },
+        {
+          "round_id": 6,
+          "voter": "anke",
+          "candidate": "r6c0",
+          "confidence": 0.972,
+          "bond": 0.486,
+          "outcome": 0.763,
+          "funded": true,
+          "slashed": 0.0
+        },
+        {
+          "round_id": 6,
+          "voter": "anke",
+          "candidate": "r6c1",
+          "confidence": 0.337,
+          "bond": 0.169,
+          "outcome": 0.539,
+          "funded": false,
+          "slashed": 0.0
+        },
+        {
+          "round_id": 6,
+          "voter": "anke",
+          "candidate": "r6c2",
+          "confidence": 0.898,
+          "bond": 0.449,
+          "outcome": 0.779,
+          "funded": true,
+          "slashed": 0.0
+        },
+        {
+          "round_id": 6,
+          "voter": "anke",
+          "candidate": "r6c3",
+          "confidence": 0.601,
+          "bond": 0.3,
+          "outcome": 0.53,
+          "funded": false,
+          "slashed": 0.0
+        },
+        {
+          "round_id": 7,
+          "voter": "anke",
+          "candidate": "r7c0",
+          "confidence": 0.339,
+          "bond": 0.169,
+          "outcome": 0.423,
+          "funded": false,
+          "slashed": 0.0
+        },
+        {
+          "round_id": 7,
+          "voter": "anke",
+          "candidate": "r7c1",
+          "confidence": 0.348,
+          "bond": 0.174,
+          "outcome": 0.212,
+          "funded": false,
+          "slashed": 0.0
+        },
+        {
+          "round_id": 7,
+          "voter": "anke",
+          "candidate": "r7c2",
+          "confidence": 0.55,
+          "bond": 0.275,
+          "outcome": 0.539,
+          "funded": true,
+          "slashed": 0.0
+        },
+        {
+          "round_id": 7,
+          "voter": "anke",
+          "candidate": "r7c3",
+          "confidence": 0.814,
+          "bond": 0.407,
+          "outcome": 0.73,
+          "funded": true,
+          "slashed": 0.0
+        },
+        {
+          "round_id": 8,
+          "voter": "anke",
+          "candidate": "r8c0",
+          "confidence": 0.19,
+          "bond": 0.095,
+          "outcome": 0.214,
+          "funded": false,
+          "slashed": 0.0
+        },
+        {
+          "round_id": 8,
+          "voter": "anke",
+          "candidate": "r8c1",
+          "confidence": 0.0,
+          "bond": 0.0,
+          "outcome": 0.132,
+          "funded": false,
+          "slashed": 0.0
+        },
+        {
+          "round_id": 8,
+          "voter": "anke",
+          "candidate": "r8c2",
+          "confidence": 0.99,
+          "bond": 0.495,
+          "outcome": 0.936,
+          "funded": true,
+          "slashed": 0.0
+        },
+        {
+          "round_id": 8,
+          "voter": "anke",
+          "candidate": "r8c3",
+          "confidence": 0.566,
+          "bond": 0.283,
+          "outcome": 0.571,
+          "funded": true,
+          "slashed": 0.0
+        }
+      ]
+    },
+    {
+      "pid": "nova",
+      "is_founder": false,
+      "is_human": false,
+      "competence": 0.72,
+      "reasoning_survival": 0.7,
+      "stake_balance": 1,
+      "total_slashed": 0.0,
+      "vouches": {},
+      "topic_vouches": {},
+      "history": [
+        {
+          "round_id": 1,
+          "voter": "nova",
+          "candidate": "r1c0",
+          "confidence": 0.676,
+          "bond": 0.338,
+          "outcome": 0.639,
+          "funded": true,
+          "slashed": 0.0
+        },
+        {
+          "round_id": 1,
+          "voter": "nova",
+          "candidate": "r1c1",
+          "confidence": 0.222,
+          "bond": 0.111,
+          "outcome": 0.025,
+          "funded": false,
+          "slashed": 0.0
+        },
+        {
+          "round_id": 1,
+          "voter": "nova",
+          "candidate": "r1c2",
+          "confidence": 0.281,
+          "bond": 0.141,
+          "outcome": 0.275,
+          "funded": false,
+          "slashed": 0.0
+        },
+        {
+          "round_id": 1,
+          "voter": "nova",
+          "candidate": "r1c3",
+          "confidence": 0.207,
+          "bond": 0.104,
+          "outcome": 0.223,
+          "funded": false,
+          "slashed": 0.0
+        },
+        {
+          "round_id": 2,
+          "voter": "nova",
+          "candidate": "r2c0",
+          "confidence": 0.944,
+          "bond": 0.472,
+          "outcome": 0.957,
+          "funded": true,
+          "slashed": 0.0
+        },
+        {
+          "round_id": 2,
+          "voter": "nova",
+          "candidate": "r2c1",
+          "confidence": 0.293,
+          "bond": 0.146,
+          "outcome": 0.337,
+          "funded": false,
+          "slashed": 0.0
+        },
+        {
+          "round_id": 2,
+          "voter": "nova",
+          "candidate": "r2c2",
+          "confidence": 0.11,
+          "bond": 0.055,
+          "outcome": 0.093,
+          "funded": false,
+          "slashed": 0.0
+        },
+        {
+          "round_id": 2,
+          "voter": "nova",
+          "candidate": "r2c3",
+          "confidence": 0.22,
+          "bond": 0.11,
+          "outcome": 0.097,
+          "funded": false,
+          "slashed": 0.0
+        },
+        {
+          "round_id": 3,
+          "voter": "nova",
+          "candidate": "r3c0",
+          "confidence": 0.779,
+          "bond": 0.389,
+          "outcome": 0.636,
+          "funded": true,
+          "slashed": 0.0
+        },
+        {
+          "round_id": 3,
+          "voter": "nova",
+          "candidate": "r3c1",
+          "confidence": 0.148,
+          "bond": 0.074,
+          "outcome": 0.365,
+          "funded": true,
+          "slashed": 0.0
+        },
+        {
+          "round_id": 3,
+          "voter": "nova",
+          "candidate": "r3c2",
+          "confidence": 0.375,
+          "bond": 0.188,
+          "outcome": 0.37,
+          "funded": false,
+          "slashed": 0.0
+        },
+        {
+          "round_id": 3,
+          "voter": "nova",
+          "candidate": "r3c3",
+          "confidence": 0.248,
+          "bond": 0.124,
+          "outcome": 0.21,
+          "funded": false,
+          "slashed": 0.0
+        },
+        {
+          "round_id": 4,
+          "voter": "nova",
+          "candidate": "r4c0",
+          "confidence": 0.915,
+          "bond": 0.458,
+          "outcome": 0.876,
+          "funded": true,
+          "slashed": 0.0
+        },
+        {
+          "round_id": 4,
+          "voter": "nova",
+          "candidate": "r4c1",
+          "confidence": 0.34,
+          "bond": 0.17,
+          "outcome": 0.315,
+          "funded": false,
+          "slashed": 0.0
+        },
+        {
+          "round_id": 4,
+          "voter": "nova",
+          "candidate": "r4c2",
+          "confidence": 0.818,
+          "bond": 0.409,
+          "outcome": 0.655,
+          "funded": true,
+          "slashed": 0.0
+        },
+        {
+          "round_id": 4,
+          "voter": "nova",
+          "candidate": "r4c3",
+          "confidence": 0.53,
+          "bond": 0.265,
+          "outcome": 0.396,
+          "funded": false,
+          "slashed": 0.0
+        },
+        {
+          "round_id": 5,
+          "voter": "nova",
+          "candidate": "r5c0",
+          "confidence": 0.902,
+          "bond": 0.451,
+          "outcome": 0.996,
+          "funded": true,
+          "slashed": 0.0
+        },
+        {
+          "round_id": 5,
+          "voter": "nova",
+          "candidate": "r5c1",
+          "confidence": 0.529,
+          "bond": 0.264,
+          "outcome": 0.529,
+          "funded": false,
+          "slashed": 0.0
+        },
+        {
+          "round_id": 5,
+          "voter": "nova",
+          "candidate": "r5c2",
+          "confidence": 1.0,
+          "bond": 0.5,
+          "outcome": 0.971,
+          "funded": true,
+          "slashed": 0.0
+        },
+        {
+          "round_id": 5,
+          "voter": "nova",
+          "candidate": "r5c3",
+          "confidence": 0.703,
+          "bond": 0.351,
+          "outcome": 0.861,
+          "funded": false,
+          "slashed": 0.0
+        },
+        {
+          "round_id": 6,
+          "voter": "nova",
+          "candidate": "r6c0",
+          "confidence": 0.993,
+          "bond": 0.497,
+          "outcome": 0.763,
+          "funded": true,
+          "slashed": 0.0
+        },
+        {
+          "round_id": 6,
+          "voter": "nova",
+          "candidate": "r6c1",
+          "confidence": 0.646,
+          "bond": 0.323,
+          "outcome": 0.539,
+          "funded": false,
+          "slashed": 0.0
+        },
+        {
+          "round_id": 6,
+          "voter": "nova",
+          "candidate": "r6c2",
+          "confidence": 0.787,
+          "bond": 0.393,
+          "outcome": 0.779,
+          "funded": true,
+          "slashed": 0.0
+        },
+        {
+          "round_id": 6,
+          "voter": "nova",
+          "candidate": "r6c3",
+          "confidence": 0.452,
+          "bond": 0.226,
+          "outcome": 0.53,
+          "funded": false,
+          "slashed": 0.0
+        },
+        {
+          "round_id": 7,
+          "voter": "nova",
+          "candidate": "r7c0",
+          "confidence": 0.614,
+          "bond": 0.307,
+          "outcome": 0.423,
+          "funded": false,
+          "slashed": 0.0
+        },
+        {
+          "round_id": 7,
+          "voter": "nova",
+          "candidate": "r7c1",
+          "confidence": 0.303,
+          "bond": 0.152,
+          "outcome": 0.212,
+          "funded": false,
+          "slashed": 0.0
+        },
+        {
+          "round_id": 7,
+          "voter": "nova",
+          "candidate": "r7c2",
+          "confidence": 0.582,
+          "bond": 0.291,
+          "outcome": 0.539,
+          "funded": true,
+          "slashed": 0.0
+        },
+        {
+          "round_id": 7,
+          "voter": "nova",
+          "candidate": "r7c3",
+          "confidence": 1.0,
+          "bond": 0.5,
+          "outcome": 0.73,
+          "funded": true,
+          "slashed": 0.0
+        },
+        {
+          "round_id": 8,
+          "voter": "nova",
+          "candidate": "r8c0",
+          "confidence": 0.102,
+          "bond": 0.051,
+          "outcome": 0.214,
+          "funded": false,
+          "slashed": 0.0
+        },
+        {
+          "round_id": 8,
+          "voter": "nova",
+          "candidate": "r8c1",
+          "confidence": 0.21,
+          "bond": 0.105,
+          "outcome": 0.132,
+          "funded": false,
+          "slashed": 0.0
+        },
+        {
+          "round_id": 8,
+          "voter": "nova",
+          "candidate": "r8c2",
+          "confidence": 1.0,
+          "bond": 0.5,
+          "outcome": 0.936,
+          "funded": true,
+          "slashed": 0.0
+        },
+        {
+          "round_id": 8,
+          "voter": "nova",
+          "candidate": "r8c3",
+          "confidence": 0.484,
+          "bond": 0.242,
+          "outcome": 0.571,
+          "funded": true,
+          "slashed": 0.0
+        }
+      ]
+    },
+    {
+      "pid": "drift",
+      "is_founder": false,
+      "is_human": false,
+      "competence": 0.6,
+      "reasoning_survival": 0.5,
+      "stake_balance": 0.75,
+      "total_slashed": 0.25,
+      "vouches": {},
+      "topic_vouches": {},
+      "history": [
+        {
+          "round_id": 1,
+          "voter": "drift",
+          "candidate": "r1c0",
+          "confidence": 0.862,
+          "bond": 0.431,
+          "outcome": 0.639,
+          "funded": true,
+          "slashed": 0.0
+        },
+        {
+          "round_id": 1,
+          "voter": "drift",
+          "candidate": "r1c1",
+          "confidence": 0.0,
+          "bond": 0.0,
+          "outcome": 0.025,
+          "funded": false,
+          "slashed": 0.0
+        },
+        {
+          "round_id": 1,
+          "voter": "drift",
+          "candidate": "r1c2",
+          "confidence": 0.144,
+          "bond": 0.072,
+          "outcome": 0.275,
+          "funded": false,
+          "slashed": 0.0
+        },
+        {
+          "round_id": 1,
+          "voter": "drift",
+          "candidate": "r1c3",
+          "confidence": 0.429,
+          "bond": 0.214,
+          "outcome": 0.223,
+          "funded": false,
+          "slashed": 0.0
+        },
+        {
+          "round_id": 2,
+          "voter": "drift",
+          "candidate": "r2c0",
+          "confidence": 1.0,
+          "bond": 0.5,
+          "outcome": 0.957,
+          "funded": true,
+          "slashed": 0.0
+        },
+        {
+          "round_id": 2,
+          "voter": "drift",
+          "candidate": "r2c1",
+          "confidence": 0.484,
+          "bond": 0.242,
+          "outcome": 0.337,
+          "funded": false,
+          "slashed": 0.0
+        },
+        {
+          "round_id": 2,
+          "voter": "drift",
+          "candidate": "r2c2",
+          "confidence": 0.366,
+          "bond": 0.183,
+          "outcome": 0.093,
+          "funded": false,
+          "slashed": 0.0
+        },
+        {
+          "round_id": 2,
+          "voter": "drift",
+          "candidate": "r2c3",
+          "confidence": 0.298,
+          "bond": 0.149,
+          "outcome": 0.097,
+          "funded": false,
+          "slashed": 0.0
+        },
+        {
+          "round_id": 3,
+          "voter": "drift",
+          "candidate": "r3c0",
+          "confidence": 0.503,
+          "bond": 0.252,
+          "outcome": 0.636,
+          "funded": true,
+          "slashed": 0.0
+        },
+        {
+          "round_id": 3,
+          "voter": "drift",
+          "candidate": "r3c1",
+          "confidence": 0.669,
+          "bond": 0.334,
+          "outcome": 0.365,
+          "funded": true,
+          "slashed": 0.0
+        },
+        {
+          "round_id": 3,
+          "voter": "drift",
+          "candidate": "r3c2",
+          "confidence": 0.614,
+          "bond": 0.307,
+          "outcome": 0.37,
+          "funded": false,
+          "slashed": 0.0
+        },
+        {
+          "round_id": 3,
+          "voter": "drift",
+          "candidate": "r3c3",
+          "confidence": 1.0,
+          "bond": 0.5,
+          "outcome": 0.21,
+          "funded": false,
+          "slashed": 0.25
+        },
+        {
+          "round_id": 4,
+          "voter": "drift",
+          "candidate": "r4c0",
+          "confidence": 0.991,
+          "bond": 0.372,
+          "outcome": 0.876,
+          "funded": true,
+          "slashed": 0.0
+        },
+        {
+          "round_id": 4,
+          "voter": "drift",
+          "candidate": "r4c1",
+          "confidence": 0.0,
+          "bond": 0.0,
+          "outcome": 0.315,
+          "funded": false,
+          "slashed": 0.0
+        },
+        {
+          "round_id": 4,
+          "voter": "drift",
+          "candidate": "r4c2",
+          "confidence": 1.0,
+          "bond": 0.375,
+          "outcome": 0.655,
+          "funded": true,
+          "slashed": 0.0
+        },
+        {
+          "round_id": 4,
+          "voter": "drift",
+          "candidate": "r4c3",
+          "confidence": 0.556,
+          "bond": 0.209,
+          "outcome": 0.396,
+          "funded": false,
+          "slashed": 0.0
+        },
+        {
+          "round_id": 5,
+          "voter": "drift",
+          "candidate": "r5c0",
+          "confidence": 0.816,
+          "bond": 0.306,
+          "outcome": 0.996,
+          "funded": true,
+          "slashed": 0.0
+        },
+        {
+          "round_id": 5,
+          "voter": "drift",
+          "candidate": "r5c1",
+          "confidence": 1.0,
+          "bond": 0.375,
+          "outcome": 0.529,
+          "funded": false,
+          "slashed": 0.0
+        },
+        {
+          "round_id": 5,
+          "voter": "drift",
+          "candidate": "r5c2",
+          "confidence": 0.784,
+          "bond": 0.294,
+          "outcome": 0.971,
+          "funded": true,
+          "slashed": 0.0
+        },
+        {
+          "round_id": 5,
+          "voter": "drift",
+          "candidate": "r5c3",
+          "confidence": 0.708,
+          "bond": 0.266,
+          "outcome": 0.861,
+          "funded": false,
+          "slashed": 0.0
+        },
+        {
+          "round_id": 6,
+          "voter": "drift",
+          "candidate": "r6c0",
+          "confidence": 0.239,
+          "bond": 0.09,
+          "outcome": 0.763,
+          "funded": true,
+          "slashed": 0.0
+        },
+        {
+          "round_id": 6,
+          "voter": "drift",
+          "candidate": "r6c1",
+          "confidence": 0.621,
+          "bond": 0.233,
+          "outcome": 0.539,
+          "funded": false,
+          "slashed": 0.0
+        },
+        {
+          "round_id": 6,
+          "voter": "drift",
+          "candidate": "r6c2",
+          "confidence": 0.698,
+          "bond": 0.262,
+          "outcome": 0.779,
+          "funded": true,
+          "slashed": 0.0
+        },
+        {
+          "round_id": 6,
+          "voter": "drift",
+          "candidate": "r6c3",
+          "confidence": 1.0,
+          "bond": 0.375,
+          "outcome": 0.53,
+          "funded": false,
+          "slashed": 0.0
+        },
+        {
+          "round_id": 7,
+          "voter": "drift",
+          "candidate": "r7c0",
+          "confidence": 0.525,
+          "bond": 0.197,
+          "outcome": 0.423,
+          "funded": false,
+          "slashed": 0.0
+        },
+        {
+          "round_id": 7,
+          "voter": "drift",
+          "candidate": "r7c1",
+          "confidence": 0.088,
+          "bond": 0.033,
+          "outcome": 0.212,
+          "funded": false,
+          "slashed": 0.0
+        },
+        {
+          "round_id": 7,
+          "voter": "drift",
+          "candidate": "r7c2",
+          "confidence": 0.586,
+          "bond": 0.22,
+          "outcome": 0.539,
+          "funded": true,
+          "slashed": 0.0
+        },
+        {
+          "round_id": 7,
+          "voter": "drift",
+          "candidate": "r7c3",
+          "confidence": 1.0,
+          "bond": 0.375,
+          "outcome": 0.73,
+          "funded": true,
+          "slashed": 0.0
+        },
+        {
+          "round_id": 8,
+          "voter": "drift",
+          "candidate": "r8c0",
+          "confidence": 0.382,
+          "bond": 0.143,
+          "outcome": 0.214,
+          "funded": false,
+          "slashed": 0.0
+        },
+        {
+          "round_id": 8,
+          "voter": "drift",
+          "candidate": "r8c1",
+          "confidence": 0.558,
+          "bond": 0.209,
+          "outcome": 0.132,
+          "funded": false,
+          "slashed": 0.0
+        },
+        {
+          "round_id": 8,
+          "voter": "drift",
+          "candidate": "r8c2",
+          "confidence": 0.637,
+          "bond": 0.239,
+          "outcome": 0.936,
+          "funded": true,
+          "slashed": 0.0
+        },
+        {
+          "round_id": 8,
+          "voter": "drift",
+          "candidate": "r8c3",
+          "confidence": 0.731,
+          "bond": 0.274,
+          "outcome": 0.571,
+          "funded": true,
+          "slashed": 0.0
+        }
+      ]
+    }
+  ],
+  "trajectories": {
+    "mira": [
+      {
+        "round": 1,
+        "raw_weight": 0.276667,
+        "share": 0.423022,
+        "cap": 5.0,
+        "calibration": 0.722,
+        "trust": 1.0
+      },
+      {
+        "round": 2,
+        "raw_weight": 0.402301,
+        "share": 0.423037,
+        "cap": 5.0,
+        "calibration": 0.8059,
+        "trust": 1.0
+      },
+      {
+        "round": 3,
+        "raw_weight": 0.457376,
+        "share": 0.421805,
+        "cap": 5.0,
+        "calibration": 0.8488,
+        "trust": 1.0
+      },
+      {
+        "round": 4,
+        "raw_weight": 0.479048,
+        "share": 0.439954,
+        "cap": 5.0,
+        "calibration": 0.877,
+        "trust": 1.0
+      },
+      {
+        "round": 5,
+        "raw_weight": 0.500289,
+        "share": 0.439186,
+        "cap": 5.0,
+        "calibration": 0.8963,
+        "trust": 1.0
+      },
+      {
+        "round": 6,
+        "raw_weight": 0.520041,
+        "share": 0.437535,
+        "cap": 5.0,
+        "calibration": 0.9093,
+        "trust": 1.0
+      },
+      {
+        "round": 7,
+        "raw_weight": 0.529776,
+        "share": 0.437378,
+        "cap": 5.0,
+        "calibration": 0.9197,
+        "trust": 1.0
+      },
+      {
+        "round": 8,
+        "raw_weight": 0.535116,
+        "share": 0.437722,
+        "cap": 5.0,
+        "calibration": 0.9278,
+        "trust": 1.0
+      }
+    ],
+    "praxis": [
+      {
+        "round": 1,
+        "raw_weight": 0.276667,
+        "share": 0.423022,
+        "cap": 5.0,
+        "calibration": 0.7212,
+        "trust": 1.0
+      },
+      {
+        "round": 2,
+        "raw_weight": 0.401837,
+        "share": 0.42255,
+        "cap": 5.0,
+        "calibration": 0.8026,
+        "trust": 1.0
+      },
+      {
+        "round": 3,
+        "raw_weight": 0.455499,
+        "share": 0.420073,
+        "cap": 5.0,
+        "calibration": 0.8477,
+        "trust": 1.0
+      },
+      {
+        "round": 4,
+        "raw_weight": 0.423571,
+        "share": 0.389005,
+        "cap": 5.0,
+        "calibration": 0.8751,
+        "trust": 0.7703
+      },
+      {
+        "round": 5,
+        "raw_weight": 0.442354,
+        "share": 0.388327,
+        "cap": 5.0,
+        "calibration": 0.8944,
+        "trust": 0.7703
+      },
+      {
+        "round": 6,
+        "raw_weight": 0.460983,
+        "share": 0.387847,
+        "cap": 5.0,
+        "calibration": 0.9082,
+        "trust": 0.7703
+      },
+      {
+        "round": 7,
+        "raw_weight": 0.469911,
+        "share": 0.387954,
+        "cap": 5.0,
+        "calibration": 0.9189,
+        "trust": 0.7703
+      },
+      {
+        "round": 8,
+        "raw_weight": 0.474257,
+        "share": 0.38794,
+        "cap": 5.0,
+        "calibration": 0.9273,
+        "trust": 0.7703
+      }
+    ],
+    "anke": [
+      {
+        "round": 1,
+        "raw_weight": 0.047857,
+        "share": 0.073173,
+        "cap": 1.6293,
+        "calibration": 0.719,
+        "trust": 0.0
+      },
+      {
+        "round": 2,
+        "raw_weight": 0.070006,
+        "share": 0.073614,
+        "cap": 2.3602,
+        "calibration": 0.8021,
+        "trust": 0.0
+      },
+      {
+        "round": 3,
+        "raw_weight": 0.081654,
+        "share": 0.075304,
+        "cap": 2.7446,
+        "calibration": 0.845,
+        "trust": 0.0
+      },
+      {
+        "round": 4,
+        "raw_weight": 0.086402,
+        "share": 0.079351,
+        "cap": 2.9013,
+        "calibration": 0.8732,
+        "trust": 0.0
+      },
+      {
+        "round": 5,
+        "raw_weight": 0.091457,
+        "share": 0.080287,
+        "cap": 3.0681,
+        "calibration": 0.8898,
+        "trust": 0.0
+      },
+      {
+        "round": 6,
+        "raw_weight": 0.096973,
+        "share": 0.081588,
+        "cap": 3.2501,
+        "calibration": 0.9014,
+        "trust": 0.0
+      },
+      {
+        "round": 7,
+        "raw_weight": 0.099024,
+        "share": 0.081753,
+        "cap": 3.3178,
+        "calibration": 0.9123,
+        "trust": 0.0
+      },
+      {
+        "round": 8,
+        "raw_weight": 0.099711,
+        "share": 0.081563,
+        "cap": 3.3405,
+        "calibration": 0.9213,
+        "trust": 0.0
+      }
+    ],
+    "nova": [
+      {
+        "round": 1,
+        "raw_weight": 0.02825,
+        "share": 0.043194,
+        "cap": 0.9823,
+        "calibration": 0.7177,
+        "trust": 0.0
+      },
+      {
+        "round": 2,
+        "raw_weight": 0.041244,
+        "share": 0.04337,
+        "cap": 1.4111,
+        "calibration": 0.8032,
+        "trust": 0.0
+      },
+      {
+        "round": 3,
+        "raw_weight": 0.048232,
+        "share": 0.044481,
+        "cap": 1.6417,
+        "calibration": 0.8455,
+        "trust": 0.0
+      },
+      {
+        "round": 4,
+        "raw_weight": 0.077942,
+        "share": 0.071581,
+        "cap": 2.6221,
+        "calibration": 0.8727,
+        "trust": 0.425
+      },
+      {
+        "round": 5,
+        "raw_weight": 0.081716,
+        "share": 0.071735,
+        "cap": 2.7466,
+        "calibration": 0.8917,
+        "trust": 0.425
+      },
+      {
+        "round": 6,
+        "raw_weight": 0.085705,
+        "share": 0.072108,
+        "cap": 2.8783,
+        "calibration": 0.9042,
+        "trust": 0.425
+      },
+      {
+        "round": 7,
+        "raw_weight": 0.087366,
+        "share": 0.072129,
+        "cap": 2.9331,
+        "calibration": 0.9122,
+        "trust": 0.425
+      },
+      {
+        "round": 8,
+        "raw_weight": 0.087837,
+        "share": 0.07185,
+        "cap": 2.9486,
+        "calibration": 0.9208,
+        "trust": 0.425
+      }
+    ],
+    "drift": [
+      {
+        "round": 1,
+        "raw_weight": 0.024583,
+        "share": 0.037588,
+        "cap": 0.8613,
+        "calibration": 0.71,
+        "trust": 0.0
+      },
+      {
+        "round": 2,
+        "raw_weight": 0.035594,
+        "share": 0.037429,
+        "cap": 1.2246,
+        "calibration": 0.7886,
+        "trust": 0.0
+      },
+      {
+        "round": 3,
+        "raw_weight": 0.04157,
+        "share": 0.038337,
+        "cap": 1.4218,
+        "calibration": 0.7916,
+        "trust": 0.0
+      },
+      {
+        "round": 4,
+        "raw_weight": 0.021896,
+        "share": 0.020109,
+        "cap": 0.7726,
+        "calibration": 0.8191,
+        "trust": 0.0
+      },
+      {
+        "round": 5,
+        "raw_weight": 0.023313,
+        "share": 0.020466,
+        "cap": 0.8193,
+        "calibration": 0.8355,
+        "trust": 0.0
+      },
+      {
+        "round": 6,
+        "raw_weight": 0.024868,
+        "share": 0.020922,
+        "cap": 0.8706,
+        "calibration": 0.8407,
+        "trust": 0.0
+      },
+      {
+        "round": 7,
+        "raw_weight": 0.025178,
+        "share": 0.020787,
+        "cap": 0.8809,
+        "calibration": 0.8569,
+        "trust": 0.0
+      },
+      {
+        "round": 8,
+        "raw_weight": 0.025581,
+        "share": 0.020925,
+        "cap": 0.8942,
+        "calibration": 0.8636,
+        "trust": 0.0
+      }
+    ]
+  },
+  "metrics": {
+    "time_to_trust": {
+      "anke": 1,
+      "nova": 1,
+      "drift": 1
+    },
+    "adversarial_pids": [],
+    "peak_adversarial_share": 0.0,
+    "peak_adversarial_round": null,
+    "adversary_committed_a_payout": false,
+    "founder_share_by_round": [
+      0.846,
+      0.8456,
+      0.8419,
+      0.829,
+      0.8275,
+      0.8254,
+      0.8253,
+      0.8257
+    ],
+    "rounds": 8,
+    "delegate_floor": 0.01
+  }
+}

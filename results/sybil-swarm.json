@@ -1,0 +1,5449 @@
+{
+  "kind": "sim",
+  "scenario": {
+    "name": "sybil-swarm",
+    "description": "6 vetted sybils vouch each other in a ring with NO founder edge. Anchoring zeroes their trust, but the PoAW faucet + neutral priors still floor the swarm at ~30% aggregate share \u2014 the residual leak to close.",
+    "agents": [
+      {
+        "pid": "mira",
+        "is_founder": true,
+        "is_human": false,
+        "competence": 0.85,
+        "reasoning_survival": 0.85,
+        "stake_balance": 10,
+        "vetted": false,
+        "sigma": 0.08,
+        "kind": "founder",
+        "strategy": "honest"
+      },
+      {
+        "pid": "praxis",
+        "is_founder": true,
+        "is_human": false,
+        "competence": 0.85,
+        "reasoning_survival": 0.85,
+        "stake_balance": 10,
+        "vetted": false,
+        "sigma": 0.08,
+        "kind": "founder",
+        "strategy": "honest"
+      },
+      {
+        "pid": "sybil1",
+        "is_founder": false,
+        "is_human": false,
+        "competence": 0.6,
+        "reasoning_survival": 0.55,
+        "stake_balance": 0,
+        "vetted": true,
+        "sigma": 0.3,
+        "kind": "sybil",
+        "strategy": "pump"
+      },
+      {
+        "pid": "sybil2",
+        "is_founder": false,
+        "is_human": false,
+        "competence": 0.6,
+        "reasoning_survival": 0.55,
+        "stake_balance": 0,
+        "vetted": true,
+        "sigma": 0.3,
+        "kind": "sybil",
+        "strategy": "pump"
+      },
+      {
+        "pid": "sybil3",
+        "is_founder": false,
+        "is_human": false,
+        "competence": 0.6,
+        "reasoning_survival": 0.55,
+        "stake_balance": 0,
+        "vetted": true,
+        "sigma": 0.3,
+        "kind": "sybil",
+        "strategy": "pump"
+      },
+      {
+        "pid": "sybil4",
+        "is_founder": false,
+        "is_human": false,
+        "competence": 0.6,
+        "reasoning_survival": 0.55,
+        "stake_balance": 0,
+        "vetted": true,
+        "sigma": 0.3,
+        "kind": "sybil",
+        "strategy": "pump"
+      },
+      {
+        "pid": "sybil5",
+        "is_founder": false,
+        "is_human": false,
+        "competence": 0.6,
+        "reasoning_survival": 0.55,
+        "stake_balance": 0,
+        "vetted": true,
+        "sigma": 0.3,
+        "kind": "sybil",
+        "strategy": "pump"
+      },
+      {
+        "pid": "sybil6",
+        "is_founder": false,
+        "is_human": false,
+        "competence": 0.6,
+        "reasoning_survival": 0.55,
+        "stake_balance": 0,
+        "vetted": true,
+        "sigma": 0.3,
+        "kind": "sybil",
+        "strategy": "pump"
+      }
+    ],
+    "edges": [
+      {
+        "truster": "mira",
+        "target": "praxis",
+        "weight": 1.0,
+        "topic": null,
+        "round": 0
+      },
+      {
+        "truster": "praxis",
+        "target": "mira",
+        "weight": 1.0,
+        "topic": null,
+        "round": 0
+      },
+      {
+        "truster": "sybil1",
+        "target": "sybil2",
+        "weight": 1.0,
+        "topic": null,
+        "round": 0
+      },
+      {
+        "truster": "sybil1",
+        "target": "sybil3",
+        "weight": 1.0,
+        "topic": null,
+        "round": 0
+      },
+      {
+        "truster": "sybil1",
+        "target": "sybil4",
+        "weight": 1.0,
+        "topic": null,
+        "round": 0
+      },
+      {
+        "truster": "sybil1",
+        "target": "sybil5",
+        "weight": 1.0,
+        "topic": null,
+        "round": 0
+      },
+      {
+        "truster": "sybil1",
+        "target": "sybil6",
+        "weight": 1.0,
+        "topic": null,
+        "round": 0
+      },
+      {
+        "truster": "sybil2",
+        "target": "sybil1",
+        "weight": 1.0,
+        "topic": null,
+        "round": 0
+      },
+      {
+        "truster": "sybil2",
+        "target": "sybil3",
+        "weight": 1.0,
+        "topic": null,
+        "round": 0
+      },
+      {
+        "truster": "sybil2",
+        "target": "sybil4",
+        "weight": 1.0,
+        "topic": null,
+        "round": 0
+      },
+      {
+        "truster": "sybil2",
+        "target": "sybil5",
+        "weight": 1.0,
+        "topic": null,
+        "round": 0
+      },
+      {
+        "truster": "sybil2",
+        "target": "sybil6",
+        "weight": 1.0,
+        "topic": null,
+        "round": 0
+      },
+      {
+        "truster": "sybil3",
+        "target": "sybil1",
+        "weight": 1.0,
+        "topic": null,
+        "round": 0
+      },
+      {
+        "truster": "sybil3",
+        "target": "sybil2",
+        "weight": 1.0,
+        "topic": null,
+        "round": 0
+      },
+      {
+        "truster": "sybil3",
+        "target": "sybil4",
+        "weight": 1.0,
+        "topic": null,
+        "round": 0
+      },
+      {
+        "truster": "sybil3",
+        "target": "sybil5",
+        "weight": 1.0,
+        "topic": null,
+        "round": 0
+      },
+      {
+        "truster": "sybil3",
+        "target": "sybil6",
+        "weight": 1.0,
+        "topic": null,
+        "round": 0
+      },
+      {
+        "truster": "sybil4",
+        "target": "sybil1",
+        "weight": 1.0,
+        "topic": null,
+        "round": 0
+      },
+      {
+        "truster": "sybil4",
+        "target": "sybil2",
+        "weight": 1.0,
+        "topic": null,
+        "round": 0
+      },
+      {
+        "truster": "sybil4",
+        "target": "sybil3",
+        "weight": 1.0,
+        "topic": null,
+        "round": 0
+      },
+      {
+        "truster": "sybil4",
+        "target": "sybil5",
+        "weight": 1.0,
+        "topic": null,
+        "round": 0
+      },
+      {
+        "truster": "sybil4",
+        "target": "sybil6",
+        "weight": 1.0,
+        "topic": null,
+        "round": 0
+      },
+      {
+        "truster": "sybil5",
+        "target": "sybil1",
+        "weight": 1.0,
+        "topic": null,
+        "round": 0
+      },
+      {
+        "truster": "sybil5",
+        "target": "sybil2",
+        "weight": 1.0,
+        "topic": null,
+        "round": 0
+      },
+      {
+        "truster": "sybil5",
+        "target": "sybil3",
+        "weight": 1.0,
+        "topic": null,
+        "round": 0
+      },
+      {
+        "truster": "sybil5",
+        "target": "sybil4",
+        "weight": 1.0,
+        "topic": null,
+        "round": 0
+      },
+      {
+        "truster": "sybil5",
+        "target": "sybil6",
+        "weight": 1.0,
+        "topic": null,
+        "round": 0
+      },
+      {
+        "truster": "sybil6",
+        "target": "sybil1",
+        "weight": 1.0,
+        "topic": null,
+        "round": 0
+      },
+      {
+        "truster": "sybil6",
+        "target": "sybil2",
+        "weight": 1.0,
+        "topic": null,
+        "round": 0
+      },
+      {
+        "truster": "sybil6",
+        "target": "sybil3",
+        "weight": 1.0,
+        "topic": null,
+        "round": 0
+      },
+      {
+        "truster": "sybil6",
+        "target": "sybil4",
+        "weight": 1.0,
+        "topic": null,
+        "round": 0
+      },
+      {
+        "truster": "sybil6",
+        "target": "sybil5",
+        "weight": 1.0,
+        "topic": null,
+        "round": 0
+      }
+    ],
+    "topics": [
+      "ai-safety",
+      "markets",
+      "governance"
+    ],
+    "rounds": 6,
+    "pool": 1.0,
+    "seed": 42,
+    "candidates_per_round": 4,
+    "top_k": 2,
+    "slash": false,
+    "slash_confidence": 0.7,
+    "bad_outcome": 0.3,
+    "slash_fraction": 0.5,
+    "delegate_floor_raw": 0.01,
+    "quorums": {},
+    "overrides": {
+      "W_TRUST": null,
+      "W_COMPETENCE": null,
+      "W_PAYOUT": null,
+      "W_REASONING": null,
+      "CAP_FLOOR": null,
+      "CAP_CEIL": null,
+      "w_ref": null,
+      "ref_bond": null,
+      "damping": null,
+      "prior_strength": null,
+      "faucet_stake": null
+    },
+    "quality": "uniform"
+  },
+  "topics": [
+    "ai-safety",
+    "markets",
+    "governance"
+  ],
+  "agents": [
+    {
+      "pid": "mira",
+      "kind": "founder",
+      "is_founder": true,
+      "is_human": false
+    },
+    {
+      "pid": "praxis",
+      "kind": "founder",
+      "is_founder": true,
+      "is_human": false
+    },
+    {
+      "pid": "sybil1",
+      "kind": "sybil",
+      "is_founder": false,
+      "is_human": false
+    },
+    {
+      "pid": "sybil2",
+      "kind": "sybil",
+      "is_founder": false,
+      "is_human": false
+    },
+    {
+      "pid": "sybil3",
+      "kind": "sybil",
+      "is_founder": false,
+      "is_human": false
+    },
+    {
+      "pid": "sybil4",
+      "kind": "sybil",
+      "is_founder": false,
+      "is_human": false
+    },
+    {
+      "pid": "sybil5",
+      "kind": "sybil",
+      "is_founder": false,
+      "is_human": false
+    },
+    {
+      "pid": "sybil6",
+      "kind": "sybil",
+      "is_founder": false,
+      "is_human": false
+    }
+  ],
+  "rounds": [
+    {
+      "round_id": 1,
+      "pool": 1.0,
+      "top_k": 2,
+      "unit": "MERIT",
+      "dry": true,
+      "weights": {
+        "mira": 0.341363,
+        "praxis": 0.341363,
+        "sybil1": 0.052879,
+        "sybil2": 0.052879,
+        "sybil3": 0.052879,
+        "sybil4": 0.052879,
+        "sybil5": 0.052879,
+        "sybil6": 0.052879
+      },
+      "raw_weights": {
+        "mira": 0.276667,
+        "praxis": 0.276667,
+        "sybil1": 0.042857,
+        "sybil2": 0.042857,
+        "sybil3": 0.042857,
+        "sybil4": 0.042857,
+        "sybil5": 0.042857,
+        "sybil6": 0.042857
+      },
+      "caps": {
+        "mira": 5.0,
+        "praxis": 5.0,
+        "sybil1": 1.4643,
+        "sybil2": 1.4643,
+        "sybil3": 1.4643,
+        "sybil4": 1.4643,
+        "sybil5": 1.4643,
+        "sybil6": 1.4643
+      },
+      "scores": {
+        "r1c0": 0.69879,
+        "r1c1": 0.272881,
+        "r1c2": 0.468958,
+        "r1c3": 0.442173
+      },
+      "allocated": {
+        "r1c0": 0.598408,
+        "r1c2": 0.401592
+      },
+      "paid": {
+        "r1c0": 0.598408,
+        "r1c2": 0.401592
+      },
+      "committers": {
+        "r1c0": "mira",
+        "r1c2": "sybil1"
+      },
+      "clipped": {},
+      "accrued_pending": {
+        "contrib-ai-safety": 0.598408,
+        "contrib-governance": 0.401592
+      },
+      "candidate_topics": {
+        "r1c0": "ai-safety",
+        "r1c1": "markets",
+        "r1c2": "governance",
+        "r1c3": "ai-safety"
+      },
+      "trust_edges_applied": 0,
+      "candidates": [
+        {
+          "candidate_id": "r1c0",
+          "title": "ai-safety contribution 1.0",
+          "author": "contrib-ai-safety",
+          "topic": "ai-safety",
+          "true_quality": 0.639
+        },
+        {
+          "candidate_id": "r1c1",
+          "title": "markets contribution 1.1",
+          "author": "contrib-markets",
+          "topic": "markets",
+          "true_quality": 0.025
+        },
+        {
+          "candidate_id": "r1c2",
+          "title": "governance contribution 1.2",
+          "author": "contrib-governance",
+          "topic": "governance",
+          "true_quality": 0.275
+        },
+        {
+          "candidate_id": "r1c3",
+          "title": "ai-safety contribution 1.3",
+          "author": "contrib-ai-safety",
+          "topic": "ai-safety",
+          "true_quality": 0.223
+        }
+      ],
+      "slashes": {},
+      "neurons": {
+        "mira": {
+          "calibration": 0.722,
+          "stake": 0.6667,
+          "competence": 0.85,
+          "payout": 0.5232,
+          "reasoning": 0.85,
+          "trust": 1.0
+        },
+        "praxis": {
+          "calibration": 0.7212,
+          "stake": 0.6667,
+          "competence": 0.85,
+          "payout": 0.5232,
+          "reasoning": 0.85,
+          "trust": 1.0
+        },
+        "sybil1": {
+          "calibration": 0.5745,
+          "stake": 0.2857,
+          "competence": 0.6,
+          "payout": 0.4877,
+          "reasoning": 0.55,
+          "trust": 0.0
+        },
+        "sybil2": {
+          "calibration": 0.5406,
+          "stake": 0.2857,
+          "competence": 0.6,
+          "payout": 0.4877,
+          "reasoning": 0.55,
+          "trust": 0.0
+        },
+        "sybil3": {
+          "calibration": 0.5763,
+          "stake": 0.2857,
+          "competence": 0.6,
+          "payout": 0.4877,
+          "reasoning": 0.55,
+          "trust": 0.0
+        },
+        "sybil4": {
+          "calibration": 0.5541,
+          "stake": 0.2857,
+          "competence": 0.6,
+          "payout": 0.4877,
+          "reasoning": 0.55,
+          "trust": 0.0
+        },
+        "sybil5": {
+          "calibration": 0.5825,
+          "stake": 0.2857,
+          "competence": 0.6,
+          "payout": 0.4877,
+          "reasoning": 0.55,
+          "trust": 0.0
+        },
+        "sybil6": {
+          "calibration": 0.5733,
+          "stake": 0.2857,
+          "competence": 0.6,
+          "payout": 0.4877,
+          "reasoning": 0.55,
+          "trust": 0.0
+        }
+      },
+      "votes": [
+        {
+          "voter": "mira",
+          "candidate": "r1c0",
+          "confidence": 0.629,
+          "bond": 0.314,
+          "external": false,
+          "rationale": ""
+        },
+        {
+          "voter": "mira",
+          "candidate": "r1c1",
+          "confidence": 0.0,
+          "bond": 0.0,
+          "external": false,
+          "rationale": ""
+        },
+        {
+          "voter": "mira",
+          "candidate": "r1c2",
+          "confidence": 0.302,
+          "bond": 0.151,
+          "external": false,
+          "rationale": ""
+        },
+        {
+          "voter": "mira",
+          "candidate": "r1c3",
+          "confidence": 0.202,
+          "bond": 0.101,
+          "external": false,
+          "rationale": ""
+        },
+        {
+          "voter": "praxis",
+          "candidate": "r1c0",
+          "confidence": 0.622,
+          "bond": 0.311,
+          "external": false,
+          "rationale": ""
+        },
+        {
+          "voter": "praxis",
+          "candidate": "r1c1",
+          "confidence": 0.034,
+          "bond": 0.017,
+          "external": false,
+          "rationale": ""
+        },
+        {
+          "voter": "praxis",
+          "candidate": "r1c2",
+          "confidence": 0.294,
+          "bond": 0.147,
+          "external": false,
+          "rationale": ""
+        },
+        {
+          "voter": "praxis",
+          "candidate": "r1c3",
+          "confidence": 0.316,
+          "bond": 0.158,
+          "external": false,
+          "rationale": ""
+        },
+        {
+          "voter": "sybil1",
+          "candidate": "r1c0",
+          "confidence": 0.903,
+          "bond": 0.451,
+          "external": true,
+          "rationale": ""
+        },
+        {
+          "voter": "sybil1",
+          "candidate": "r1c1",
+          "confidence": 0.859,
+          "bond": 0.429,
+          "external": true,
+          "rationale": ""
+        },
+        {
+          "voter": "sybil1",
+          "candidate": "r1c2",
+          "confidence": 0.791,
+          "bond": 0.395,
+          "external": true,
+          "rationale": ""
+        },
+        {
+          "voter": "sybil1",
+          "candidate": "r1c3",
+          "confidence": 0.769,
+          "bond": 0.384,
+          "external": true,
+          "rationale": ""
+        },
+        {
+          "voter": "sybil2",
+          "candidate": "r1c0",
+          "confidence": 0.87,
+          "bond": 0.435,
+          "external": true,
+          "rationale": ""
+        },
+        {
+          "voter": "sybil2",
+          "candidate": "r1c1",
+          "confidence": 0.955,
+          "bond": 0.477,
+          "external": true,
+          "rationale": ""
+        },
+        {
+          "voter": "sybil2",
+          "candidate": "r1c2",
+          "confidence": 0.853,
+          "bond": 0.427,
+          "external": true,
+          "rationale": ""
+        },
+        {
+          "voter": "sybil2",
+          "candidate": "r1c3",
+          "confidence": 0.841,
+          "bond": 0.421,
+          "external": true,
+          "rationale": ""
+        },
+        {
+          "voter": "sybil3",
+          "candidate": "r1c0",
+          "confidence": 0.893,
+          "bond": 0.446,
+          "external": true,
+          "rationale": ""
+        },
+        {
+          "voter": "sybil3",
+          "candidate": "r1c1",
+          "confidence": 0.734,
+          "bond": 0.367,
+          "external": true,
+          "rationale": ""
+        },
+        {
+          "voter": "sybil3",
+          "candidate": "r1c2",
+          "confidence": 0.825,
+          "bond": 0.413,
+          "external": true,
+          "rationale": ""
+        },
+        {
+          "voter": "sybil3",
+          "candidate": "r1c3",
+          "confidence": 0.889,
+          "bond": 0.445,
+          "external": true,
+          "rationale": ""
+        },
+        {
+          "voter": "sybil4",
+          "candidate": "r1c0",
+          "confidence": 0.92,
+          "bond": 0.46,
+          "external": true,
+          "rationale": ""
+        },
+        {
+          "voter": "sybil4",
+          "candidate": "r1c1",
+          "confidence": 0.831,
+          "bond": 0.415,
+          "external": true,
+          "rationale": ""
+        },
+        {
+          "voter": "sybil4",
+          "candidate": "r1c2",
+          "confidence": 0.88,
+          "bond": 0.44,
+          "external": true,
+          "rationale": ""
+        },
+        {
+          "voter": "sybil4",
+          "candidate": "r1c3",
+          "confidence": 0.87,
+          "bond": 0.435,
+          "external": true,
+          "rationale": ""
+        },
+        {
+          "voter": "sybil5",
+          "candidate": "r1c0",
+          "confidence": 0.913,
+          "bond": 0.456,
+          "external": true,
+          "rationale": ""
+        },
+        {
+          "voter": "sybil5",
+          "candidate": "r1c1",
+          "confidence": 0.761,
+          "bond": 0.38,
+          "external": true,
+          "rationale": ""
+        },
+        {
+          "voter": "sybil5",
+          "candidate": "r1c2",
+          "confidence": 0.895,
+          "bond": 0.448,
+          "external": true,
+          "rationale": ""
+        },
+        {
+          "voter": "sybil5",
+          "candidate": "r1c3",
+          "confidence": 0.729,
+          "bond": 0.364,
+          "external": true,
+          "rationale": ""
+        },
+        {
+          "voter": "sybil6",
+          "candidate": "r1c0",
+          "confidence": 0.64,
+          "bond": 0.32,
+          "external": true,
+          "rationale": ""
+        },
+        {
+          "voter": "sybil6",
+          "candidate": "r1c1",
+          "confidence": 0.801,
+          "bond": 0.401,
+          "external": true,
+          "rationale": ""
+        },
+        {
+          "voter": "sybil6",
+          "candidate": "r1c2",
+          "confidence": 0.777,
+          "bond": 0.388,
+          "external": true,
+          "rationale": ""
+        },
+        {
+          "voter": "sybil6",
+          "candidate": "r1c3",
+          "confidence": 0.92,
+          "bond": 0.46,
+          "external": true,
+          "rationale": ""
+        }
+      ]
+    },
+    {
+      "round_id": 2,
+      "pool": 1.0,
+      "top_k": 2,
+      "unit": "MERIT",
+      "dry": true,
+      "weights": {
+        "mira": 0.368171,
+        "praxis": 0.367747,
+        "sybil1": 0.044603,
+        "sybil2": 0.041975,
+        "sybil3": 0.044744,
+        "sybil4": 0.043019,
+        "sybil5": 0.045228,
+        "sybil6": 0.044513
+      },
+      "raw_weights": {
+        "mira": 0.402301,
+        "praxis": 0.401837,
+        "sybil1": 0.048738,
+        "sybil2": 0.045866,
+        "sybil3": 0.048892,
+        "sybil4": 0.047007,
+        "sybil5": 0.04942,
+        "sybil6": 0.04864
+      },
+      "caps": {
+        "mira": 5.0,
+        "praxis": 5.0,
+        "sybil1": 1.6583,
+        "sybil2": 1.5636,
+        "sybil3": 1.6634,
+        "sybil4": 1.6012,
+        "sybil5": 1.6809,
+        "sybil6": 1.6551
+      },
+      "scores": {
+        "r2c0": 0.857612,
+        "r2c1": 0.687355,
+        "r2c2": 0.875871,
+        "r2c3": 0.69382
+      },
+      "allocated": {
+        "r2c2": 0.505267,
+        "r2c0": 0.494733
+      },
+      "paid": {
+        "r2c2": 0.505267,
+        "r2c0": 0.494733
+      },
+      "committers": {
+        "r2c2": "mira",
+        "r2c0": "mira"
+      },
+      "clipped": {},
+      "accrued_pending": {
+        "contrib-governance": 0.505267,
+        "contrib-ai-safety": 0.494733
+      },
+      "candidate_topics": {
+        "r2c0": "ai-safety",
+        "r2c1": "markets",
+        "r2c2": "governance",
+        "r2c3": "ai-safety"
+      },
+      "trust_edges_applied": 0,
+      "candidates": [
+        {
+          "candidate_id": "r2c0",
+          "title": "ai-safety contribution 2.0",
+          "author": "contrib-ai-safety",
+          "topic": "ai-safety",
+          "true_quality": 0.829
+        },
+        {
+          "candidate_id": "r2c1",
+          "title": "markets contribution 2.1",
+          "author": "contrib-markets",
+          "topic": "markets",
+          "true_quality": 0.619
+        },
+        {
+          "candidate_id": "r2c2",
+          "title": "governance contribution 2.2",
+          "author": "contrib-governance",
+          "topic": "governance",
+          "true_quality": 0.862
+        },
+        {
+          "candidate_id": "r2c3",
+          "title": "ai-safety contribution 2.3",
+          "author": "contrib-ai-safety",
+          "topic": "ai-safety",
+          "true_quality": 0.577
+        }
+      ],
+      "slashes": {},
+      "neurons": {
+        "mira": {
+          "calibration": 0.8072,
+          "stake": 0.6667,
+          "competence": 0.85,
+          "payout": 0.6038,
+          "reasoning": 0.85,
+          "trust": 1.0
+        },
+        "praxis": {
+          "calibration": 0.8064,
+          "stake": 0.6667,
+          "competence": 0.85,
+          "payout": 0.6038,
+          "reasoning": 0.85,
+          "trust": 1.0
+        },
+        "sybil1": {
+          "calibration": 0.6953,
+          "stake": 0.2857,
+          "competence": 0.6,
+          "payout": 0.5672,
+          "reasoning": 0.55,
+          "trust": 0.0
+        },
+        "sybil2": {
+          "calibration": 0.6677,
+          "stake": 0.2857,
+          "competence": 0.6,
+          "payout": 0.5672,
+          "reasoning": 0.55,
+          "trust": 0.0
+        },
+        "sybil3": {
+          "calibration": 0.688,
+          "stake": 0.2857,
+          "competence": 0.6,
+          "payout": 0.5672,
+          "reasoning": 0.55,
+          "trust": 0.0
+        },
+        "sybil4": {
+          "calibration": 0.6808,
+          "stake": 0.2857,
+          "competence": 0.6,
+          "payout": 0.5672,
+          "reasoning": 0.55,
+          "trust": 0.0
+        },
+        "sybil5": {
+          "calibration": 0.7026,
+          "stake": 0.2857,
+          "competence": 0.6,
+          "payout": 0.5672,
+          "reasoning": 0.55,
+          "trust": 0.0
+        },
+        "sybil6": {
+          "calibration": 0.6843,
+          "stake": 0.2857,
+          "competence": 0.6,
+          "payout": 0.5672,
+          "reasoning": 0.55,
+          "trust": 0.0
+        }
+      },
+      "votes": [
+        {
+          "voter": "mira",
+          "candidate": "r2c0",
+          "confidence": 0.822,
+          "bond": 0.411,
+          "external": false,
+          "rationale": ""
+        },
+        {
+          "voter": "mira",
+          "candidate": "r2c1",
+          "confidence": 0.595,
+          "bond": 0.298,
+          "external": false,
+          "rationale": ""
+        },
+        {
+          "voter": "mira",
+          "candidate": "r2c2",
+          "confidence": 0.871,
+          "bond": 0.436,
+          "external": false,
+          "rationale": ""
+        },
+        {
+          "voter": "mira",
+          "candidate": "r2c3",
+          "confidence": 0.642,
+          "bond": 0.321,
+          "external": false,
+          "rationale": ""
+        },
+        {
+          "voter": "praxis",
+          "candidate": "r2c0",
+          "confidence": 0.88,
+          "bond": 0.44,
+          "external": false,
+          "rationale": ""
+        },
+        {
+          "voter": "praxis",
+          "candidate": "r2c1",
+          "confidence": 0.647,
+          "bond": 0.323,
+          "external": false,
+          "rationale": ""
+        },
+        {
+          "voter": "praxis",
+          "candidate": "r2c2",
+          "confidence": 0.914,
+          "bond": 0.457,
+          "external": false,
+          "rationale": ""
+        },
+        {
+          "voter": "praxis",
+          "candidate": "r2c3",
+          "confidence": 0.615,
+          "bond": 0.308,
+          "external": false,
+          "rationale": ""
+        },
+        {
+          "voter": "sybil1",
+          "candidate": "r2c0",
+          "confidence": 0.8,
+          "bond": 0.4,
+          "external": true,
+          "rationale": ""
+        },
+        {
+          "voter": "sybil1",
+          "candidate": "r2c1",
+          "confidence": 0.793,
+          "bond": 0.396,
+          "external": true,
+          "rationale": ""
+        },
+        {
+          "voter": "sybil1",
+          "candidate": "r2c2",
+          "confidence": 0.812,
+          "bond": 0.406,
+          "external": true,
+          "rationale": ""
+        },
+        {
+          "voter": "sybil1",
+          "candidate": "r2c3",
+          "confidence": 0.89,
+          "bond": 0.445,
+          "external": true,
+          "rationale": ""
+        },
+        {
+          "voter": "sybil2",
+          "candidate": "r2c0",
+          "confidence": 0.83,
+          "bond": 0.415,
+          "external": true,
+          "rationale": ""
+        },
+        {
+          "voter": "sybil2",
+          "candidate": "r2c1",
+          "confidence": 1.0,
+          "bond": 0.5,
+          "external": true,
+          "rationale": ""
+        },
+        {
+          "voter": "sybil2",
+          "candidate": "r2c2",
+          "confidence": 0.784,
+          "bond": 0.392,
+          "external": true,
+          "rationale": ""
+        },
+        {
+          "voter": "sybil2",
+          "candidate": "r2c3",
+          "confidence": 0.762,
+          "bond": 0.381,
+          "external": true,
+          "rationale": ""
+        },
+        {
+          "voter": "sybil3",
+          "candidate": "r2c0",
+          "confidence": 0.911,
+          "bond": 0.456,
+          "external": true,
+          "rationale": ""
+        },
+        {
+          "voter": "sybil3",
+          "candidate": "r2c1",
+          "confidence": 0.964,
+          "bond": 0.482,
+          "external": true,
+          "rationale": ""
+        },
+        {
+          "voter": "sybil3",
+          "candidate": "r2c2",
+          "confidence": 0.89,
+          "bond": 0.445,
+          "external": true,
+          "rationale": ""
+        },
+        {
+          "voter": "sybil3",
+          "candidate": "r2c3",
+          "confidence": 0.917,
+          "bond": 0.458,
+          "external": true,
+          "rationale": ""
+        },
+        {
+          "voter": "sybil4",
+          "candidate": "r2c0",
+          "confidence": 0.964,
+          "bond": 0.482,
+          "external": true,
+          "rationale": ""
+        },
+        {
+          "voter": "sybil4",
+          "candidate": "r2c1",
+          "confidence": 0.842,
+          "bond": 0.421,
+          "external": true,
+          "rationale": ""
+        },
+        {
+          "voter": "sybil4",
+          "candidate": "r2c2",
+          "confidence": 0.736,
+          "bond": 0.368,
+          "external": true,
+          "rationale": ""
+        },
+        {
+          "voter": "sybil4",
+          "candidate": "r2c3",
+          "confidence": 0.807,
+          "bond": 0.404,
+          "external": true,
+          "rationale": ""
+        },
+        {
+          "voter": "sybil5",
+          "candidate": "r2c0",
+          "confidence": 0.926,
+          "bond": 0.463,
+          "external": true,
+          "rationale": ""
+        },
+        {
+          "voter": "sybil5",
+          "candidate": "r2c1",
+          "confidence": 0.735,
+          "bond": 0.367,
+          "external": true,
+          "rationale": ""
+        },
+        {
+          "voter": "sybil5",
+          "candidate": "r2c2",
+          "confidence": 0.853,
+          "bond": 0.426,
+          "external": true,
+          "rationale": ""
+        },
+        {
+          "voter": "sybil5",
+          "candidate": "r2c3",
+          "confidence": 0.87,
+          "bond": 0.435,
+          "external": true,
+          "rationale": ""
+        },
+        {
+          "voter": "sybil6",
+          "candidate": "r2c0",
+          "confidence": 0.825,
+          "bond": 0.412,
+          "external": true,
+          "rationale": ""
+        },
+        {
+          "voter": "sybil6",
+          "candidate": "r2c1",
+          "confidence": 0.908,
+          "bond": 0.454,
+          "external": true,
+          "rationale": ""
+        },
+        {
+          "voter": "sybil6",
+          "candidate": "r2c2",
+          "confidence": 0.896,
+          "bond": 0.448,
+          "external": true,
+          "rationale": ""
+        },
+        {
+          "voter": "sybil6",
+          "candidate": "r2c3",
+          "confidence": 1.0,
+          "bond": 0.5,
+          "external": true,
+          "rationale": ""
+        }
+      ]
+    },
+    {
+      "round_id": 3,
+      "pool": 1.0,
+      "top_k": 2,
+      "unit": "MERIT",
+      "dry": true,
+      "weights": {
+        "mira": 0.356066,
+        "praxis": 0.355724,
+        "sybil1": 0.048653,
+        "sybil2": 0.046723,
+        "sybil3": 0.048146,
+        "sybil4": 0.047637,
+        "sybil5": 0.049165,
+        "sybil6": 0.047886
+      },
+      "raw_weights": {
+        "mira": 0.46059,
+        "praxis": 0.460147,
+        "sybil1": 0.062935,
+        "sybil2": 0.060439,
+        "sybil3": 0.062279,
+        "sybil4": 0.061621,
+        "sybil5": 0.063598,
+        "sybil6": 0.061943
+      },
+      "caps": {
+        "mira": 5.0,
+        "praxis": 5.0,
+        "sybil1": 2.1269,
+        "sybil2": 2.0445,
+        "sybil3": 2.1052,
+        "sybil4": 2.0835,
+        "sybil5": 2.1487,
+        "sybil6": 2.0941
+      },
+      "scores": {
+        "r3c0": 0.885124,
+        "r3c1": 0.449107,
+        "r3c2": 0.677169,
+        "r3c3": 0.518804
+      },
+      "allocated": {
+        "r3c0": 0.566555,
+        "r3c2": 0.433445
+      },
+      "paid": {
+        "r3c0": 0.566555,
+        "r3c2": 0.433445
+      },
+      "committers": {
+        "r3c0": "mira",
+        "r3c2": "mira"
+      },
+      "clipped": {},
+      "accrued_pending": {
+        "contrib-ai-safety": 0.566555,
+        "contrib-governance": 0.433445
+      },
+      "candidate_topics": {
+        "r3c0": "ai-safety",
+        "r3c1": "markets",
+        "r3c2": "governance",
+        "r3c3": "ai-safety"
+      },
+      "trust_edges_applied": 0,
+      "candidates": [
+        {
+          "candidate_id": "r3c0",
+          "title": "ai-safety contribution 3.0",
+          "author": "contrib-ai-safety",
+          "topic": "ai-safety",
+          "true_quality": 0.876
+        },
+        {
+          "candidate_id": "r3c1",
+          "title": "markets contribution 3.1",
+          "author": "contrib-markets",
+          "topic": "markets",
+          "true_quality": 0.315
+        },
+        {
+          "candidate_id": "r3c2",
+          "title": "governance contribution 3.2",
+          "author": "contrib-governance",
+          "topic": "governance",
+          "true_quality": 0.655
+        },
+        {
+          "candidate_id": "r3c3",
+          "title": "ai-safety contribution 3.3",
+          "author": "contrib-ai-safety",
+          "topic": "ai-safety",
+          "true_quality": 0.396
+        }
+      ],
+      "slashes": {},
+      "neurons": {
+        "mira": {
+          "calibration": 0.8519,
+          "stake": 0.6667,
+          "competence": 0.85,
+          "payout": 0.6361,
+          "reasoning": 0.85,
+          "trust": 1.0
+        },
+        "praxis": {
+          "calibration": 0.85,
+          "stake": 0.6667,
+          "competence": 0.85,
+          "payout": 0.6361,
+          "reasoning": 0.85,
+          "trust": 1.0
+        },
+        "sybil1": {
+          "calibration": 0.7307,
+          "stake": 0.2857,
+          "competence": 0.6,
+          "payout": 0.6033,
+          "reasoning": 0.55,
+          "trust": 0.0
+        },
+        "sybil2": {
+          "calibration": 0.7073,
+          "stake": 0.2857,
+          "competence": 0.6,
+          "payout": 0.6033,
+          "reasoning": 0.55,
+          "trust": 0.0
+        },
+        "sybil3": {
+          "calibration": 0.7313,
+          "stake": 0.2857,
+          "competence": 0.6,
+          "payout": 0.6033,
+          "reasoning": 0.55,
+          "trust": 0.0
+        },
+        "sybil4": {
+          "calibration": 0.7212,
+          "stake": 0.2857,
+          "competence": 0.6,
+          "payout": 0.6033,
+          "reasoning": 0.55,
+          "trust": 0.0
+        },
+        "sybil5": {
+          "calibration": 0.7454,
+          "stake": 0.2857,
+          "competence": 0.6,
+          "payout": 0.6033,
+          "reasoning": 0.55,
+          "trust": 0.0
+        },
+        "sybil6": {
+          "calibration": 0.7145,
+          "stake": 0.2857,
+          "competence": 0.6,
+          "payout": 0.6033,
+          "reasoning": 0.55,
+          "trust": 0.0
+        }
+      },
+      "votes": [
+        {
+          "voter": "mira",
+          "candidate": "r3c0",
+          "confidence": 0.952,
+          "bond": 0.476,
+          "external": false,
+          "rationale": ""
+        },
+        {
+          "voter": "mira",
+          "candidate": "r3c1",
+          "confidence": 0.27,
+          "bond": 0.135,
+          "external": false,
+          "rationale": ""
+        },
+        {
+          "voter": "mira",
+          "candidate": "r3c2",
+          "confidence": 0.649,
+          "bond": 0.325,
+          "external": false,
+          "rationale": ""
+        },
+        {
+          "voter": "mira",
+          "candidate": "r3c3",
+          "confidence": 0.456,
+          "bond": 0.228,
+          "external": false,
+          "rationale": ""
+        },
+        {
+          "voter": "praxis",
+          "candidate": "r3c0",
+          "confidence": 0.818,
+          "bond": 0.409,
+          "external": false,
+          "rationale": ""
+        },
+        {
+          "voter": "praxis",
+          "candidate": "r3c1",
+          "confidence": 0.292,
+          "bond": 0.146,
+          "external": false,
+          "rationale": ""
+        },
+        {
+          "voter": "praxis",
+          "candidate": "r3c2",
+          "confidence": 0.508,
+          "bond": 0.254,
+          "external": false,
+          "rationale": ""
+        },
+        {
+          "voter": "praxis",
+          "candidate": "r3c3",
+          "confidence": 0.309,
+          "bond": 0.155,
+          "external": false,
+          "rationale": ""
+        },
+        {
+          "voter": "sybil1",
+          "candidate": "r3c0",
+          "confidence": 0.805,
+          "bond": 0.402,
+          "external": true,
+          "rationale": ""
+        },
+        {
+          "voter": "sybil1",
+          "candidate": "r3c1",
+          "confidence": 0.883,
+          "bond": 0.442,
+          "external": true,
+          "rationale": ""
+        },
+        {
+          "voter": "sybil1",
+          "candidate": "r3c2",
+          "confidence": 0.945,
+          "bond": 0.473,
+          "external": true,
+          "rationale": ""
+        },
+        {
+          "voter": "sybil1",
+          "candidate": "r3c3",
+          "confidence": 0.849,
+          "bond": 0.424,
+          "external": true,
+          "rationale": ""
+        },
+        {
+          "voter": "sybil2",
+          "candidate": "r3c0",
+          "confidence": 0.871,
+          "bond": 0.435,
+          "external": true,
+          "rationale": ""
+        },
+        {
+          "voter": "sybil2",
+          "candidate": "r3c1",
+          "confidence": 0.863,
+          "bond": 0.432,
+          "external": true,
+          "rationale": ""
+        },
+        {
+          "voter": "sybil2",
+          "candidate": "r3c2",
+          "confidence": 0.937,
+          "bond": 0.468,
+          "external": true,
+          "rationale": ""
+        },
+        {
+          "voter": "sybil2",
+          "candidate": "r3c3",
+          "confidence": 0.921,
+          "bond": 0.461,
+          "external": true,
+          "rationale": ""
+        },
+        {
+          "voter": "sybil3",
+          "candidate": "r3c0",
+          "confidence": 0.872,
+          "bond": 0.436,
+          "external": true,
+          "rationale": ""
+        },
+        {
+          "voter": "sybil3",
+          "candidate": "r3c1",
+          "confidence": 0.769,
+          "bond": 0.385,
+          "external": true,
+          "rationale": ""
+        },
+        {
+          "voter": "sybil3",
+          "candidate": "r3c2",
+          "confidence": 0.922,
+          "bond": 0.461,
+          "external": true,
+          "rationale": ""
+        },
+        {
+          "voter": "sybil3",
+          "candidate": "r3c3",
+          "confidence": 0.88,
+          "bond": 0.44,
+          "external": true,
+          "rationale": ""
+        },
+        {
+          "voter": "sybil4",
+          "candidate": "r3c0",
+          "confidence": 0.948,
+          "bond": 0.474,
+          "external": true,
+          "rationale": ""
+        },
+        {
+          "voter": "sybil4",
+          "candidate": "r3c1",
+          "confidence": 0.848,
+          "bond": 0.424,
+          "external": true,
+          "rationale": ""
+        },
+        {
+          "voter": "sybil4",
+          "candidate": "r3c2",
+          "confidence": 1.0,
+          "bond": 0.5,
+          "external": true,
+          "rationale": ""
+        },
+        {
+          "voter": "sybil4",
+          "candidate": "r3c3",
+          "confidence": 0.821,
+          "bond": 0.411,
+          "external": true,
+          "rationale": ""
+        },
+        {
+          "voter": "sybil5",
+          "candidate": "r3c0",
+          "confidence": 0.977,
+          "bond": 0.489,
+          "external": true,
+          "rationale": ""
+        },
+        {
+          "voter": "sybil5",
+          "candidate": "r3c1",
+          "confidence": 0.859,
+          "bond": 0.43,
+          "external": true,
+          "rationale": ""
+        },
+        {
+          "voter": "sybil5",
+          "candidate": "r3c2",
+          "confidence": 0.809,
+          "bond": 0.404,
+          "external": true,
+          "rationale": ""
+        },
+        {
+          "voter": "sybil5",
+          "candidate": "r3c3",
+          "confidence": 0.76,
+          "bond": 0.38,
+          "external": true,
+          "rationale": ""
+        },
+        {
+          "voter": "sybil6",
+          "candidate": "r3c0",
+          "confidence": 0.838,
+          "bond": 0.419,
+          "external": true,
+          "rationale": ""
+        },
+        {
+          "voter": "sybil6",
+          "candidate": "r3c1",
+          "confidence": 0.964,
+          "bond": 0.482,
+          "external": true,
+          "rationale": ""
+        },
+        {
+          "voter": "sybil6",
+          "candidate": "r3c2",
+          "confidence": 0.915,
+          "bond": 0.458,
+          "external": true,
+          "rationale": ""
+        },
+        {
+          "voter": "sybil6",
+          "candidate": "r3c3",
+          "confidence": 0.905,
+          "bond": 0.453,
+          "external": true,
+          "rationale": ""
+        }
+      ]
+    },
+    {
+      "round_id": 4,
+      "pool": 1.0,
+      "top_k": 2,
+      "unit": "MERIT",
+      "dry": true,
+      "weights": {
+        "mira": 0.354211,
+        "praxis": 0.353436,
+        "sybil1": 0.049102,
+        "sybil2": 0.047533,
+        "sybil3": 0.049146,
+        "sybil4": 0.048467,
+        "sybil5": 0.05009,
+        "sybil6": 0.048016
+      },
+      "raw_weights": {
+        "mira": 0.49069,
+        "praxis": 0.489615,
+        "sybil1": 0.068021,
+        "sybil2": 0.065847,
+        "sybil3": 0.068082,
+        "sybil4": 0.067141,
+        "sybil5": 0.069389,
+        "sybil6": 0.066517
+      },
+      "caps": {
+        "mira": 5.0,
+        "praxis": 5.0,
+        "sybil1": 2.2947,
+        "sybil2": 2.2229,
+        "sybil3": 2.2967,
+        "sybil4": 2.2657,
+        "sybil5": 2.3398,
+        "sybil6": 2.245
+      },
+      "scores": {
+        "r4c0": 0.557314,
+        "r4c1": 0.92701,
+        "r4c2": 0.910429,
+        "r4c3": 0.399545
+      },
+      "allocated": {
+        "r4c1": 0.504512,
+        "r4c2": 0.495488
+      },
+      "paid": {
+        "r4c1": 0.504512,
+        "r4c2": 0.495488
+      },
+      "committers": {
+        "r4c1": "mira",
+        "r4c2": "mira"
+      },
+      "clipped": {},
+      "accrued_pending": {
+        "contrib-markets": 0.504512,
+        "contrib-governance": 0.495488
+      },
+      "candidate_topics": {
+        "r4c0": "ai-safety",
+        "r4c1": "markets",
+        "r4c2": "governance",
+        "r4c3": "ai-safety"
+      },
+      "trust_edges_applied": 0,
+      "candidates": [
+        {
+          "candidate_id": "r4c0",
+          "title": "ai-safety contribution 4.0",
+          "author": "contrib-ai-safety",
+          "topic": "ai-safety",
+          "true_quality": 0.454
+        },
+        {
+          "candidate_id": "r4c1",
+          "title": "markets contribution 4.1",
+          "author": "contrib-markets",
+          "topic": "markets",
+          "true_quality": 0.954
+        },
+        {
+          "candidate_id": "r4c2",
+          "title": "governance contribution 4.2",
+          "author": "contrib-governance",
+          "topic": "governance",
+          "true_quality": 0.876
+        },
+        {
+          "candidate_id": "r4c3",
+          "title": "ai-safety contribution 4.3",
+          "author": "contrib-ai-safety",
+          "topic": "ai-safety",
+          "true_quality": 0.263
+        }
+      ],
+      "slashes": {},
+      "neurons": {
+        "mira": {
+          "calibration": 0.8789,
+          "stake": 0.6667,
+          "competence": 0.85,
+          "payout": 0.6826,
+          "reasoning": 0.85,
+          "trust": 1.0
+        },
+        "praxis": {
+          "calibration": 0.8783,
+          "stake": 0.6667,
+          "competence": 0.85,
+          "payout": 0.6826,
+          "reasoning": 0.85,
+          "trust": 1.0
+        },
+        "sybil1": {
+          "calibration": 0.7608,
+          "stake": 0.2857,
+          "competence": 0.6,
+          "payout": 0.6512,
+          "reasoning": 0.55,
+          "trust": 0.0
+        },
+        "sybil2": {
+          "calibration": 0.7338,
+          "stake": 0.2857,
+          "competence": 0.6,
+          "payout": 0.6512,
+          "reasoning": 0.55,
+          "trust": 0.0
+        },
+        "sybil3": {
+          "calibration": 0.7504,
+          "stake": 0.2857,
+          "competence": 0.6,
+          "payout": 0.6512,
+          "reasoning": 0.55,
+          "trust": 0.0
+        },
+        "sybil4": {
+          "calibration": 0.7387,
+          "stake": 0.2857,
+          "competence": 0.6,
+          "payout": 0.6512,
+          "reasoning": 0.55,
+          "trust": 0.0
+        },
+        "sybil5": {
+          "calibration": 0.7668,
+          "stake": 0.2857,
+          "competence": 0.6,
+          "payout": 0.6512,
+          "reasoning": 0.55,
+          "trust": 0.0
+        },
+        "sybil6": {
+          "calibration": 0.7384,
+          "stake": 0.2857,
+          "competence": 0.6,
+          "payout": 0.6512,
+          "reasoning": 0.55,
+          "trust": 0.0
+        }
+      },
+      "votes": [
+        {
+          "voter": "mira",
+          "candidate": "r4c0",
+          "confidence": 0.404,
+          "bond": 0.202,
+          "external": false,
+          "rationale": ""
+        },
+        {
+          "voter": "mira",
+          "candidate": "r4c1",
+          "confidence": 0.954,
+          "bond": 0.477,
+          "external": false,
+          "rationale": ""
+        },
+        {
+          "voter": "mira",
+          "candidate": "r4c2",
+          "confidence": 1.0,
+          "bond": 0.5,
+          "external": false,
+          "rationale": ""
+        },
+        {
+          "voter": "mira",
+          "candidate": "r4c3",
+          "confidence": 0.179,
+          "bond": 0.089,
+          "external": false,
+          "rationale": ""
+        },
+        {
+          "voter": "praxis",
+          "candidate": "r4c0",
+          "confidence": 0.42,
+          "bond": 0.21,
+          "external": false,
+          "rationale": ""
+        },
+        {
+          "voter": "praxis",
+          "candidate": "r4c1",
+          "confidence": 1.0,
+          "bond": 0.5,
+          "external": false,
+          "rationale": ""
+        },
+        {
+          "voter": "praxis",
+          "candidate": "r4c2",
+          "confidence": 0.84,
+          "bond": 0.42,
+          "external": false,
+          "rationale": ""
+        },
+        {
+          "voter": "praxis",
+          "candidate": "r4c3",
+          "confidence": 0.234,
+          "bond": 0.117,
+          "external": false,
+          "rationale": ""
+        },
+        {
+          "voter": "sybil1",
+          "candidate": "r4c0",
+          "confidence": 0.858,
+          "bond": 0.429,
+          "external": true,
+          "rationale": ""
+        },
+        {
+          "voter": "sybil1",
+          "candidate": "r4c1",
+          "confidence": 0.751,
+          "bond": 0.375,
+          "external": true,
+          "rationale": ""
+        },
+        {
+          "voter": "sybil1",
+          "candidate": "r4c2",
+          "confidence": 0.868,
+          "bond": 0.434,
+          "external": true,
+          "rationale": ""
+        },
+        {
+          "voter": "sybil1",
+          "candidate": "r4c3",
+          "confidence": 0.753,
+          "bond": 0.377,
+          "external": true,
+          "rationale": ""
+        },
+        {
+          "voter": "sybil2",
+          "candidate": "r4c0",
+          "confidence": 0.921,
+          "bond": 0.46,
+          "external": true,
+          "rationale": ""
+        },
+        {
+          "voter": "sybil2",
+          "candidate": "r4c1",
+          "confidence": 0.85,
+          "bond": 0.425,
+          "external": true,
+          "rationale": ""
+        },
+        {
+          "voter": "sybil2",
+          "candidate": "r4c2",
+          "confidence": 1.0,
+          "bond": 0.5,
+          "external": true,
+          "rationale": ""
+        },
+        {
+          "voter": "sybil2",
+          "candidate": "r4c3",
+          "confidence": 0.872,
+          "bond": 0.436,
+          "external": true,
+          "rationale": ""
+        },
+        {
+          "voter": "sybil3",
+          "candidate": "r4c0",
+          "confidence": 0.959,
+          "bond": 0.48,
+          "external": true,
+          "rationale": ""
+        },
+        {
+          "voter": "sybil3",
+          "candidate": "r4c1",
+          "confidence": 0.746,
+          "bond": 0.373,
+          "external": true,
+          "rationale": ""
+        },
+        {
+          "voter": "sybil3",
+          "candidate": "r4c2",
+          "confidence": 0.84,
+          "bond": 0.42,
+          "external": true,
+          "rationale": ""
+        },
+        {
+          "voter": "sybil3",
+          "candidate": "r4c3",
+          "confidence": 0.876,
+          "bond": 0.438,
+          "external": true,
+          "rationale": ""
+        },
+        {
+          "voter": "sybil4",
+          "candidate": "r4c0",
+          "confidence": 0.99,
+          "bond": 0.495,
+          "external": true,
+          "rationale": ""
+        },
+        {
+          "voter": "sybil4",
+          "candidate": "r4c1",
+          "confidence": 0.716,
+          "bond": 0.358,
+          "external": true,
+          "rationale": ""
+        },
+        {
+          "voter": "sybil4",
+          "candidate": "r4c2",
+          "confidence": 0.929,
+          "bond": 0.465,
+          "external": true,
+          "rationale": ""
+        },
+        {
+          "voter": "sybil4",
+          "candidate": "r4c3",
+          "confidence": 0.897,
+          "bond": 0.449,
+          "external": true,
+          "rationale": ""
+        },
+        {
+          "voter": "sybil5",
+          "candidate": "r4c0",
+          "confidence": 0.973,
+          "bond": 0.486,
+          "external": true,
+          "rationale": ""
+        },
+        {
+          "voter": "sybil5",
+          "candidate": "r4c1",
+          "confidence": 0.907,
+          "bond": 0.453,
+          "external": true,
+          "rationale": ""
+        },
+        {
+          "voter": "sybil5",
+          "candidate": "r4c2",
+          "confidence": 0.854,
+          "bond": 0.427,
+          "external": true,
+          "rationale": ""
+        },
+        {
+          "voter": "sybil5",
+          "candidate": "r4c3",
+          "confidence": 0.808,
+          "bond": 0.404,
+          "external": true,
+          "rationale": ""
+        },
+        {
+          "voter": "sybil6",
+          "candidate": "r4c0",
+          "confidence": 0.75,
+          "bond": 0.375,
+          "external": true,
+          "rationale": ""
+        },
+        {
+          "voter": "sybil6",
+          "candidate": "r4c1",
+          "confidence": 0.866,
+          "bond": 0.433,
+          "external": true,
+          "rationale": ""
+        },
+        {
+          "voter": "sybil6",
+          "candidate": "r4c2",
+          "confidence": 0.835,
+          "bond": 0.417,
+          "external": true,
+          "rationale": ""
+        },
+        {
+          "voter": "sybil6",
+          "candidate": "r4c3",
+          "confidence": 1.0,
+          "bond": 0.5,
+          "external": true,
+          "rationale": ""
+        }
+      ]
+    },
+    {
+      "round_id": 5,
+      "pool": 1.0,
+      "top_k": 2,
+      "unit": "MERIT",
+      "dry": true,
+      "weights": {
+        "mira": 0.351646,
+        "praxis": 0.351413,
+        "sybil1": 0.050329,
+        "sybil2": 0.048541,
+        "sybil3": 0.049637,
+        "sybil4": 0.048864,
+        "sybil5": 0.050723,
+        "sybil6": 0.048847
+      },
+      "raw_weights": {
+        "mira": 0.513067,
+        "praxis": 0.512728,
+        "sybil1": 0.073432,
+        "sybil2": 0.070823,
+        "sybil3": 0.072422,
+        "sybil4": 0.071295,
+        "sybil5": 0.074008,
+        "sybil6": 0.07127
+      },
+      "caps": {
+        "mira": 5.0,
+        "praxis": 5.0,
+        "sybil1": 2.4732,
+        "sybil2": 2.3872,
+        "sybil3": 2.4399,
+        "sybil4": 2.4027,
+        "sybil5": 2.4923,
+        "sybil6": 2.4019
+      },
+      "scores": {
+        "r5c0": 0.525837,
+        "r5c1": 0.449089,
+        "r5c2": 0.690159,
+        "r5c3": 0.791452
+      },
+      "allocated": {
+        "r5c3": 0.534183,
+        "r5c2": 0.465817
+      },
+      "paid": {
+        "r5c3": 0.534183,
+        "r5c2": 0.465817
+      },
+      "committers": {
+        "r5c3": "mira",
+        "r5c2": "mira"
+      },
+      "clipped": {},
+      "accrued_pending": {
+        "contrib-ai-safety": 0.534183,
+        "contrib-governance": 0.465817
+      },
+      "candidate_topics": {
+        "r5c0": "ai-safety",
+        "r5c1": "markets",
+        "r5c2": "governance",
+        "r5c3": "ai-safety"
+      },
+      "trust_edges_applied": 0,
+      "candidates": [
+        {
+          "candidate_id": "r5c0",
+          "title": "ai-safety contribution 5.0",
+          "author": "contrib-ai-safety",
+          "topic": "ai-safety",
+          "true_quality": 0.423
+        },
+        {
+          "candidate_id": "r5c1",
+          "title": "markets contribution 5.1",
+          "author": "contrib-markets",
+          "topic": "markets",
+          "true_quality": 0.212
+        },
+        {
+          "candidate_id": "r5c2",
+          "title": "governance contribution 5.2",
+          "author": "contrib-governance",
+          "topic": "governance",
+          "true_quality": 0.539
+        },
+        {
+          "candidate_id": "r5c3",
+          "title": "ai-safety contribution 5.3",
+          "author": "contrib-ai-safety",
+          "topic": "ai-safety",
+          "true_quality": 0.73
+        }
+      ],
+      "slashes": {},
+      "neurons": {
+        "mira": {
+          "calibration": 0.8975,
+          "stake": 0.6667,
+          "competence": 0.85,
+          "payout": 0.6757,
+          "reasoning": 0.85,
+          "trust": 1.0
+        },
+        "praxis": {
+          "calibration": 0.8973,
+          "stake": 0.6667,
+          "competence": 0.85,
+          "payout": 0.6757,
+          "reasoning": 0.85,
+          "trust": 1.0
+        },
+        "sybil1": {
+          "calibration": 0.767,
+          "stake": 0.2857,
+          "competence": 0.6,
+          "payout": 0.649,
+          "reasoning": 0.55,
+          "trust": 0.0
+        },
+        "sybil2": {
+          "calibration": 0.7389,
+          "stake": 0.2857,
+          "competence": 0.6,
+          "payout": 0.649,
+          "reasoning": 0.55,
+          "trust": 0.0
+        },
+        "sybil3": {
+          "calibration": 0.7609,
+          "stake": 0.2857,
+          "competence": 0.6,
+          "payout": 0.649,
+          "reasoning": 0.55,
+          "trust": 0.0
+        },
+        "sybil4": {
+          "calibration": 0.7475,
+          "stake": 0.2857,
+          "competence": 0.6,
+          "payout": 0.649,
+          "reasoning": 0.55,
+          "trust": 0.0
+        },
+        "sybil5": {
+          "calibration": 0.7787,
+          "stake": 0.2857,
+          "competence": 0.6,
+          "payout": 0.649,
+          "reasoning": 0.55,
+          "trust": 0.0
+        },
+        "sybil6": {
+          "calibration": 0.7483,
+          "stake": 0.2857,
+          "competence": 0.6,
+          "payout": 0.649,
+          "reasoning": 0.55,
+          "trust": 0.0
+        }
+      },
+      "votes": [
+        {
+          "voter": "mira",
+          "candidate": "r5c0",
+          "confidence": 0.444,
+          "bond": 0.222,
+          "external": false,
+          "rationale": ""
+        },
+        {
+          "voter": "mira",
+          "candidate": "r5c1",
+          "confidence": 0.278,
+          "bond": 0.139,
+          "external": false,
+          "rationale": ""
+        },
+        {
+          "voter": "mira",
+          "candidate": "r5c2",
+          "confidence": 0.655,
+          "bond": 0.327,
+          "external": false,
+          "rationale": ""
+        },
+        {
+          "voter": "mira",
+          "candidate": "r5c3",
+          "confidence": 0.726,
+          "bond": 0.363,
+          "external": false,
+          "rationale": ""
+        },
+        {
+          "voter": "praxis",
+          "candidate": "r5c0",
+          "confidence": 0.334,
+          "bond": 0.167,
+          "external": false,
+          "rationale": ""
+        },
+        {
+          "voter": "praxis",
+          "candidate": "r5c1",
+          "confidence": 0.249,
+          "bond": 0.124,
+          "external": false,
+          "rationale": ""
+        },
+        {
+          "voter": "praxis",
+          "candidate": "r5c2",
+          "confidence": 0.58,
+          "bond": 0.29,
+          "external": false,
+          "rationale": ""
+        },
+        {
+          "voter": "praxis",
+          "candidate": "r5c3",
+          "confidence": 0.769,
+          "bond": 0.385,
+          "external": false,
+          "rationale": ""
+        },
+        {
+          "voter": "sybil1",
+          "candidate": "r5c0",
+          "confidence": 0.794,
+          "bond": 0.397,
+          "external": true,
+          "rationale": ""
+        },
+        {
+          "voter": "sybil1",
+          "candidate": "r5c1",
+          "confidence": 0.941,
+          "bond": 0.47,
+          "external": true,
+          "rationale": ""
+        },
+        {
+          "voter": "sybil1",
+          "candidate": "r5c2",
+          "confidence": 0.857,
+          "bond": 0.429,
+          "external": true,
+          "rationale": ""
+        },
+        {
+          "voter": "sybil1",
+          "candidate": "r5c3",
+          "confidence": 0.906,
+          "bond": 0.453,
+          "external": true,
+          "rationale": ""
+        },
+        {
+          "voter": "sybil2",
+          "candidate": "r5c0",
+          "confidence": 0.952,
+          "bond": 0.476,
+          "external": true,
+          "rationale": ""
+        },
+        {
+          "voter": "sybil2",
+          "candidate": "r5c1",
+          "confidence": 0.899,
+          "bond": 0.449,
+          "external": true,
+          "rationale": ""
+        },
+        {
+          "voter": "sybil2",
+          "candidate": "r5c2",
+          "confidence": 0.873,
+          "bond": 0.436,
+          "external": true,
+          "rationale": ""
+        },
+        {
+          "voter": "sybil2",
+          "candidate": "r5c3",
+          "confidence": 1.0,
+          "bond": 0.5,
+          "external": true,
+          "rationale": ""
+        },
+        {
+          "voter": "sybil3",
+          "candidate": "r5c0",
+          "confidence": 0.869,
+          "bond": 0.435,
+          "external": true,
+          "rationale": ""
+        },
+        {
+          "voter": "sybil3",
+          "candidate": "r5c1",
+          "confidence": 0.826,
+          "bond": 0.413,
+          "external": true,
+          "rationale": ""
+        },
+        {
+          "voter": "sybil3",
+          "candidate": "r5c2",
+          "confidence": 0.859,
+          "bond": 0.429,
+          "external": true,
+          "rationale": ""
+        },
+        {
+          "voter": "sybil3",
+          "candidate": "r5c3",
+          "confidence": 0.969,
+          "bond": 0.484,
+          "external": true,
+          "rationale": ""
+        },
+        {
+          "voter": "sybil4",
+          "candidate": "r5c0",
+          "confidence": 0.859,
+          "bond": 0.43,
+          "external": true,
+          "rationale": ""
+        },
+        {
+          "voter": "sybil4",
+          "candidate": "r5c1",
+          "confidence": 0.892,
+          "bond": 0.446,
+          "external": true,
+          "rationale": ""
+        },
+        {
+          "voter": "sybil4",
+          "candidate": "r5c2",
+          "confidence": 0.946,
+          "bond": 0.473,
+          "external": true,
+          "rationale": ""
+        },
+        {
+          "voter": "sybil4",
+          "candidate": "r5c3",
+          "confidence": 0.809,
+          "bond": 0.404,
+          "external": true,
+          "rationale": ""
+        },
+        {
+          "voter": "sybil5",
+          "candidate": "r5c0",
+          "confidence": 0.712,
+          "bond": 0.356,
+          "external": true,
+          "rationale": ""
+        },
+        {
+          "voter": "sybil5",
+          "candidate": "r5c1",
+          "confidence": 0.874,
+          "bond": 0.437,
+          "external": true,
+          "rationale": ""
+        },
+        {
+          "voter": "sybil5",
+          "candidate": "r5c2",
+          "confidence": 0.868,
+          "bond": 0.434,
+          "external": true,
+          "rationale": ""
+        },
+        {
+          "voter": "sybil5",
+          "candidate": "r5c3",
+          "confidence": 0.801,
+          "bond": 0.401,
+          "external": true,
+          "rationale": ""
+        },
+        {
+          "voter": "sybil6",
+          "candidate": "r5c0",
+          "confidence": 0.92,
+          "bond": 0.46,
+          "external": true,
+          "rationale": ""
+        },
+        {
+          "voter": "sybil6",
+          "candidate": "r5c1",
+          "confidence": 0.899,
+          "bond": 0.449,
+          "external": true,
+          "rationale": ""
+        },
+        {
+          "voter": "sybil6",
+          "candidate": "r5c2",
+          "confidence": 0.77,
+          "bond": 0.385,
+          "external": true,
+          "rationale": ""
+        },
+        {
+          "voter": "sybil6",
+          "candidate": "r5c3",
+          "confidence": 0.891,
+          "bond": 0.446,
+          "external": true,
+          "rationale": ""
+        }
+      ]
+    },
+    {
+      "round_id": 6,
+      "pool": 1.0,
+      "top_k": 2,
+      "unit": "MERIT",
+      "dry": true,
+      "weights": {
+        "mira": 0.352542,
+        "praxis": 0.352441,
+        "sybil1": 0.049828,
+        "sybil2": 0.048002,
+        "sybil3": 0.049428,
+        "sybil4": 0.04856,
+        "sybil5": 0.050585,
+        "sybil6": 0.048613
+      },
+      "raw_weights": {
+        "mira": 0.522925,
+        "praxis": 0.522775,
+        "sybil1": 0.07391,
+        "sybil2": 0.071202,
+        "sybil3": 0.073317,
+        "sybil4": 0.072029,
+        "sybil5": 0.075033,
+        "sybil6": 0.072108
+      },
+      "caps": {
+        "mira": 5.0,
+        "praxis": 5.0,
+        "sybil1": 2.489,
+        "sybil2": 2.3997,
+        "sybil3": 2.4695,
+        "sybil4": 2.427,
+        "sybil5": 2.5261,
+        "sybil6": 2.4296
+      },
+      "scores": {
+        "r6c0": 0.745978,
+        "r6c1": 0.782881,
+        "r6c2": 0.936697,
+        "r6c3": 0.319429
+      },
+      "allocated": {
+        "r6c2": 0.544725,
+        "r6c1": 0.455275
+      },
+      "paid": {
+        "r6c2": 0.544725,
+        "r6c1": 0.455275
+      },
+      "committers": {
+        "r6c2": "mira",
+        "r6c1": "mira"
+      },
+      "clipped": {},
+      "accrued_pending": {
+        "contrib-governance": 0.544725,
+        "contrib-markets": 0.455275
+      },
+      "candidate_topics": {
+        "r6c0": "ai-safety",
+        "r6c1": "markets",
+        "r6c2": "governance",
+        "r6c3": "ai-safety"
+      },
+      "trust_edges_applied": 0,
+      "candidates": [
+        {
+          "candidate_id": "r6c0",
+          "title": "ai-safety contribution 6.0",
+          "author": "contrib-ai-safety",
+          "topic": "ai-safety",
+          "true_quality": 0.729
+        },
+        {
+          "candidate_id": "r6c1",
+          "title": "markets contribution 6.1",
+          "author": "contrib-markets",
+          "topic": "markets",
+          "true_quality": 0.673
+        },
+        {
+          "candidate_id": "r6c2",
+          "title": "governance contribution 6.2",
+          "author": "contrib-governance",
+          "topic": "governance",
+          "true_quality": 0.984
+        },
+        {
+          "candidate_id": "r6c3",
+          "title": "ai-safety contribution 6.3",
+          "author": "contrib-ai-safety",
+          "topic": "ai-safety",
+          "true_quality": 0.098
+        }
+      ],
+      "slashes": {},
+      "neurons": {
+        "mira": {
+          "calibration": 0.9114,
+          "stake": 0.6667,
+          "competence": 0.85,
+          "payout": 0.6948,
+          "reasoning": 0.85,
+          "trust": 1.0
+        },
+        "praxis": {
+          "calibration": 0.911,
+          "stake": 0.6667,
+          "competence": 0.85,
+          "payout": 0.6948,
+          "reasoning": 0.85,
+          "trust": 1.0
+        },
+        "sybil1": {
+          "calibration": 0.7697,
+          "stake": 0.2857,
+          "competence": 0.6,
+          "payout": 0.6701,
+          "reasoning": 0.55,
+          "trust": 0.0
+        },
+        "sybil2": {
+          "calibration": 0.7542,
+          "stake": 0.2857,
+          "competence": 0.6,
+          "payout": 0.6701,
+          "reasoning": 0.55,
+          "trust": 0.0
+        },
+        "sybil3": {
+          "calibration": 0.7727,
+          "stake": 0.2857,
+          "competence": 0.6,
+          "payout": 0.6701,
+          "reasoning": 0.55,
+          "trust": 0.0
+        },
+        "sybil4": {
+          "calibration": 0.7599,
+          "stake": 0.2857,
+          "competence": 0.6,
+          "payout": 0.6701,
+          "reasoning": 0.55,
+          "trust": 0.0
+        },
+        "sybil5": {
+          "calibration": 0.7773,
+          "stake": 0.2857,
+          "competence": 0.6,
+          "payout": 0.6701,
+          "reasoning": 0.55,
+          "trust": 0.0
+        },
+        "sybil6": {
+          "calibration": 0.7656,
+          "stake": 0.2857,
+          "competence": 0.6,
+          "payout": 0.6701,
+          "reasoning": 0.55,
+          "trust": 0.0
+        }
+      },
+      "votes": [
+        {
+          "voter": "mira",
+          "candidate": "r6c0",
+          "confidence": 0.669,
+          "bond": 0.335,
+          "external": false,
+          "rationale": ""
+        },
+        {
+          "voter": "mira",
+          "candidate": "r6c1",
+          "confidence": 0.715,
+          "bond": 0.357,
+          "external": false,
+          "rationale": ""
+        },
+        {
+          "voter": "mira",
+          "candidate": "r6c2",
+          "confidence": 1.0,
+          "bond": 0.5,
+          "external": false,
+          "rationale": ""
+        },
+        {
+          "voter": "mira",
+          "candidate": "r6c3",
+          "confidence": 0.052,
+          "bond": 0.026,
+          "external": false,
+          "rationale": ""
+        },
+        {
+          "voter": "praxis",
+          "candidate": "r6c0",
+          "confidence": 0.761,
+          "bond": 0.381,
+          "external": false,
+          "rationale": ""
+        },
+        {
+          "voter": "praxis",
+          "candidate": "r6c1",
+          "confidence": 0.754,
+          "bond": 0.377,
+          "external": false,
+          "rationale": ""
+        },
+        {
+          "voter": "praxis",
+          "candidate": "r6c2",
+          "confidence": 0.927,
+          "bond": 0.463,
+          "external": false,
+          "rationale": ""
+        },
+        {
+          "voter": "praxis",
+          "candidate": "r6c3",
+          "confidence": 0.128,
+          "bond": 0.064,
+          "external": false,
+          "rationale": ""
+        },
+        {
+          "voter": "sybil1",
+          "candidate": "r6c0",
+          "confidence": 0.85,
+          "bond": 0.425,
+          "external": true,
+          "rationale": ""
+        },
+        {
+          "voter": "sybil1",
+          "candidate": "r6c1",
+          "confidence": 1.0,
+          "bond": 0.5,
+          "external": true,
+          "rationale": ""
+        },
+        {
+          "voter": "sybil1",
+          "candidate": "r6c2",
+          "confidence": 0.701,
+          "bond": 0.351,
+          "external": true,
+          "rationale": ""
+        },
+        {
+          "voter": "sybil1",
+          "candidate": "r6c3",
+          "confidence": 0.906,
+          "bond": 0.453,
+          "external": true,
+          "rationale": ""
+        },
+        {
+          "voter": "sybil2",
+          "candidate": "r6c0",
+          "confidence": 0.826,
+          "bond": 0.413,
+          "external": true,
+          "rationale": ""
+        },
+        {
+          "voter": "sybil2",
+          "candidate": "r6c1",
+          "confidence": 0.842,
+          "bond": 0.421,
+          "external": true,
+          "rationale": ""
+        },
+        {
+          "voter": "sybil2",
+          "candidate": "r6c2",
+          "confidence": 1.0,
+          "bond": 0.5,
+          "external": true,
+          "rationale": ""
+        },
+        {
+          "voter": "sybil2",
+          "candidate": "r6c3",
+          "confidence": 0.849,
+          "bond": 0.425,
+          "external": true,
+          "rationale": ""
+        },
+        {
+          "voter": "sybil3",
+          "candidate": "r6c0",
+          "confidence": 1.0,
+          "bond": 0.5,
+          "external": true,
+          "rationale": ""
+        },
+        {
+          "voter": "sybil3",
+          "candidate": "r6c1",
+          "confidence": 0.815,
+          "bond": 0.407,
+          "external": true,
+          "rationale": ""
+        },
+        {
+          "voter": "sybil3",
+          "candidate": "r6c2",
+          "confidence": 0.878,
+          "bond": 0.439,
+          "external": true,
+          "rationale": ""
+        },
+        {
+          "voter": "sybil3",
+          "candidate": "r6c3",
+          "confidence": 0.811,
+          "bond": 0.405,
+          "external": true,
+          "rationale": ""
+        },
+        {
+          "voter": "sybil4",
+          "candidate": "r6c0",
+          "confidence": 0.795,
+          "bond": 0.397,
+          "external": true,
+          "rationale": ""
+        },
+        {
+          "voter": "sybil4",
+          "candidate": "r6c1",
+          "confidence": 0.855,
+          "bond": 0.427,
+          "external": true,
+          "rationale": ""
+        },
+        {
+          "voter": "sybil4",
+          "candidate": "r6c2",
+          "confidence": 0.827,
+          "bond": 0.414,
+          "external": true,
+          "rationale": ""
+        },
+        {
+          "voter": "sybil4",
+          "candidate": "r6c3",
+          "confidence": 0.866,
+          "bond": 0.433,
+          "external": true,
+          "rationale": ""
+        },
+        {
+          "voter": "sybil5",
+          "candidate": "r6c0",
+          "confidence": 0.682,
+          "bond": 0.341,
+          "external": true,
+          "rationale": ""
+        },
+        {
+          "voter": "sybil5",
+          "candidate": "r6c1",
+          "confidence": 1.0,
+          "bond": 0.5,
+          "external": true,
+          "rationale": ""
+        },
+        {
+          "voter": "sybil5",
+          "candidate": "r6c2",
+          "confidence": 0.837,
+          "bond": 0.418,
+          "external": true,
+          "rationale": ""
+        },
+        {
+          "voter": "sybil5",
+          "candidate": "r6c3",
+          "confidence": 0.989,
+          "bond": 0.495,
+          "external": true,
+          "rationale": ""
+        },
+        {
+          "voter": "sybil6",
+          "candidate": "r6c0",
+          "confidence": 0.769,
+          "bond": 0.385,
+          "external": true,
+          "rationale": ""
+        },
+        {
+          "voter": "sybil6",
+          "candidate": "r6c1",
+          "confidence": 0.873,
+          "bond": 0.437,
+          "external": true,
+          "rationale": ""
+        },
+        {
+          "voter": "sybil6",
+          "candidate": "r6c2",
+          "confidence": 1.0,
+          "bond": 0.5,
+          "external": true,
+          "rationale": ""
+        },
+        {
+          "voter": "sybil6",
+          "candidate": "r6c3",
+          "confidence": 0.78,
+          "bond": 0.39,
+          "external": true,
+          "rationale": ""
+        }
+      ]
+    }
+  ],
+  "participants_final": [
+    {
+      "pid": "mira",
+      "is_founder": true,
+      "is_human": false,
+      "competence": 0.85,
+      "reasoning_survival": 0.85,
+      "stake_balance": 10,
+      "total_slashed": 0.0,
+      "vouches": {
+        "praxis": 1.0
+      },
+      "topic_vouches": {},
+      "history": [
+        {
+          "round_id": 1,
+          "voter": "mira",
+          "candidate": "r1c0",
+          "confidence": 0.629,
+          "bond": 0.314,
+          "outcome": 0.639,
+          "funded": true,
+          "slashed": 0.0
+        },
+        {
+          "round_id": 1,
+          "voter": "mira",
+          "candidate": "r1c1",
+          "confidence": 0.0,
+          "bond": 0.0,
+          "outcome": 0.025,
+          "funded": false,
+          "slashed": 0.0
+        },
+        {
+          "round_id": 1,
+          "voter": "mira",
+          "candidate": "r1c2",
+          "confidence": 0.302,
+          "bond": 0.151,
+          "outcome": 0.275,
+          "funded": true,
+          "slashed": 0.0
+        },
+        {
+          "round_id": 1,
+          "voter": "mira",
+          "candidate": "r1c3",
+          "confidence": 0.202,
+          "bond": 0.101,
+          "outcome": 0.223,
+          "funded": false,
+          "slashed": 0.0
+        },
+        {
+          "round_id": 2,
+          "voter": "mira",
+          "candidate": "r2c0",
+          "confidence": 0.822,
+          "bond": 0.411,
+          "outcome": 0.829,
+          "funded": true,
+          "slashed": 0.0
+        },
+        {
+          "round_id": 2,
+          "voter": "mira",
+          "candidate": "r2c1",
+          "confidence": 0.595,
+          "bond": 0.298,
+          "outcome": 0.619,
+          "funded": false,
+          "slashed": 0.0
+        },
+        {
+          "round_id": 2,
+          "voter": "mira",
+          "candidate": "r2c2",
+          "confidence": 0.871,
+          "bond": 0.436,
+          "outcome": 0.862,
+          "funded": true,
+          "slashed": 0.0
+        },
+        {
+          "round_id": 2,
+          "voter": "mira",
+          "candidate": "r2c3",
+          "confidence": 0.642,
+          "bond": 0.321,
+          "outcome": 0.577,
+          "funded": false,
+          "slashed": 0.0
+        },
+        {
+          "round_id": 3,
+          "voter": "mira",
+          "candidate": "r3c0",
+          "confidence": 0.952,
+          "bond": 0.476,
+          "outcome": 0.876,
+          "funded": true,
+          "slashed": 0.0
+        },
+        {
+          "round_id": 3,
+          "voter": "mira",
+          "candidate": "r3c1",
+          "confidence": 0.27,
+          "bond": 0.135,
+          "outcome": 0.315,
+          "funded": false,
+          "slashed": 0.0
+        },
+        {
+          "round_id": 3,
+          "voter": "mira",
+          "candidate": "r3c2",
+          "confidence": 0.649,
+          "bond": 0.325,
+          "outcome": 0.655,
+          "funded": true,
+          "slashed": 0.0
+        },
+        {
+          "round_id": 3,
+          "voter": "mira",
+          "candidate": "r3c3",
+          "confidence": 0.456,
+          "bond": 0.228,
+          "outcome": 0.396,
+          "funded": false,
+          "slashed": 0.0
+        },
+        {
+          "round_id": 4,
+          "voter": "mira",
+          "candidate": "r4c0",
+          "confidence": 0.404,
+          "bond": 0.202,
+          "outcome": 0.454,
+          "funded": false,
+          "slashed": 0.0
+        },
+        {
+          "round_id": 4,
+          "voter": "mira",
+          "candidate": "r4c1",
+          "confidence": 0.954,
+          "bond": 0.477,
+          "outcome": 0.954,
+          "funded": true,
+          "slashed": 0.0
+        },
+        {
+          "round_id": 4,
+          "voter": "mira",
+          "candidate": "r4c2",
+          "confidence": 1.0,
+          "bond": 0.5,
+          "outcome": 0.876,
+          "funded": true,
+          "slashed": 0.0
+        },
+        {
+          "round_id": 4,
+          "voter": "mira",
+          "candidate": "r4c3",
+          "confidence": 0.179,
+          "bond": 0.089,
+          "outcome": 0.263,
+          "funded": false,
+          "slashed": 0.0
+        },
+        {
+          "round_id": 5,
+          "voter": "mira",
+          "candidate": "r5c0",
+          "confidence": 0.444,
+          "bond": 0.222,
+          "outcome": 0.423,
+          "funded": false,
+          "slashed": 0.0
+        },
+        {
+          "round_id": 5,
+          "voter": "mira",
+          "candidate": "r5c1",
+          "confidence": 0.278,
+          "bond": 0.139,
+          "outcome": 0.212,
+          "funded": false,
+          "slashed": 0.0
+        },
+        {
+          "round_id": 5,
+          "voter": "mira",
+          "candidate": "r5c2",
+          "confidence": 0.655,
+          "bond": 0.327,
+          "outcome": 0.539,
+          "funded": true,
+          "slashed": 0.0
+        },
+        {
+          "round_id": 5,
+          "voter": "mira",
+          "candidate": "r5c3",
+          "confidence": 0.726,
+          "bond": 0.363,
+          "outcome": 0.73,
+          "funded": true,
+          "slashed": 0.0
+        },
+        {
+          "round_id": 6,
+          "voter": "mira",
+          "candidate": "r6c0",
+          "confidence": 0.669,
+          "bond": 0.335,
+          "outcome": 0.729,
+          "funded": false,
+          "slashed": 0.0
+        },
+        {
+          "round_id": 6,
+          "voter": "mira",
+          "candidate": "r6c1",
+          "confidence": 0.715,
+          "bond": 0.357,
+          "outcome": 0.673,
+          "funded": true,
+          "slashed": 0.0
+        },
+        {
+          "round_id": 6,
+          "voter": "mira",
+          "candidate": "r6c2",
+          "confidence": 1.0,
+          "bond": 0.5,
+          "outcome": 0.984,
+          "funded": true,
+          "slashed": 0.0
+        },
+        {
+          "round_id": 6,
+          "voter": "mira",
+          "candidate": "r6c3",
+          "confidence": 0.052,
+          "bond": 0.026,
+          "outcome": 0.098,
+          "funded": false,
+          "slashed": 0.0
+        }
+      ]
+    },
+    {
+      "pid": "praxis",
+      "is_founder": true,
+      "is_human": false,
+      "competence": 0.85,
+      "reasoning_survival": 0.85,
+      "stake_balance": 10,
+      "total_slashed": 0.0,
+      "vouches": {
+        "mira": 1.0
+      },
+      "topic_vouches": {},
+      "history": [
+        {
+          "round_id": 1,
+          "voter": "praxis",
+          "candidate": "r1c0",
+          "confidence": 0.622,
+          "bond": 0.311,
+          "outcome": 0.639,
+          "funded": true,
+          "slashed": 0.0
+        },
+        {
+          "round_id": 1,
+          "voter": "praxis",
+          "candidate": "r1c1",
+          "confidence": 0.034,
+          "bond": 0.017,
+          "outcome": 0.025,
+          "funded": false,
+          "slashed": 0.0
+        },
+        {
+          "round_id": 1,
+          "voter": "praxis",
+          "candidate": "r1c2",
+          "confidence": 0.294,
+          "bond": 0.147,
+          "outcome": 0.275,
+          "funded": true,
+          "slashed": 0.0
+        },
+        {
+          "round_id": 1,
+          "voter": "praxis",
+          "candidate": "r1c3",
+          "confidence": 0.316,
+          "bond": 0.158,
+          "outcome": 0.223,
+          "funded": false,
+          "slashed": 0.0
+        },
+        {
+          "round_id": 2,
+          "voter": "praxis",
+          "candidate": "r2c0",
+          "confidence": 0.88,
+          "bond": 0.44,
+          "outcome": 0.829,
+          "funded": true,
+          "slashed": 0.0
+        },
+        {
+          "round_id": 2,
+          "voter": "praxis",
+          "candidate": "r2c1",
+          "confidence": 0.647,
+          "bond": 0.323,
+          "outcome": 0.619,
+          "funded": false,
+          "slashed": 0.0
+        },
+        {
+          "round_id": 2,
+          "voter": "praxis",
+          "candidate": "r2c2",
+          "confidence": 0.914,
+          "bond": 0.457,
+          "outcome": 0.862,
+          "funded": true,
+          "slashed": 0.0
+        },
+        {
+          "round_id": 2,
+          "voter": "praxis",
+          "candidate": "r2c3",
+          "confidence": 0.615,
+          "bond": 0.308,
+          "outcome": 0.577,
+          "funded": false,
+          "slashed": 0.0
+        },
+        {
+          "round_id": 3,
+          "voter": "praxis",
+          "candidate": "r3c0",
+          "confidence": 0.818,
+          "bond": 0.409,
+          "outcome": 0.876,
+          "funded": true,
+          "slashed": 0.0
+        },
+        {
+          "round_id": 3,
+          "voter": "praxis",
+          "candidate": "r3c1",
+          "confidence": 0.292,
+          "bond": 0.146,
+          "outcome": 0.315,
+          "funded": false,
+          "slashed": 0.0
+        },
+        {
+          "round_id": 3,
+          "voter": "praxis",
+          "candidate": "r3c2",
+          "confidence": 0.508,
+          "bond": 0.254,
+          "outcome": 0.655,
+          "funded": true,
+          "slashed": 0.0
+        },
+        {
+          "round_id": 3,
+          "voter": "praxis",
+          "candidate": "r3c3",
+          "confidence": 0.309,
+          "bond": 0.155,
+          "outcome": 0.396,
+          "funded": false,
+          "slashed": 0.0
+        },
+        {
+          "round_id": 4,
+          "voter": "praxis",
+          "candidate": "r4c0",
+          "confidence": 0.42,
+          "bond": 0.21,
+          "outcome": 0.454,
+          "funded": false,
+          "slashed": 0.0
+        },
+        {
+          "round_id": 4,
+          "voter": "praxis",
+          "candidate": "r4c1",
+          "confidence": 1.0,
+          "bond": 0.5,
+          "outcome": 0.954,
+          "funded": true,
+          "slashed": 0.0
+        },
+        {
+          "round_id": 4,
+          "voter": "praxis",
+          "candidate": "r4c2",
+          "confidence": 0.84,
+          "bond": 0.42,
+          "outcome": 0.876,
+          "funded": true,
+          "slashed": 0.0
+        },
+        {
+          "round_id": 4,
+          "voter": "praxis",
+          "candidate": "r4c3",
+          "confidence": 0.234,
+          "bond": 0.117,
+          "outcome": 0.263,
+          "funded": false,
+          "slashed": 0.0
+        },
+        {
+          "round_id": 5,
+          "voter": "praxis",
+          "candidate": "r5c0",
+          "confidence": 0.334,
+          "bond": 0.167,
+          "outcome": 0.423,
+          "funded": false,
+          "slashed": 0.0
+        },
+        {
+          "round_id": 5,
+          "voter": "praxis",
+          "candidate": "r5c1",
+          "confidence": 0.249,
+          "bond": 0.124,
+          "outcome": 0.212,
+          "funded": false,
+          "slashed": 0.0
+        },
+        {
+          "round_id": 5,
+          "voter": "praxis",
+          "candidate": "r5c2",
+          "confidence": 0.58,
+          "bond": 0.29,
+          "outcome": 0.539,
+          "funded": true,
+          "slashed": 0.0
+        },
+        {
+          "round_id": 5,
+          "voter": "praxis",
+          "candidate": "r5c3",
+          "confidence": 0.769,
+          "bond": 0.385,
+          "outcome": 0.73,
+          "funded": true,
+          "slashed": 0.0
+        },
+        {
+          "round_id": 6,
+          "voter": "praxis",
+          "candidate": "r6c0",
+          "confidence": 0.761,
+          "bond": 0.381,
+          "outcome": 0.729,
+          "funded": false,
+          "slashed": 0.0
+        },
+        {
+          "round_id": 6,
+          "voter": "praxis",
+          "candidate": "r6c1",
+          "confidence": 0.754,
+          "bond": 0.377,
+          "outcome": 0.673,
+          "funded": true,
+          "slashed": 0.0
+        },
+        {
+          "round_id": 6,
+          "voter": "praxis",
+          "candidate": "r6c2",
+          "confidence": 0.927,
+          "bond": 0.463,
+          "outcome": 0.984,
+          "funded": true,
+          "slashed": 0.0
+        },
+        {
+          "round_id": 6,
+          "voter": "praxis",
+          "candidate": "r6c3",
+          "confidence": 0.128,
+          "bond": 0.064,
+          "outcome": 0.098,
+          "funded": false,
+          "slashed": 0.0
+        }
+      ]
+    },
+    {
+      "pid": "sybil1",
+      "is_founder": false,
+      "is_human": false,
+      "competence": 0.6,
+      "reasoning_survival": 0.55,
+      "stake_balance": 2.0,
+      "total_slashed": 0.0,
+      "vouches": {
+        "sybil2": 1.0,
+        "sybil3": 1.0,
+        "sybil4": 1.0,
+        "sybil5": 1.0,
+        "sybil6": 1.0
+      },
+      "topic_vouches": {},
+      "history": [
+        {
+          "round_id": 1,
+          "voter": "sybil1",
+          "candidate": "r1c0",
+          "confidence": 0.903,
+          "bond": 0.451,
+          "outcome": 0.639,
+          "funded": true,
+          "slashed": 0.0
+        },
+        {
+          "round_id": 1,
+          "voter": "sybil1",
+          "candidate": "r1c1",
+          "confidence": 0.859,
+          "bond": 0.429,
+          "outcome": 0.025,
+          "funded": false,
+          "slashed": 0.0
+        },
+        {
+          "round_id": 1,
+          "voter": "sybil1",
+          "candidate": "r1c2",
+          "confidence": 0.791,
+          "bond": 0.395,
+          "outcome": 0.275,
+          "funded": true,
+          "slashed": 0.0
+        },
+        {
+          "round_id": 1,
+          "voter": "sybil1",
+          "candidate": "r1c3",
+          "confidence": 0.769,
+          "bond": 0.384,
+          "outcome": 0.223,
+          "funded": false,
+          "slashed": 0.0
+        },
+        {
+          "round_id": 2,
+          "voter": "sybil1",
+          "candidate": "r2c0",
+          "confidence": 0.8,
+          "bond": 0.4,
+          "outcome": 0.829,
+          "funded": true,
+          "slashed": 0.0
+        },
+        {
+          "round_id": 2,
+          "voter": "sybil1",
+          "candidate": "r2c1",
+          "confidence": 0.793,
+          "bond": 0.396,
+          "outcome": 0.619,
+          "funded": false,
+          "slashed": 0.0
+        },
+        {
+          "round_id": 2,
+          "voter": "sybil1",
+          "candidate": "r2c2",
+          "confidence": 0.812,
+          "bond": 0.406,
+          "outcome": 0.862,
+          "funded": true,
+          "slashed": 0.0
+        },
+        {
+          "round_id": 2,
+          "voter": "sybil1",
+          "candidate": "r2c3",
+          "confidence": 0.89,
+          "bond": 0.445,
+          "outcome": 0.577,
+          "funded": false,
+          "slashed": 0.0
+        },
+        {
+          "round_id": 3,
+          "voter": "sybil1",
+          "candidate": "r3c0",
+          "confidence": 0.805,
+          "bond": 0.402,
+          "outcome": 0.876,
+          "funded": true,
+          "slashed": 0.0
+        },
+        {
+          "round_id": 3,
+          "voter": "sybil1",
+          "candidate": "r3c1",
+          "confidence": 0.883,
+          "bond": 0.442,
+          "outcome": 0.315,
+          "funded": false,
+          "slashed": 0.0
+        },
+        {
+          "round_id": 3,
+          "voter": "sybil1",
+          "candidate": "r3c2",
+          "confidence": 0.945,
+          "bond": 0.473,
+          "outcome": 0.655,
+          "funded": true,
+          "slashed": 0.0
+        },
+        {
+          "round_id": 3,
+          "voter": "sybil1",
+          "candidate": "r3c3",
+          "confidence": 0.849,
+          "bond": 0.424,
+          "outcome": 0.396,
+          "funded": false,
+          "slashed": 0.0
+        },
+        {
+          "round_id": 4,
+          "voter": "sybil1",
+          "candidate": "r4c0",
+          "confidence": 0.858,
+          "bond": 0.429,
+          "outcome": 0.454,
+          "funded": false,
+          "slashed": 0.0
+        },
+        {
+          "round_id": 4,
+          "voter": "sybil1",
+          "candidate": "r4c1",
+          "confidence": 0.751,
+          "bond": 0.375,
+          "outcome": 0.954,
+          "funded": true,
+          "slashed": 0.0
+        },
+        {
+          "round_id": 4,
+          "voter": "sybil1",
+          "candidate": "r4c2",
+          "confidence": 0.868,
+          "bond": 0.434,
+          "outcome": 0.876,
+          "funded": true,
+          "slashed": 0.0
+        },
+        {
+          "round_id": 4,
+          "voter": "sybil1",
+          "candidate": "r4c3",
+          "confidence": 0.753,
+          "bond": 0.377,
+          "outcome": 0.263,
+          "funded": false,
+          "slashed": 0.0
+        },
+        {
+          "round_id": 5,
+          "voter": "sybil1",
+          "candidate": "r5c0",
+          "confidence": 0.794,
+          "bond": 0.397,
+          "outcome": 0.423,
+          "funded": false,
+          "slashed": 0.0
+        },
+        {
+          "round_id": 5,
+          "voter": "sybil1",
+          "candidate": "r5c1",
+          "confidence": 0.941,
+          "bond": 0.47,
+          "outcome": 0.212,
+          "funded": false,
+          "slashed": 0.0
+        },
+        {
+          "round_id": 5,
+          "voter": "sybil1",
+          "candidate": "r5c2",
+          "confidence": 0.857,
+          "bond": 0.429,
+          "outcome": 0.539,
+          "funded": true,
+          "slashed": 0.0
+        },
+        {
+          "round_id": 5,
+          "voter": "sybil1",
+          "candidate": "r5c3",
+          "confidence": 0.906,
+          "bond": 0.453,
+          "outcome": 0.73,
+          "funded": true,
+          "slashed": 0.0
+        },
+        {
+          "round_id": 6,
+          "voter": "sybil1",
+          "candidate": "r6c0",
+          "confidence": 0.85,
+          "bond": 0.425,
+          "outcome": 0.729,
+          "funded": false,
+          "slashed": 0.0
+        },
+        {
+          "round_id": 6,
+          "voter": "sybil1",
+          "candidate": "r6c1",
+          "confidence": 1.0,
+          "bond": 0.5,
+          "outcome": 0.673,
+          "funded": true,
+          "slashed": 0.0
+        },
+        {
+          "round_id": 6,
+          "voter": "sybil1",
+          "candidate": "r6c2",
+          "confidence": 0.701,
+          "bond": 0.351,
+          "outcome": 0.984,
+          "funded": true,
+          "slashed": 0.0
+        },
+        {
+          "round_id": 6,
+          "voter": "sybil1",
+          "candidate": "r6c3",
+          "confidence": 0.906,
+          "bond": 0.453,
+          "outcome": 0.098,
+          "funded": false,
+          "slashed": 0.0
+        }
+      ]
+    },
+    {
+      "pid": "sybil2",
+      "is_founder": false,
+      "is_human": false,
+      "competence": 0.6,
+      "reasoning_survival": 0.55,
+      "stake_balance": 2.0,
+      "total_slashed": 0.0,
+      "vouches": {
+        "sybil1": 1.0,
+        "sybil3": 1.0,
+        "sybil4": 1.0,
+        "sybil5": 1.0,
+        "sybil6": 1.0
+      },
+      "topic_vouches": {},
+      "history": [
+        {
+          "round_id": 1,
+          "voter": "sybil2",
+          "candidate": "r1c0",
+          "confidence": 0.87,
+          "bond": 0.435,
+          "outcome": 0.639,
+          "funded": true,
+          "slashed": 0.0
+        },
+        {
+          "round_id": 1,
+          "voter": "sybil2",
+          "candidate": "r1c1",
+          "confidence": 0.955,
+          "bond": 0.477,
+          "outcome": 0.025,
+          "funded": false,
+          "slashed": 0.0
+        },
+        {
+          "round_id": 1,
+          "voter": "sybil2",
+          "candidate": "r1c2",
+          "confidence": 0.853,
+          "bond": 0.427,
+          "outcome": 0.275,
+          "funded": true,
+          "slashed": 0.0
+        },
+        {
+          "round_id": 1,
+          "voter": "sybil2",
+          "candidate": "r1c3",
+          "confidence": 0.841,
+          "bond": 0.421,
+          "outcome": 0.223,
+          "funded": false,
+          "slashed": 0.0
+        },
+        {
+          "round_id": 2,
+          "voter": "sybil2",
+          "candidate": "r2c0",
+          "confidence": 0.83,
+          "bond": 0.415,
+          "outcome": 0.829,
+          "funded": true,
+          "slashed": 0.0
+        },
+        {
+          "round_id": 2,
+          "voter": "sybil2",
+          "candidate": "r2c1",
+          "confidence": 1.0,
+          "bond": 0.5,
+          "outcome": 0.619,
+          "funded": false,
+          "slashed": 0.0
+        },
+        {
+          "round_id": 2,
+          "voter": "sybil2",
+          "candidate": "r2c2",
+          "confidence": 0.784,
+          "bond": 0.392,
+          "outcome": 0.862,
+          "funded": true,
+          "slashed": 0.0
+        },
+        {
+          "round_id": 2,
+          "voter": "sybil2",
+          "candidate": "r2c3",
+          "confidence": 0.762,
+          "bond": 0.381,
+          "outcome": 0.577,
+          "funded": false,
+          "slashed": 0.0
+        },
+        {
+          "round_id": 3,
+          "voter": "sybil2",
+          "candidate": "r3c0",
+          "confidence": 0.871,
+          "bond": 0.435,
+          "outcome": 0.876,
+          "funded": true,
+          "slashed": 0.0
+        },
+        {
+          "round_id": 3,
+          "voter": "sybil2",
+          "candidate": "r3c1",
+          "confidence": 0.863,
+          "bond": 0.432,
+          "outcome": 0.315,
+          "funded": false,
+          "slashed": 0.0
+        },
+        {
+          "round_id": 3,
+          "voter": "sybil2",
+          "candidate": "r3c2",
+          "confidence": 0.937,
+          "bond": 0.468,
+          "outcome": 0.655,
+          "funded": true,
+          "slashed": 0.0
+        },
+        {
+          "round_id": 3,
+          "voter": "sybil2",
+          "candidate": "r3c3",
+          "confidence": 0.921,
+          "bond": 0.461,
+          "outcome": 0.396,
+          "funded": false,
+          "slashed": 0.0
+        },
+        {
+          "round_id": 4,
+          "voter": "sybil2",
+          "candidate": "r4c0",
+          "confidence": 0.921,
+          "bond": 0.46,
+          "outcome": 0.454,
+          "funded": false,
+          "slashed": 0.0
+        },
+        {
+          "round_id": 4,
+          "voter": "sybil2",
+          "candidate": "r4c1",
+          "confidence": 0.85,
+          "bond": 0.425,
+          "outcome": 0.954,
+          "funded": true,
+          "slashed": 0.0
+        },
+        {
+          "round_id": 4,
+          "voter": "sybil2",
+          "candidate": "r4c2",
+          "confidence": 1.0,
+          "bond": 0.5,
+          "outcome": 0.876,
+          "funded": true,
+          "slashed": 0.0
+        },
+        {
+          "round_id": 4,
+          "voter": "sybil2",
+          "candidate": "r4c3",
+          "confidence": 0.872,
+          "bond": 0.436,
+          "outcome": 0.263,
+          "funded": false,
+          "slashed": 0.0
+        },
+        {
+          "round_id": 5,
+          "voter": "sybil2",
+          "candidate": "r5c0",
+          "confidence": 0.952,
+          "bond": 0.476,
+          "outcome": 0.423,
+          "funded": false,
+          "slashed": 0.0
+        },
+        {
+          "round_id": 5,
+          "voter": "sybil2",
+          "candidate": "r5c1",
+          "confidence": 0.899,
+          "bond": 0.449,
+          "outcome": 0.212,
+          "funded": false,
+          "slashed": 0.0
+        },
+        {
+          "round_id": 5,
+          "voter": "sybil2",
+          "candidate": "r5c2",
+          "confidence": 0.873,
+          "bond": 0.436,
+          "outcome": 0.539,
+          "funded": true,
+          "slashed": 0.0
+        },
+        {
+          "round_id": 5,
+          "voter": "sybil2",
+          "candidate": "r5c3",
+          "confidence": 1.0,
+          "bond": 0.5,
+          "outcome": 0.73,
+          "funded": true,
+          "slashed": 0.0
+        },
+        {
+          "round_id": 6,
+          "voter": "sybil2",
+          "candidate": "r6c0",
+          "confidence": 0.826,
+          "bond": 0.413,
+          "outcome": 0.729,
+          "funded": false,
+          "slashed": 0.0
+        },
+        {
+          "round_id": 6,
+          "voter": "sybil2",
+          "candidate": "r6c1",
+          "confidence": 0.842,
+          "bond": 0.421,
+          "outcome": 0.673,
+          "funded": true,
+          "slashed": 0.0
+        },
+        {
+          "round_id": 6,
+          "voter": "sybil2",
+          "candidate": "r6c2",
+          "confidence": 1.0,
+          "bond": 0.5,
+          "outcome": 0.984,
+          "funded": true,
+          "slashed": 0.0
+        },
+        {
+          "round_id": 6,
+          "voter": "sybil2",
+          "candidate": "r6c3",
+          "confidence": 0.849,
+          "bond": 0.425,
+          "outcome": 0.098,
+          "funded": false,
+          "slashed": 0.0
+        }
+      ]
+    },
+    {
+      "pid": "sybil3",
+      "is_founder": false,
+      "is_human": false,
+      "competence": 0.6,
+      "reasoning_survival": 0.55,
+      "stake_balance": 2.0,
+      "total_slashed": 0.0,
+      "vouches": {
+        "sybil1": 1.0,
+        "sybil2": 1.0,
+        "sybil4": 1.0,
+        "sybil5": 1.0,
+        "sybil6": 1.0
+      },
+      "topic_vouches": {},
+      "history": [
+        {
+          "round_id": 1,
+          "voter": "sybil3",
+          "candidate": "r1c0",
+          "confidence": 0.893,
+          "bond": 0.446,
+          "outcome": 0.639,
+          "funded": true,
+          "slashed": 0.0
+        },
+        {
+          "round_id": 1,
+          "voter": "sybil3",
+          "candidate": "r1c1",
+          "confidence": 0.734,
+          "bond": 0.367,
+          "outcome": 0.025,
+          "funded": false,
+          "slashed": 0.0
+        },
+        {
+          "round_id": 1,
+          "voter": "sybil3",
+          "candidate": "r1c2",
+          "confidence": 0.825,
+          "bond": 0.413,
+          "outcome": 0.275,
+          "funded": true,
+          "slashed": 0.0
+        },
+        {
+          "round_id": 1,
+          "voter": "sybil3",
+          "candidate": "r1c3",
+          "confidence": 0.889,
+          "bond": 0.445,
+          "outcome": 0.223,
+          "funded": false,
+          "slashed": 0.0
+        },
+        {
+          "round_id": 2,
+          "voter": "sybil3",
+          "candidate": "r2c0",
+          "confidence": 0.911,
+          "bond": 0.456,
+          "outcome": 0.829,
+          "funded": true,
+          "slashed": 0.0
+        },
+        {
+          "round_id": 2,
+          "voter": "sybil3",
+          "candidate": "r2c1",
+          "confidence": 0.964,
+          "bond": 0.482,
+          "outcome": 0.619,
+          "funded": false,
+          "slashed": 0.0
+        },
+        {
+          "round_id": 2,
+          "voter": "sybil3",
+          "candidate": "r2c2",
+          "confidence": 0.89,
+          "bond": 0.445,
+          "outcome": 0.862,
+          "funded": true,
+          "slashed": 0.0
+        },
+        {
+          "round_id": 2,
+          "voter": "sybil3",
+          "candidate": "r2c3",
+          "confidence": 0.917,
+          "bond": 0.458,
+          "outcome": 0.577,
+          "funded": false,
+          "slashed": 0.0
+        },
+        {
+          "round_id": 3,
+          "voter": "sybil3",
+          "candidate": "r3c0",
+          "confidence": 0.872,
+          "bond": 0.436,
+          "outcome": 0.876,
+          "funded": true,
+          "slashed": 0.0
+        },
+        {
+          "round_id": 3,
+          "voter": "sybil3",
+          "candidate": "r3c1",
+          "confidence": 0.769,
+          "bond": 0.385,
+          "outcome": 0.315,
+          "funded": false,
+          "slashed": 0.0
+        },
+        {
+          "round_id": 3,
+          "voter": "sybil3",
+          "candidate": "r3c2",
+          "confidence": 0.922,
+          "bond": 0.461,
+          "outcome": 0.655,
+          "funded": true,
+          "slashed": 0.0
+        },
+        {
+          "round_id": 3,
+          "voter": "sybil3",
+          "candidate": "r3c3",
+          "confidence": 0.88,
+          "bond": 0.44,
+          "outcome": 0.396,
+          "funded": false,
+          "slashed": 0.0
+        },
+        {
+          "round_id": 4,
+          "voter": "sybil3",
+          "candidate": "r4c0",
+          "confidence": 0.959,
+          "bond": 0.48,
+          "outcome": 0.454,
+          "funded": false,
+          "slashed": 0.0
+        },
+        {
+          "round_id": 4,
+          "voter": "sybil3",
+          "candidate": "r4c1",
+          "confidence": 0.746,
+          "bond": 0.373,
+          "outcome": 0.954,
+          "funded": true,
+          "slashed": 0.0
+        },
+        {
+          "round_id": 4,
+          "voter": "sybil3",
+          "candidate": "r4c2",
+          "confidence": 0.84,
+          "bond": 0.42,
+          "outcome": 0.876,
+          "funded": true,
+          "slashed": 0.0
+        },
+        {
+          "round_id": 4,
+          "voter": "sybil3",
+          "candidate": "r4c3",
+          "confidence": 0.876,
+          "bond": 0.438,
+          "outcome": 0.263,
+          "funded": false,
+          "slashed": 0.0
+        },
+        {
+          "round_id": 5,
+          "voter": "sybil3",
+          "candidate": "r5c0",
+          "confidence": 0.869,
+          "bond": 0.435,
+          "outcome": 0.423,
+          "funded": false,
+          "slashed": 0.0
+        },
+        {
+          "round_id": 5,
+          "voter": "sybil3",
+          "candidate": "r5c1",
+          "confidence": 0.826,
+          "bond": 0.413,
+          "outcome": 0.212,
+          "funded": false,
+          "slashed": 0.0
+        },
+        {
+          "round_id": 5,
+          "voter": "sybil3",
+          "candidate": "r5c2",
+          "confidence": 0.859,
+          "bond": 0.429,
+          "outcome": 0.539,
+          "funded": true,
+          "slashed": 0.0
+        },
+        {
+          "round_id": 5,
+          "voter": "sybil3",
+          "candidate": "r5c3",
+          "confidence": 0.969,
+          "bond": 0.484,
+          "outcome": 0.73,
+          "funded": true,
+          "slashed": 0.0
+        },
+        {
+          "round_id": 6,
+          "voter": "sybil3",
+          "candidate": "r6c0",
+          "confidence": 1.0,
+          "bond": 0.5,
+          "outcome": 0.729,
+          "funded": false,
+          "slashed": 0.0
+        },
+        {
+          "round_id": 6,
+          "voter": "sybil3",
+          "candidate": "r6c1",
+          "confidence": 0.815,
+          "bond": 0.407,
+          "outcome": 0.673,
+          "funded": true,
+          "slashed": 0.0
+        },
+        {
+          "round_id": 6,
+          "voter": "sybil3",
+          "candidate": "r6c2",
+          "confidence": 0.878,
+          "bond": 0.439,
+          "outcome": 0.984,
+          "funded": true,
+          "slashed": 0.0
+        },
+        {
+          "round_id": 6,
+          "voter": "sybil3",
+          "candidate": "r6c3",
+          "confidence": 0.811,
+          "bond": 0.405,
+          "outcome": 0.098,
+          "funded": false,
+          "slashed": 0.0
+        }
+      ]
+    },
+    {
+      "pid": "sybil4",
+      "is_founder": false,
+      "is_human": false,
+      "competence": 0.6,
+      "reasoning_survival": 0.55,
+      "stake_balance": 2.0,
+      "total_slashed": 0.0,
+      "vouches": {
+        "sybil1": 1.0,
+        "sybil2": 1.0,
+        "sybil3": 1.0,
+        "sybil5": 1.0,
+        "sybil6": 1.0
+      },
+      "topic_vouches": {},
+      "history": [
+        {
+          "round_id": 1,
+          "voter": "sybil4",
+          "candidate": "r1c0",
+          "confidence": 0.92,
+          "bond": 0.46,
+          "outcome": 0.639,
+          "funded": true,
+          "slashed": 0.0
+        },
+        {
+          "round_id": 1,
+          "voter": "sybil4",
+          "candidate": "r1c1",
+          "confidence": 0.831,
+          "bond": 0.415,
+          "outcome": 0.025,
+          "funded": false,
+          "slashed": 0.0
+        },
+        {
+          "round_id": 1,
+          "voter": "sybil4",
+          "candidate": "r1c2",
+          "confidence": 0.88,
+          "bond": 0.44,
+          "outcome": 0.275,
+          "funded": true,
+          "slashed": 0.0
+        },
+        {
+          "round_id": 1,
+          "voter": "sybil4",
+          "candidate": "r1c3",
+          "confidence": 0.87,
+          "bond": 0.435,
+          "outcome": 0.223,
+          "funded": false,
+          "slashed": 0.0
+        },
+        {
+          "round_id": 2,
+          "voter": "sybil4",
+          "candidate": "r2c0",
+          "confidence": 0.964,
+          "bond": 0.482,
+          "outcome": 0.829,
+          "funded": true,
+          "slashed": 0.0
+        },
+        {
+          "round_id": 2,
+          "voter": "sybil4",
+          "candidate": "r2c1",
+          "confidence": 0.842,
+          "bond": 0.421,
+          "outcome": 0.619,
+          "funded": false,
+          "slashed": 0.0
+        },
+        {
+          "round_id": 2,
+          "voter": "sybil4",
+          "candidate": "r2c2",
+          "confidence": 0.736,
+          "bond": 0.368,
+          "outcome": 0.862,
+          "funded": true,
+          "slashed": 0.0
+        },
+        {
+          "round_id": 2,
+          "voter": "sybil4",
+          "candidate": "r2c3",
+          "confidence": 0.807,
+          "bond": 0.404,
+          "outcome": 0.577,
+          "funded": false,
+          "slashed": 0.0
+        },
+        {
+          "round_id": 3,
+          "voter": "sybil4",
+          "candidate": "r3c0",
+          "confidence": 0.948,
+          "bond": 0.474,
+          "outcome": 0.876,
+          "funded": true,
+          "slashed": 0.0
+        },
+        {
+          "round_id": 3,
+          "voter": "sybil4",
+          "candidate": "r3c1",
+          "confidence": 0.848,
+          "bond": 0.424,
+          "outcome": 0.315,
+          "funded": false,
+          "slashed": 0.0
+        },
+        {
+          "round_id": 3,
+          "voter": "sybil4",
+          "candidate": "r3c2",
+          "confidence": 1.0,
+          "bond": 0.5,
+          "outcome": 0.655,
+          "funded": true,
+          "slashed": 0.0
+        },
+        {
+          "round_id": 3,
+          "voter": "sybil4",
+          "candidate": "r3c3",
+          "confidence": 0.821,
+          "bond": 0.411,
+          "outcome": 0.396,
+          "funded": false,
+          "slashed": 0.0
+        },
+        {
+          "round_id": 4,
+          "voter": "sybil4",
+          "candidate": "r4c0",
+          "confidence": 0.99,
+          "bond": 0.495,
+          "outcome": 0.454,
+          "funded": false,
+          "slashed": 0.0
+        },
+        {
+          "round_id": 4,
+          "voter": "sybil4",
+          "candidate": "r4c1",
+          "confidence": 0.716,
+          "bond": 0.358,
+          "outcome": 0.954,
+          "funded": true,
+          "slashed": 0.0
+        },
+        {
+          "round_id": 4,
+          "voter": "sybil4",
+          "candidate": "r4c2",
+          "confidence": 0.929,
+          "bond": 0.465,
+          "outcome": 0.876,
+          "funded": true,
+          "slashed": 0.0
+        },
+        {
+          "round_id": 4,
+          "voter": "sybil4",
+          "candidate": "r4c3",
+          "confidence": 0.897,
+          "bond": 0.449,
+          "outcome": 0.263,
+          "funded": false,
+          "slashed": 0.0
+        },
+        {
+          "round_id": 5,
+          "voter": "sybil4",
+          "candidate": "r5c0",
+          "confidence": 0.859,
+          "bond": 0.43,
+          "outcome": 0.423,
+          "funded": false,
+          "slashed": 0.0
+        },
+        {
+          "round_id": 5,
+          "voter": "sybil4",
+          "candidate": "r5c1",
+          "confidence": 0.892,
+          "bond": 0.446,
+          "outcome": 0.212,
+          "funded": false,
+          "slashed": 0.0
+        },
+        {
+          "round_id": 5,
+          "voter": "sybil4",
+          "candidate": "r5c2",
+          "confidence": 0.946,
+          "bond": 0.473,
+          "outcome": 0.539,
+          "funded": true,
+          "slashed": 0.0
+        },
+        {
+          "round_id": 5,
+          "voter": "sybil4",
+          "candidate": "r5c3",
+          "confidence": 0.809,
+          "bond": 0.404,
+          "outcome": 0.73,
+          "funded": true,
+          "slashed": 0.0
+        },
+        {
+          "round_id": 6,
+          "voter": "sybil4",
+          "candidate": "r6c0",
+          "confidence": 0.795,
+          "bond": 0.397,
+          "outcome": 0.729,
+          "funded": false,
+          "slashed": 0.0
+        },
+        {
+          "round_id": 6,
+          "voter": "sybil4",
+          "candidate": "r6c1",
+          "confidence": 0.855,
+          "bond": 0.427,
+          "outcome": 0.673,
+          "funded": true,
+          "slashed": 0.0
+        },
+        {
+          "round_id": 6,
+          "voter": "sybil4",
+          "candidate": "r6c2",
+          "confidence": 0.827,
+          "bond": 0.414,
+          "outcome": 0.984,
+          "funded": true,
+          "slashed": 0.0
+        },
+        {
+          "round_id": 6,
+          "voter": "sybil4",
+          "candidate": "r6c3",
+          "confidence": 0.866,
+          "bond": 0.433,
+          "outcome": 0.098,
+          "funded": false,
+          "slashed": 0.0
+        }
+      ]
+    },
+    {
+      "pid": "sybil5",
+      "is_founder": false,
+      "is_human": false,
+      "competence": 0.6,
+      "reasoning_survival": 0.55,
+      "stake_balance": 2.0,
+      "total_slashed": 0.0,
+      "vouches": {
+        "sybil1": 1.0,
+        "sybil2": 1.0,
+        "sybil3": 1.0,
+        "sybil4": 1.0,
+        "sybil6": 1.0
+      },
+      "topic_vouches": {},
+      "history": [
+        {
+          "round_id": 1,
+          "voter": "sybil5",
+          "candidate": "r1c0",
+          "confidence": 0.913,
+          "bond": 0.456,
+          "outcome": 0.639,
+          "funded": true,
+          "slashed": 0.0
+        },
+        {
+          "round_id": 1,
+          "voter": "sybil5",
+          "candidate": "r1c1",
+          "confidence": 0.761,
+          "bond": 0.38,
+          "outcome": 0.025,
+          "funded": false,
+          "slashed": 0.0
+        },
+        {
+          "round_id": 1,
+          "voter": "sybil5",
+          "candidate": "r1c2",
+          "confidence": 0.895,
+          "bond": 0.448,
+          "outcome": 0.275,
+          "funded": true,
+          "slashed": 0.0
+        },
+        {
+          "round_id": 1,
+          "voter": "sybil5",
+          "candidate": "r1c3",
+          "confidence": 0.729,
+          "bond": 0.364,
+          "outcome": 0.223,
+          "funded": false,
+          "slashed": 0.0
+        },
+        {
+          "round_id": 2,
+          "voter": "sybil5",
+          "candidate": "r2c0",
+          "confidence": 0.926,
+          "bond": 0.463,
+          "outcome": 0.829,
+          "funded": true,
+          "slashed": 0.0
+        },
+        {
+          "round_id": 2,
+          "voter": "sybil5",
+          "candidate": "r2c1",
+          "confidence": 0.735,
+          "bond": 0.367,
+          "outcome": 0.619,
+          "funded": false,
+          "slashed": 0.0
+        },
+        {
+          "round_id": 2,
+          "voter": "sybil5",
+          "candidate": "r2c2",
+          "confidence": 0.853,
+          "bond": 0.426,
+          "outcome": 0.862,
+          "funded": true,
+          "slashed": 0.0
+        },
+        {
+          "round_id": 2,
+          "voter": "sybil5",
+          "candidate": "r2c3",
+          "confidence": 0.87,
+          "bond": 0.435,
+          "outcome": 0.577,
+          "funded": false,
+          "slashed": 0.0
+        },
+        {
+          "round_id": 3,
+          "voter": "sybil5",
+          "candidate": "r3c0",
+          "confidence": 0.977,
+          "bond": 0.489,
+          "outcome": 0.876,
+          "funded": true,
+          "slashed": 0.0
+        },
+        {
+          "round_id": 3,
+          "voter": "sybil5",
+          "candidate": "r3c1",
+          "confidence": 0.859,
+          "bond": 0.43,
+          "outcome": 0.315,
+          "funded": false,
+          "slashed": 0.0
+        },
+        {
+          "round_id": 3,
+          "voter": "sybil5",
+          "candidate": "r3c2",
+          "confidence": 0.809,
+          "bond": 0.404,
+          "outcome": 0.655,
+          "funded": true,
+          "slashed": 0.0
+        },
+        {
+          "round_id": 3,
+          "voter": "sybil5",
+          "candidate": "r3c3",
+          "confidence": 0.76,
+          "bond": 0.38,
+          "outcome": 0.396,
+          "funded": false,
+          "slashed": 0.0
+        },
+        {
+          "round_id": 4,
+          "voter": "sybil5",
+          "candidate": "r4c0",
+          "confidence": 0.973,
+          "bond": 0.486,
+          "outcome": 0.454,
+          "funded": false,
+          "slashed": 0.0
+        },
+        {
+          "round_id": 4,
+          "voter": "sybil5",
+          "candidate": "r4c1",
+          "confidence": 0.907,
+          "bond": 0.453,
+          "outcome": 0.954,
+          "funded": true,
+          "slashed": 0.0
+        },
+        {
+          "round_id": 4,
+          "voter": "sybil5",
+          "candidate": "r4c2",
+          "confidence": 0.854,
+          "bond": 0.427,
+          "outcome": 0.876,
+          "funded": true,
+          "slashed": 0.0
+        },
+        {
+          "round_id": 4,
+          "voter": "sybil5",
+          "candidate": "r4c3",
+          "confidence": 0.808,
+          "bond": 0.404,
+          "outcome": 0.263,
+          "funded": false,
+          "slashed": 0.0
+        },
+        {
+          "round_id": 5,
+          "voter": "sybil5",
+          "candidate": "r5c0",
+          "confidence": 0.712,
+          "bond": 0.356,
+          "outcome": 0.423,
+          "funded": false,
+          "slashed": 0.0
+        },
+        {
+          "round_id": 5,
+          "voter": "sybil5",
+          "candidate": "r5c1",
+          "confidence": 0.874,
+          "bond": 0.437,
+          "outcome": 0.212,
+          "funded": false,
+          "slashed": 0.0
+        },
+        {
+          "round_id": 5,
+          "voter": "sybil5",
+          "candidate": "r5c2",
+          "confidence": 0.868,
+          "bond": 0.434,
+          "outcome": 0.539,
+          "funded": true,
+          "slashed": 0.0
+        },
+        {
+          "round_id": 5,
+          "voter": "sybil5",
+          "candidate": "r5c3",
+          "confidence": 0.801,
+          "bond": 0.401,
+          "outcome": 0.73,
+          "funded": true,
+          "slashed": 0.0
+        },
+        {
+          "round_id": 6,
+          "voter": "sybil5",
+          "candidate": "r6c0",
+          "confidence": 0.682,
+          "bond": 0.341,
+          "outcome": 0.729,
+          "funded": false,
+          "slashed": 0.0
+        },
+        {
+          "round_id": 6,
+          "voter": "sybil5",
+          "candidate": "r6c1",
+          "confidence": 1.0,
+          "bond": 0.5,
+          "outcome": 0.673,
+          "funded": true,
+          "slashed": 0.0
+        },
+        {
+          "round_id": 6,
+          "voter": "sybil5",
+          "candidate": "r6c2",
+          "confidence": 0.837,
+          "bond": 0.418,
+          "outcome": 0.984,
+          "funded": true,
+          "slashed": 0.0
+        },
+        {
+          "round_id": 6,
+          "voter": "sybil5",
+          "candidate": "r6c3",
+          "confidence": 0.989,
+          "bond": 0.495,
+          "outcome": 0.098,
+          "funded": false,
+          "slashed": 0.0
+        }
+      ]
+    },
+    {
+      "pid": "sybil6",
+      "is_founder": false,
+      "is_human": false,
+      "competence": 0.6,
+      "reasoning_survival": 0.55,
+      "stake_balance": 2.0,
+      "total_slashed": 0.0,
+      "vouches": {
+        "sybil1": 1.0,
+        "sybil2": 1.0,
+        "sybil3": 1.0,
+        "sybil4": 1.0,
+        "sybil5": 1.0
+      },
+      "topic_vouches": {},
+      "history": [
+        {
+          "round_id": 1,
+          "voter": "sybil6",
+          "candidate": "r1c0",
+          "confidence": 0.64,
+          "bond": 0.32,
+          "outcome": 0.639,
+          "funded": true,
+          "slashed": 0.0
+        },
+        {
+          "round_id": 1,
+          "voter": "sybil6",
+          "candidate": "r1c1",
+          "confidence": 0.801,
+          "bond": 0.401,
+          "outcome": 0.025,
+          "funded": false,
+          "slashed": 0.0
+        },
+        {
+          "round_id": 1,
+          "voter": "sybil6",
+          "candidate": "r1c2",
+          "confidence": 0.777,
+          "bond": 0.388,
+          "outcome": 0.275,
+          "funded": true,
+          "slashed": 0.0
+        },
+        {
+          "round_id": 1,
+          "voter": "sybil6",
+          "candidate": "r1c3",
+          "confidence": 0.92,
+          "bond": 0.46,
+          "outcome": 0.223,
+          "funded": false,
+          "slashed": 0.0
+        },
+        {
+          "round_id": 2,
+          "voter": "sybil6",
+          "candidate": "r2c0",
+          "confidence": 0.825,
+          "bond": 0.412,
+          "outcome": 0.829,
+          "funded": true,
+          "slashed": 0.0
+        },
+        {
+          "round_id": 2,
+          "voter": "sybil6",
+          "candidate": "r2c1",
+          "confidence": 0.908,
+          "bond": 0.454,
+          "outcome": 0.619,
+          "funded": false,
+          "slashed": 0.0
+        },
+        {
+          "round_id": 2,
+          "voter": "sybil6",
+          "candidate": "r2c2",
+          "confidence": 0.896,
+          "bond": 0.448,
+          "outcome": 0.862,
+          "funded": true,
+          "slashed": 0.0
+        },
+        {
+          "round_id": 2,
+          "voter": "sybil6",
+          "candidate": "r2c3",
+          "confidence": 1.0,
+          "bond": 0.5,
+          "outcome": 0.577,
+          "funded": false,
+          "slashed": 0.0
+        },
+        {
+          "round_id": 3,
+          "voter": "sybil6",
+          "candidate": "r3c0",
+          "confidence": 0.838,
+          "bond": 0.419,
+          "outcome": 0.876,
+          "funded": true,
+          "slashed": 0.0
+        },
+        {
+          "round_id": 3,
+          "voter": "sybil6",
+          "candidate": "r3c1",
+          "confidence": 0.964,
+          "bond": 0.482,
+          "outcome": 0.315,
+          "funded": false,
+          "slashed": 0.0
+        },
+        {
+          "round_id": 3,
+          "voter": "sybil6",
+          "candidate": "r3c2",
+          "confidence": 0.915,
+          "bond": 0.458,
+          "outcome": 0.655,
+          "funded": true,
+          "slashed": 0.0
+        },
+        {
+          "round_id": 3,
+          "voter": "sybil6",
+          "candidate": "r3c3",
+          "confidence": 0.905,
+          "bond": 0.453,
+          "outcome": 0.396,
+          "funded": false,
+          "slashed": 0.0
+        },
+        {
+          "round_id": 4,
+          "voter": "sybil6",
+          "candidate": "r4c0",
+          "confidence": 0.75,
+          "bond": 0.375,
+          "outcome": 0.454,
+          "funded": false,
+          "slashed": 0.0
+        },
+        {
+          "round_id": 4,
+          "voter": "sybil6",
+          "candidate": "r4c1",
+          "confidence": 0.866,
+          "bond": 0.433,
+          "outcome": 0.954,
+          "funded": true,
+          "slashed": 0.0
+        },
+        {
+          "round_id": 4,
+          "voter": "sybil6",
+          "candidate": "r4c2",
+          "confidence": 0.835,
+          "bond": 0.417,
+          "outcome": 0.876,
+          "funded": true,
+          "slashed": 0.0
+        },
+        {
+          "round_id": 4,
+          "voter": "sybil6",
+          "candidate": "r4c3",
+          "confidence": 1.0,
+          "bond": 0.5,
+          "outcome": 0.263,
+          "funded": false,
+          "slashed": 0.0
+        },
+        {
+          "round_id": 5,
+          "voter": "sybil6",
+          "candidate": "r5c0",
+          "confidence": 0.92,
+          "bond": 0.46,
+          "outcome": 0.423,
+          "funded": false,
+          "slashed": 0.0
+        },
+        {
+          "round_id": 5,
+          "voter": "sybil6",
+          "candidate": "r5c1",
+          "confidence": 0.899,
+          "bond": 0.449,
+          "outcome": 0.212,
+          "funded": false,
+          "slashed": 0.0
+        },
+        {
+          "round_id": 5,
+          "voter": "sybil6",
+          "candidate": "r5c2",
+          "confidence": 0.77,
+          "bond": 0.385,
+          "outcome": 0.539,
+          "funded": true,
+          "slashed": 0.0
+        },
+        {
+          "round_id": 5,
+          "voter": "sybil6",
+          "candidate": "r5c3",
+          "confidence": 0.891,
+          "bond": 0.446,
+          "outcome": 0.73,
+          "funded": true,
+          "slashed": 0.0
+        },
+        {
+          "round_id": 6,
+          "voter": "sybil6",
+          "candidate": "r6c0",
+          "confidence": 0.769,
+          "bond": 0.385,
+          "outcome": 0.729,
+          "funded": false,
+          "slashed": 0.0
+        },
+        {
+          "round_id": 6,
+          "voter": "sybil6",
+          "candidate": "r6c1",
+          "confidence": 0.873,
+          "bond": 0.437,
+          "outcome": 0.673,
+          "funded": true,
+          "slashed": 0.0
+        },
+        {
+          "round_id": 6,
+          "voter": "sybil6",
+          "candidate": "r6c2",
+          "confidence": 1.0,
+          "bond": 0.5,
+          "outcome": 0.984,
+          "funded": true,
+          "slashed": 0.0
+        },
+        {
+          "round_id": 6,
+          "voter": "sybil6",
+          "candidate": "r6c3",
+          "confidence": 0.78,
+          "bond": 0.39,
+          "outcome": 0.098,
+          "funded": false,
+          "slashed": 0.0
+        }
+      ]
+    }
+  ],
+  "trajectories": {
+    "mira": [
+      {
+        "round": 1,
+        "raw_weight": 0.276667,
+        "share": 0.341363,
+        "cap": 5.0,
+        "calibration": 0.722,
+        "trust": 1.0
+      },
+      {
+        "round": 2,
+        "raw_weight": 0.402301,
+        "share": 0.368171,
+        "cap": 5.0,
+        "calibration": 0.8072,
+        "trust": 1.0
+      },
+      {
+        "round": 3,
+        "raw_weight": 0.46059,
+        "share": 0.356066,
+        "cap": 5.0,
+        "calibration": 0.8519,
+        "trust": 1.0
+      },
+      {
+        "round": 4,
+        "raw_weight": 0.49069,
+        "share": 0.354211,
+        "cap": 5.0,
+        "calibration": 0.8789,
+        "trust": 1.0
+      },
+      {
+        "round": 5,
+        "raw_weight": 0.513067,
+        "share": 0.351646,
+        "cap": 5.0,
+        "calibration": 0.8975,
+        "trust": 1.0
+      },
+      {
+        "round": 6,
+        "raw_weight": 0.522925,
+        "share": 0.352542,
+        "cap": 5.0,
+        "calibration": 0.9114,
+        "trust": 1.0
+      }
+    ],
+    "praxis": [
+      {
+        "round": 1,
+        "raw_weight": 0.276667,
+        "share": 0.341363,
+        "cap": 5.0,
+        "calibration": 0.7212,
+        "trust": 1.0
+      },
+      {
+        "round": 2,
+        "raw_weight": 0.401837,
+        "share": 0.367747,
+        "cap": 5.0,
+        "calibration": 0.8064,
+        "trust": 1.0
+      },
+      {
+        "round": 3,
+        "raw_weight": 0.460147,
+        "share": 0.355724,
+        "cap": 5.0,
+        "calibration": 0.85,
+        "trust": 1.0
+      },
+      {
+        "round": 4,
+        "raw_weight": 0.489615,
+        "share": 0.353436,
+        "cap": 5.0,
+        "calibration": 0.8783,
+        "trust": 1.0
+      },
+      {
+        "round": 5,
+        "raw_weight": 0.512728,
+        "share": 0.351413,
+        "cap": 5.0,
+        "calibration": 0.8973,
+        "trust": 1.0
+      },
+      {
+        "round": 6,
+        "raw_weight": 0.522775,
+        "share": 0.352441,
+        "cap": 5.0,
+        "calibration": 0.911,
+        "trust": 1.0
+      }
+    ],
+    "sybil1": [
+      {
+        "round": 1,
+        "raw_weight": 0.042857,
+        "share": 0.052879,
+        "cap": 1.4643,
+        "calibration": 0.5745,
+        "trust": 0.0
+      },
+      {
+        "round": 2,
+        "raw_weight": 0.048738,
+        "share": 0.044603,
+        "cap": 1.6583,
+        "calibration": 0.6953,
+        "trust": 0.0
+      },
+      {
+        "round": 3,
+        "raw_weight": 0.062935,
+        "share": 0.048653,
+        "cap": 2.1269,
+        "calibration": 0.7307,
+        "trust": 0.0
+      },
+      {
+        "round": 4,
+        "raw_weight": 0.068021,
+        "share": 0.049102,
+        "cap": 2.2947,
+        "calibration": 0.7608,
+        "trust": 0.0
+      },
+      {
+        "round": 5,
+        "raw_weight": 0.073432,
+        "share": 0.050329,
+        "cap": 2.4732,
+        "calibration": 0.767,
+        "trust": 0.0
+      },
+      {
+        "round": 6,
+        "raw_weight": 0.07391,
+        "share": 0.049828,
+        "cap": 2.489,
+        "calibration": 0.7697,
+        "trust": 0.0
+      }
+    ],
+    "sybil2": [
+      {
+        "round": 1,
+        "raw_weight": 0.042857,
+        "share": 0.052879,
+        "cap": 1.4643,
+        "calibration": 0.5406,
+        "trust": 0.0
+      },
+      {
+        "round": 2,
+        "raw_weight": 0.045866,
+        "share": 0.041975,
+        "cap": 1.5636,
+        "calibration": 0.6677,
+        "trust": 0.0
+      },
+      {
+        "round": 3,
+        "raw_weight": 0.060439,
+        "share": 0.046723,
+        "cap": 2.0445,
+        "calibration": 0.7073,
+        "trust": 0.0
+      },
+      {
+        "round": 4,
+        "raw_weight": 0.065847,
+        "share": 0.047533,
+        "cap": 2.2229,
+        "calibration": 0.7338,
+        "trust": 0.0
+      },
+      {
+        "round": 5,
+        "raw_weight": 0.070823,
+        "share": 0.048541,
+        "cap": 2.3872,
+        "calibration": 0.7389,
+        "trust": 0.0
+      },
+      {
+        "round": 6,
+        "raw_weight": 0.071202,
+        "share": 0.048002,
+        "cap": 2.3997,
+        "calibration": 0.7542,
+        "trust": 0.0
+      }
+    ],
+    "sybil3": [
+      {
+        "round": 1,
+        "raw_weight": 0.042857,
+        "share": 0.052879,
+        "cap": 1.4643,
+        "calibration": 0.5763,
+        "trust": 0.0
+      },
+      {
+        "round": 2,
+        "raw_weight": 0.048892,
+        "share": 0.044744,
+        "cap": 1.6634,
+        "calibration": 0.688,
+        "trust": 0.0
+      },
+      {
+        "round": 3,
+        "raw_weight": 0.062279,
+        "share": 0.048146,
+        "cap": 2.1052,
+        "calibration": 0.7313,
+        "trust": 0.0
+      },
+      {
+        "round": 4,
+        "raw_weight": 0.068082,
+        "share": 0.049146,
+        "cap": 2.2967,
+        "calibration": 0.7504,
+        "trust": 0.0
+      },
+      {
+        "round": 5,
+        "raw_weight": 0.072422,
+        "share": 0.049637,
+        "cap": 2.4399,
+        "calibration": 0.7609,
+        "trust": 0.0
+      },
+      {
+        "round": 6,
+        "raw_weight": 0.073317,
+        "share": 0.049428,
+        "cap": 2.4695,
+        "calibration": 0.7727,
+        "trust": 0.0
+      }
+    ],
+    "sybil4": [
+      {
+        "round": 1,
+        "raw_weight": 0.042857,
+        "share": 0.052879,
+        "cap": 1.4643,
+        "calibration": 0.5541,
+        "trust": 0.0
+      },
+      {
+        "round": 2,
+        "raw_weight": 0.047007,
+        "share": 0.043019,
+        "cap": 1.6012,
+        "calibration": 0.6808,
+        "trust": 0.0
+      },
+      {
+        "round": 3,
+        "raw_weight": 0.061621,
+        "share": 0.047637,
+        "cap": 2.0835,
+        "calibration": 0.7212,
+        "trust": 0.0
+      },
+      {
+        "round": 4,
+        "raw_weight": 0.067141,
+        "share": 0.048467,
+        "cap": 2.2657,
+        "calibration": 0.7387,
+        "trust": 0.0
+      },
+      {
+        "round": 5,
+        "raw_weight": 0.071295,
+        "share": 0.048864,
+        "cap": 2.4027,
+        "calibration": 0.7475,
+        "trust": 0.0
+      },
+      {
+        "round": 6,
+        "raw_weight": 0.072029,
+        "share": 0.04856,
+        "cap": 2.427,
+        "calibration": 0.7599,
+        "trust": 0.0
+      }
+    ],
+    "sybil5": [
+      {
+        "round": 1,
+        "raw_weight": 0.042857,
+        "share": 0.052879,
+        "cap": 1.4643,
+        "calibration": 0.5825,
+        "trust": 0.0
+      },
+      {
+        "round": 2,
+        "raw_weight": 0.04942,
+        "share": 0.045228,
+        "cap": 1.6809,
+        "calibration": 0.7026,
+        "trust": 0.0
+      },
+      {
+        "round": 3,
+        "raw_weight": 0.063598,
+        "share": 0.049165,
+        "cap": 2.1487,
+        "calibration": 0.7454,
+        "trust": 0.0
+      },
+      {
+        "round": 4,
+        "raw_weight": 0.069389,
+        "share": 0.05009,
+        "cap": 2.3398,
+        "calibration": 0.7668,
+        "trust": 0.0
+      },
+      {
+        "round": 5,
+        "raw_weight": 0.074008,
+        "share": 0.050723,
+        "cap": 2.4923,
+        "calibration": 0.7787,
+        "trust": 0.0
+      },
+      {
+        "round": 6,
+        "raw_weight": 0.075033,
+        "share": 0.050585,
+        "cap": 2.5261,
+        "calibration": 0.7773,
+        "trust": 0.0
+      }
+    ],
+    "sybil6": [
+      {
+        "round": 1,
+        "raw_weight": 0.042857,
+        "share": 0.052879,
+        "cap": 1.4643,
+        "calibration": 0.5733,
+        "trust": 0.0
+      },
+      {
+        "round": 2,
+        "raw_weight": 0.04864,
+        "share": 0.044513,
+        "cap": 1.6551,
+        "calibration": 0.6843,
+        "trust": 0.0
+      },
+      {
+        "round": 3,
+        "raw_weight": 0.061943,
+        "share": 0.047886,
+        "cap": 2.0941,
+        "calibration": 0.7145,
+        "trust": 0.0
+      },
+      {
+        "round": 4,
+        "raw_weight": 0.066517,
+        "share": 0.048016,
+        "cap": 2.245,
+        "calibration": 0.7384,
+        "trust": 0.0
+      },
+      {
+        "round": 5,
+        "raw_weight": 0.07127,
+        "share": 0.048847,
+        "cap": 2.4019,
+        "calibration": 0.7483,
+        "trust": 0.0
+      },
+      {
+        "round": 6,
+        "raw_weight": 0.072108,
+        "share": 0.048613,
+        "cap": 2.4296,
+        "calibration": 0.7656,
+        "trust": 0.0
+      }
+    ]
+  },
+  "metrics": {
+    "time_to_trust": {
+      "sybil1": 1,
+      "sybil2": 1,
+      "sybil3": 1,
+      "sybil4": 1,
+      "sybil5": 1,
+      "sybil6": 1
+    },
+    "adversarial_pids": [
+      "sybil1",
+      "sybil2",
+      "sybil3",
+      "sybil4",
+      "sybil5",
+      "sybil6"
+    ],
+    "peak_adversarial_share": 0.3173,
+    "peak_adversarial_round": 1,
+    "adversary_committed_a_payout": true,
+    "founder_share_by_round": [
+      0.6827,
+      0.7359,
+      0.7118,
+      0.7076,
+      0.7031,
+      0.705
+    ],
+    "rounds": 6,
+    "delegate_floor": 0.01
+  }
+}

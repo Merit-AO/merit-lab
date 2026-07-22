@@ -1,0 +1,426 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Merit AO — Observatory</title>
+<style>
+:root{ color-scheme:light;
+  --plane:#f4f2ec; --surface:#fbfaf6; --sunken:#efece3;
+  --ink:#161513; --ink-2:#54524c; --muted:#8a877f;
+  --grid:#e4e1d7; --rule:#cbc7ba; --border:rgba(22,21,19,.12);
+  --signal:#177d59; --earned:#b07d05; --earned-soft:#d99e12;
+  --clip:#c85a2e; --slash:#c22f2f; --human:#3a6ea5; --track:#e7e3d8;
+  --edge:rgba(22,21,19,.20); --real:#177d59; --sim:#8046c9;
+  --shadow:0 1px 0 rgba(22,21,19,.04),0 2px 10px rgba(22,21,19,.05);
+  --mono:ui-monospace,"SF Mono","JetBrains Mono",Menlo,Consolas,monospace;
+  --sans:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif; }
+@media (prefers-color-scheme:dark){:root:where(:not([data-theme="light"])){ color-scheme:dark;
+  --plane:#0c0d0f; --surface:#16181c; --sunken:#101215; --ink:#f3f2ee; --ink-2:#c3c2b7; --muted:#8f8d86;
+  --grid:#26282c; --rule:#34373c; --border:rgba(255,255,255,.11); --signal:#20b47f; --earned:#e3a520;
+  --earned-soft:#c98500; --clip:#e07a4c; --slash:#e05353; --human:#6ea8e0; --track:#23252a;
+  --edge:rgba(255,255,255,.18); --real:#20b47f; --sim:#b98cf0;
+  --shadow:0 1px 0 rgba(0,0,0,.4),0 4px 16px rgba(0,0,0,.35);}}
+:root[data-theme="dark"]{ color-scheme:dark;
+  --plane:#0c0d0f; --surface:#16181c; --sunken:#101215; --ink:#f3f2ee; --ink-2:#c3c2b7; --muted:#8f8d86;
+  --grid:#26282c; --rule:#34373c; --border:rgba(255,255,255,.11); --signal:#20b47f; --earned:#e3a520;
+  --earned-soft:#c98500; --clip:#e07a4c; --slash:#e05353; --human:#6ea8e0; --track:#23252a;
+  --edge:rgba(255,255,255,.18); --real:#20b47f; --sim:#b98cf0;
+  --shadow:0 1px 0 rgba(0,0,0,.4),0 4px 16px rgba(0,0,0,.35);}
+*{box-sizing:border-box}
+body{margin:0;background:var(--plane);color:var(--ink);font-family:var(--sans);line-height:1.5;
+  -webkit-font-smoothing:antialiased;padding:clamp(14px,3.5vw,36px)}
+.wrap{max-width:1220px;margin:0 auto;display:flex;flex-direction:column;gap:18px}
+code{font-family:var(--mono);font-size:.9em;background:var(--sunken);padding:1px 5px;border-radius:5px}
+a{color:var(--signal)}
+header{display:flex;flex-direction:column;gap:8px}
+.eyebrow{font-family:var(--mono);font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--earned);font-weight:600}
+h1{font-family:var(--mono);font-weight:600;font-size:clamp(21px,3.2vw,30px);margin:0;letter-spacing:-.01em;line-height:1.15}
+.lede{color:var(--ink-2);max-width:74ch;font-size:14.5px;margin:0}.lede b{color:var(--ink);font-weight:600}
+.panel{background:var(--surface);border:1px solid var(--border);border-radius:12px;box-shadow:var(--shadow)}
+.panel-h{display:flex;align-items:baseline;justify-content:space-between;gap:12px;padding:13px 17px;border-bottom:1px solid var(--grid);flex-wrap:wrap}
+.panel-h h2{font-family:var(--mono);font-size:12px;letter-spacing:.16em;text-transform:uppercase;margin:0;font-weight:600}
+.panel-h .sub{font-family:var(--mono);font-size:11px;color:var(--muted)}
+/* source bar */
+.srcbar{display:flex;flex-wrap:wrap;gap:12px 18px;padding:14px 17px;align-items:center}
+.field{display:flex;flex-direction:column;gap:5px}
+.field label{font-family:var(--mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+select,button{font-family:var(--mono);font-size:13px;padding:7px 10px;background:var(--sunken);color:var(--ink);border:1px solid var(--rule);border-radius:8px;cursor:pointer}
+select:focus-visible,button:focus-visible{outline:2px solid var(--earned);outline-offset:2px}
+.badge{font-family:var(--mono);font-size:10px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;padding:4px 9px;border-radius:999px}
+.badge.real{background:color-mix(in oklab,var(--real) 16%,transparent);color:var(--real);border:1px solid color-mix(in oklab,var(--real) 45%,transparent)}
+.badge.sim{background:color-mix(in oklab,var(--sim) 15%,transparent);color:var(--sim);border:1px solid color-mix(in oklab,var(--sim) 45%,transparent)}
+.provenance{font-family:var(--mono);font-size:11.5px;padding:9px 17px;border-top:1px solid var(--grid);color:var(--ink-2);display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.provenance.sim{background:color-mix(in oklab,var(--sim) 6%,transparent)}
+.provenance.real{background:color-mix(in oklab,var(--real) 5%,transparent)}
+/* scrubber */
+.scrub{display:flex;align-items:center;gap:12px;padding:12px 17px;flex-wrap:wrap}
+.scrub input[type=range]{flex:1;min-width:160px;accent-color:var(--signal)}
+.scrub .rnd{font-family:var(--mono);font-size:13px;color:var(--earned);font-weight:600;white-space:nowrap}
+.topics{display:flex;gap:6px;flex-wrap:wrap}
+.pill{font-family:var(--mono);font-size:11px;padding:4px 10px;border-radius:999px;border:1px solid var(--rule);background:var(--sunken);color:var(--ink-2);cursor:pointer}
+.pill[aria-pressed=true]{background:var(--signal);border-color:var(--signal);color:#fff}
+/* split */
+.split{display:grid;grid-template-columns:1.4fr 1fr;gap:18px}
+@media(max-width:880px){.split{grid-template-columns:1fr}}
+#stage{width:100%;height:440px;display:block}
+.csvg text{font-family:var(--mono)}
+.node{cursor:pointer}
+.clegend{display:flex;flex-wrap:wrap;gap:13px;padding:10px 17px;border-top:1px solid var(--grid);font-family:var(--mono);font-size:11px;color:var(--ink-2)}
+.clegend i{display:inline-block;width:10px;height:10px;border-radius:50%;margin-right:6px;vertical-align:-1px}
+.clegend .edge{width:15px;height:0;border-top:2px solid var(--edge);border-radius:0}
+/* detail */
+.detail{padding:15px 17px;display:flex;flex-direction:column;gap:13px;min-height:440px}
+.dhead{display:flex;align-items:center;gap:11px}
+.dhead .dot{width:32px;height:32px;border-radius:50%;flex:0 0 auto}
+.dhead .nm{font-family:var(--mono);font-weight:600;font-size:16px}
+.dhead .role{font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:9px}
+.stat{background:var(--sunken);border:1px solid var(--border);border-radius:9px;padding:9px 11px}
+.stat .k{font-family:var(--mono);font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.stat .v{font-family:var(--mono);font-size:17px;font-weight:600;color:var(--earned);font-variant-numeric:tabular-nums;margin-top:3px}
+.sect-t{font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin:2px 0 -2px}
+.nu{display:grid;grid-template-columns:70px 1fr 36px;gap:8px;align-items:center;margin:4px 0}
+.nu .k{font-family:var(--mono);font-size:10px;color:var(--ink-2)}
+.nu .bar{height:6px;border-radius:3px;background:var(--track);overflow:hidden}
+.nu .bar>i{display:block;height:100%;border-radius:3px;background:var(--signal)}
+.nu.mod .bar>i{background:var(--earned)}
+.nu .n{font-family:var(--mono);font-size:10.5px;color:var(--ink-2);text-align:right;font-variant-numeric:tabular-nums}
+.agg{font-family:var(--mono);font-size:11px;color:var(--ink-2);background:var(--sunken);border:1px solid var(--border);border-radius:8px;padding:9px 11px;line-height:1.55}
+.agg b{color:var(--earned)}
+.spark{width:100%;height:52px;display:block}
+.moves{font-size:12.5px;color:var(--ink-2);line-height:1.55}.moves b{color:var(--ink)}
+.empty{display:flex;flex-direction:column;gap:8px;align-items:flex-start;justify-content:center;flex:1;color:var(--muted);font-size:13px}
+/* tally */
+.scroll{overflow-x:auto}
+table{border-collapse:collapse;width:100%;font-family:var(--mono);font-size:12px}
+th,td{padding:8px 11px;text-align:right;font-variant-numeric:tabular-nums;border-bottom:1px solid var(--grid);white-space:nowrap}
+th{font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+td.cand,th.cand{text-align:left;white-space:normal;min-width:180px;max-width:280px}
+.cand .t{color:var(--ink);font-weight:600;font-family:var(--sans);font-size:12.5px}.cand .m{font-size:10px;color:var(--muted)}
+.tp{font-family:var(--mono);font-size:9px;padding:1px 6px;border-radius:999px;background:var(--sunken);border:1px solid var(--rule);color:var(--ink-2)}
+.scorecell{position:relative}.scorebar{position:absolute;left:0;top:0;bottom:0;background:color-mix(in oklab,var(--earned) 18%,transparent);border-right:2px solid var(--earned)}
+.scorecell span{position:relative}
+.pay{color:var(--earned);font-weight:600}.pay.zero{color:var(--muted);font-weight:400}
+tr.funded td{background:color-mix(in oklab,var(--earned) 6%,transparent)}
+/* metrics */
+.mgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;padding:15px 17px}
+.metric{background:var(--sunken);border:1px solid var(--border);border-radius:10px;padding:11px 13px}
+.metric .k{font-family:var(--mono);font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.metric .v{font-family:var(--mono);font-size:20px;font-weight:600;color:var(--ink);font-variant-numeric:tabular-nums;margin-top:4px}
+.metric .v.warn{color:var(--clip)} .metric .v.ok{color:var(--signal)}
+.verdict{padding:0 17px 15px;font-size:13px;color:var(--ink-2);line-height:1.6}
+.tip{position:fixed;pointer-events:none;background:var(--ink);color:var(--plane);font-family:var(--mono);font-size:11px;padding:6px 9px;border-radius:7px;opacity:0;transition:opacity .1s;z-index:20;line-height:1.5;box-shadow:var(--shadow)}
+.foot{font-family:var(--mono);font-size:11px;color:var(--muted);padding:10px 0 2px;display:flex;flex-wrap:wrap;gap:6px 16px}
+.tglbtn{position:fixed;top:12px;right:12px;z-index:30}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+<button class="tglbtn" id="themebtn" title="Toggle theme">◐</button>
+<div class="wrap">
+  <header>
+    <div class="eyebrow">Merit AO · observatory</div>
+    <h1>The constellation of earned trust</h1>
+    <p class="lede">Every circle is a participant; its <b>size is earned NQG weight</b>. This renders the
+      <b>real engine's output</b> — never a re-implementation — so what you see is what the mechanism
+      actually computed. Switch between <b>live merit-state rounds</b> and <b>simulations</b> (synthetic
+      identities on the same engine) to test what-ifs. Real and simulated are always labeled, never blurred.</p>
+  </header>
+
+  <section class="panel">
+    <div class="panel-h"><h2>Source</h2><span class="sub" id="srcsub"></span></div>
+    <div class="srcbar">
+      <div class="field"><label for="src">Dataset</label><select id="src"></select></div>
+      <div class="field"><label>Provenance</label><span id="badge" class="badge real">real</span></div>
+      <button id="reload">↻ reload</button>
+    </div>
+    <div class="provenance" id="prov"></div>
+    <div class="scrub">
+      <span class="rnd" id="rndlabel">round —</span>
+      <input type="range" id="scrub" min="1" max="1" value="1" step="1">
+      <div class="topics" id="topics"></div>
+    </div>
+  </section>
+
+  <div class="split">
+    <section class="panel">
+      <div class="panel-h"><h2>Trust constellation</h2><span class="sub">size = weight · lines = vouches</span></div>
+      <svg id="stage" class="csvg" viewBox="0 0 680 440" role="img" aria-label="Participant trust constellation"></svg>
+      <div class="clegend">
+        <span><i style="background:var(--earned)"></i>founder / anchor</span>
+        <span><i style="background:var(--signal)"></i>earned</span>
+        <span><i style="background:var(--human)"></i>human</span>
+        <span><i style="background:var(--muted)"></i>newcomer</span>
+        <span><i style="background:var(--clip)"></i>sybil / adversary</span>
+        <span><i class="edge"></i>vouch</span>
+      </div>
+    </section>
+    <section class="panel">
+      <div class="panel-h"><h2>Agent detail</h2><span class="sub" id="dsel">— select</span></div>
+      <div class="detail" id="detail"></div>
+    </section>
+  </div>
+
+  <section class="panel" id="metricspanel" hidden>
+    <div class="panel-h"><h2>Research read-outs</h2><span class="sub">the two clocks</span></div>
+    <div class="mgrid" id="mgrid"></div>
+    <div class="verdict" id="verdict"></div>
+  </section>
+
+  <section class="panel">
+    <div class="panel-h"><h2>The tally</h2><span class="sub">score = Σ share·confidence → allocate → cap-authorize</span></div>
+    <div class="scroll"><table id="tally"><thead></thead><tbody></tbody></table></div>
+  </section>
+
+  <div class="foot">
+    <span>renders precomputed engine output — no client-side NQG math (no drift)</span>
+    <span id="footsrc"></span>
+  </div>
+</div>
+<div class="tip" id="tip"></div>
+
+<script>
+const $=s=>document.querySelector(s), fmt=(x,d=3)=>Number(x||0).toFixed(d), pct=x=>(x*100).toFixed(1)+"%";
+const RAW_BASE="https://raw.githubusercontent.com/Merit-AO/merit-state/main/";
+const KIND_COLOR={founder:"var(--earned)",human:"var(--human)",newcomer:"var(--muted)",sybil:"var(--clip)",ring:"var(--clip)",sleeper:"var(--clip)",agent:"var(--signal)"};
+
+// ---------- theme toggle ----------
+$("#themebtn").onclick=()=>{const r=document.documentElement;
+  const cur=r.getAttribute("data-theme")|| (matchMedia("(prefers-color-scheme:dark)").matches?"dark":"light");
+  r.setAttribute("data-theme",cur==="dark"?"light":"dark");draw();};
+
+// ---------- state ----------
+let DS=null, SEL=null, TOPIC=null, RID=1, SOURCES=[];
+const Q=new URLSearchParams(location.search); let firstLoad=true;
+function pushUrl(){ const q=new URLSearchParams();
+  q.set("src",$("#src").value); if(SEL)q.set("sel",SEL); if(TOPIC)q.set("topic",TOPIC);
+  if(DS&&DS.rounds.length>1)q.set("round",RID);
+  history.replaceState(null,"","?"+q.toString()); }
+
+// ---------- source list ----------
+async function loadSources(){
+  SOURCES=[{id:"real",label:"REAL · live merit-state",kind:"real"}];
+  try{
+    const idx=await (await fetch("../results/index.json",{cache:"no-store"})).json();
+    for(const s of idx) SOURCES.push({id:s.file,label:"SIM · "+s.name,kind:"sim",desc:s.description,file:s.file});
+  }catch(e){/* no results dir yet */}
+  const sel=$("#src");sel.innerHTML=SOURCES.map(s=>`<option value="${s.id}">${s.label}</option>`).join("");
+  // default to the first sim if present (real is currently sparse), else real; ?src overrides
+  const firstSim=SOURCES.find(s=>s.kind==="sim"), want=Q.get("src");
+  sel.value=(want && SOURCES.some(s=>s.id===want)) ? want : (firstSim?firstSim.id:"real");
+}
+
+// ---------- loaders (produce the common shape DS) ----------
+async function loadReal(){
+  const meta=await fetch(RAW_BASE+"meta.json",{cache:"no-store"}).then(r=>r.ok?r.json():{last_round_id:0}).catch(()=>({last_round_id:0}));
+  const last=meta.last_round_id||0;
+  const rounds=[];
+  for(let i=1;i<=last;i++){
+    const rl=await fetch(RAW_BASE+`round-${String(i).padStart(4,"0")}.json`,{cache:"no-store"}).then(r=>r.ok?r.json():null).catch(()=>null);
+    if(rl) rounds.push(rl);
+  }
+  const parts=await fetch(RAW_BASE+"participants.json",{cache:"no-store"}).then(r=>r.ok?r.json():[]).catch(()=>[]);
+  const participants={}; (parts||[]).forEach(p=>participants[p.pid]=p);
+  const agents=(parts||[]).map(p=>({pid:p.pid,is_founder:p.is_founder,is_human:p.is_human,
+    kind:p.is_founder?"founder":(p.is_human?"human":"agent")}));
+  const topics=[...new Set(rounds.flatMap(r=>Object.values(r.candidate_topics||{})))];
+  return {kind:"real",label:"REAL · merit-state",rounds,participants,agents,
+    topics:topics.length?topics:["general"],metrics:null,scenario:null,note:last?null:"no completed rounds in merit-state yet — round 1 is live on SafeMolt, pending tally"};
+}
+async function loadSim(file){
+  const t=await fetch("../results/"+file,{cache:"no-store"}).then(r=>r.json());
+  const participants={}; (t.participants_final||[]).forEach(p=>participants[p.pid]=p);
+  return {kind:"sim",label:"SIM · "+(t.scenario?.name||file),rounds:t.rounds,participants,
+    agents:t.agents,topics:t.topics||["general"],metrics:t.metrics,scenario:t.scenario,trajectories:t.trajectories};
+}
+
+async function load(){
+  const id=$("#src").value, src=SOURCES.find(s=>s.id===id);
+  $("#detail").innerHTML=`<div class="empty">loading…</div>`;
+  try{ DS = src.kind==="real" ? await loadReal() : await loadSim(src.file); }
+  catch(e){ $("#detail").innerHTML=`<div class="empty">failed to load: ${e.message}</div>`; return; }
+  RID=Math.max(1,DS.rounds.length); TOPIC=null; SEL=null;
+  const sc=$("#scrub"); sc.max=Math.max(1,DS.rounds.length); sc.value=RID; sc.disabled=DS.rounds.length<2;
+  // badge + provenance
+  const isSim=DS.kind==="sim";
+  $("#badge").className="badge "+(isSim?"sim":"real"); $("#badge").textContent=isSim?"simulated":"real";
+  const prov=$("#prov"); prov.className="provenance "+(isSim?"sim":"real");
+  prov.innerHTML=isSim
+    ? `<span class="badge sim">simulated</span> Synthetic identities on the <b>real engine</b> — not live state. <b>${DS.scenario?.name}</b>: ${DS.scenario?.description||""}`
+    : `<span class="badge real">real</span> Live from <a href="https://github.com/Merit-AO/merit-state" target="_blank" rel="noopener">Merit-AO/merit-state</a>. ${DS.note?("<b>"+DS.note+"</b>"):""}`;
+  $("#srcsub").textContent=`${DS.rounds.length} round${DS.rounds.length!==1?"s":""} · ${DS.agents.length} participants`;
+  $("#footsrc").textContent=isSim?("sim seed "+(DS.scenario?.seed)):("merit-state · "+DS.rounds.length+" rounds");
+  $("#metricspanel").hidden=!isSim || !DS.metrics;
+  // topics
+  $("#topics").innerHTML=`<button class="pill" data-t="" aria-pressed="true">all topics</button>`+
+    DS.topics.map(t=>`<button class="pill" data-t="${t}" aria-pressed="false">${t}</button>`).join("");
+  $("#topics").querySelectorAll(".pill").forEach(b=>b.onclick=()=>{TOPIC=b.dataset.t||null;
+    $("#topics").querySelectorAll(".pill").forEach(x=>x.setAttribute("aria-pressed",x===b));draw();});
+  if(firstLoad){
+    const qs=Q.get("sel"); if(qs) SEL=qs;
+    const qr=+Q.get("round"); if(qr) RID=Math.min(Math.max(1,qr),DS.rounds.length||1);
+    const qt=Q.get("topic"); if(qt&&DS.topics.includes(qt)){TOPIC=qt;
+      $("#topics").querySelectorAll(".pill").forEach(x=>x.setAttribute("aria-pressed",x.dataset.t===qt));}
+    $("#scrub").value=RID; firstLoad=false;
+  }
+  draw();
+}
+
+// ---------- current round helpers ----------
+function curRound(){ return DS.rounds[RID-1]||null; }
+function rawW(){ const r=curRound(); return r?r.raw_weights||{}:{}; }
+function shareW(){ const r=curRound(); return r?r.weights||{}:{}; }
+function caps(){ const r=curRound(); return r?r.caps||{}:{}; }
+function kindOf(pid){ const a=DS.agents.find(a=>a.pid===pid); return a?a.kind:"agent"; }
+function edgesOf(p){ // general + selected topic
+  const e=Object.assign({},p.vouches||{});
+  const tv=p.topic_vouches||{};
+  if(TOPIC){ for(const[k,w]of Object.entries(tv[TOPIC]||{})) e[k]=(e[k]||0)+w; }
+  else { for(const top of Object.values(tv)) for(const[k,w]of Object.entries(top)) e[k]=(e[k]||0)+w; }
+  return e;
+}
+
+// ---------- constellation ----------
+function drawStage(){
+  const svg=$("#stage"), CX=340, CY=220, rw=rawW(), sh=shareW(), cp=caps();
+  const P=DS.agents.map(a=>a.pid).filter(pid=>DS.participants[pid]||rw[pid]!==undefined);
+  if(!P.length){ svg.innerHTML=`<text x="340" y="220" text-anchor="middle" fill="var(--muted)" font-size="13">no round data to plot</text>`; return; }
+  const mx=Math.max(...P.map(p=>rw[p]||0),1e-6);
+  const founders=P.filter(p=>kindOf(p)==="founder"), others=P.filter(p=>kindOf(p)!=="founder");
+  const pos={};
+  founders.forEach((p,i)=>pos[p]=[CX+(founders.length===1?0:(i/(founders.length-1)-.5)*110),CY]);
+  others.forEach((p,i)=>{const ang=-Math.PI/2+(i/Math.max(1,others.length))*2*Math.PI+0.35;
+    const close=(rw[p]||0)/mx; const R=205-close*95;
+    pos[p]=[CX+Math.cos(ang)*R, CY+Math.sin(ang)*R*0.8];});
+  const rad=p=>{const f=Math.sqrt((rw[p]||0)/mx); return 8+f*42;};
+  let edges="",nodes="";
+  P.forEach(pid=>{const pt=DS.participants[pid]; if(!pt)return;
+    for(const[t,w]of Object.entries(edgesOf(pt))){ if(pos[pid]&&pos[t]){
+      edges+=`<line x1="${pos[pid][0]}" y1="${pos[pid][1]}" x2="${pos[t][0]}" y2="${pos[t][1]}" stroke="var(--edge)" stroke-width="${Math.min(3,1+w)}"/>`;}}});
+  P.forEach(pid=>{const[x,y]=pos[pid],r=rad(pid),col=KIND_COLOR[kindOf(pid)]||"var(--signal)",on=SEL===pid;
+    const lab=pid.length>9?pid.slice(0,7)+"…":pid;
+    nodes+=`<g class="node" data-pid="${pid}" transform="translate(${x},${y})">
+      <circle r="${r}" fill="${col}" fill-opacity="${on?.95:.72}" stroke="${on?'var(--ink)':col}" stroke-width="${on?2.5:1}"/>
+      <text text-anchor="middle" y="${r+13}" font-size="11" fill="var(--ink)" font-weight="600">${lab}</text>
+      <text text-anchor="middle" y="4" font-size="${Math.min(13,r*0.6)}" fill="var(--surface)" font-weight="700">${((sh[pid]||0)*100).toFixed(0)}</text></g>`;});
+  svg.innerHTML=edges+nodes;
+  svg.querySelectorAll(".node").forEach(g=>{
+    g.onclick=()=>{SEL=g.dataset.pid;draw();};
+    g.onmousemove=e=>{const pid=g.dataset.pid;
+      $("#tip").innerHTML=`<b>${pid}</b><br>weight ${fmt(rw[pid],4)} · share ${pct(sh[pid]||0)}<br>cap ${fmt(cp[pid],2)} MERIT`;
+      const t=$("#tip");t.style.opacity=1;t.style.left=(e.clientX+14)+"px";t.style.top=(e.clientY+14)+"px";};
+    g.onmouseleave=()=>$("#tip").style.opacity=0;
+  });
+}
+
+// ---------- agent detail ----------
+function sparkline(pid){
+  // weight trajectory across rounds (precomputed per-round raw_weights)
+  const ys=DS.rounds.map(r=>(r.raw_weights||{})[pid]||0); if(ys.length<2) return "";
+  const mx=Math.max(...ys,1e-6), W=260,H=48,pad=4;
+  const pts=ys.map((y,i)=>[pad+i/(ys.length-1)*(W-2*pad), H-pad-(y/mx)*(H-2*pad)]);
+  const d=pts.map((p,i)=>(i?"L":"M")+p[0].toFixed(1)+" "+p[1].toFixed(1)).join(" ");
+  const last=pts[pts.length-1];
+  return `<svg class="spark" viewBox="0 0 ${W} ${H}" preserveAspectRatio="none">
+    <path d="${d}" fill="none" stroke="var(--signal)" stroke-width="2"/>
+    <circle cx="${last[0].toFixed(1)}" cy="${last[1].toFixed(1)}" r="3" fill="var(--earned)"/></svg>`;
+}
+function drawDetail(){
+  const d=$("#detail"), r=curRound();
+  if(!SEL){ d.innerHTML=`<div class="empty">Click a circle to inspect a participant's weight, neurons, trust and history.</div>`; $("#dsel").textContent="— select"; return; }
+  const pt=DS.participants[SEL]||{pid:SEL}, rw=rawW(), sh=shareW(), cp=caps();
+  const col=KIND_COLOR[kindOf(SEL)]||"var(--signal)"; $("#dsel").textContent=SEL;
+  const nz=(r&&r.neurons&&r.neurons[SEL])||null;   // sim carries the neuron snapshot; real doesn't
+  const nu=(k,v,mod)=>`<div class="nu ${mod?'mod':''}"><span class="k">${k}</span><div class="bar"><i style="width:${Math.max(2,(v||0)*100)}%"></i></div><span class="n">${fmt(v,2)}</span></div>`;
+  let neuronHtml, aggHtml="";
+  if(nz){
+    neuronHtml=nu("trust",nz.trust)+nu("competence",nz.competence)+nu("payout",nz.payout)+nu("reasoning",nz.reasoning)+nu("calibration",nz.calibration,1)+nu("stake",nz.stake,1);
+    aggHtml=`<div class="agg">base = .45·${fmt(nz.trust,2)} + .20·${fmt(nz.competence,2)} + .25·${fmt(nz.payout,2)} + .10·${fmt(nz.reasoning,2)}<br>
+      modulator = calibration ${fmt(nz.calibration,2)} × stake ${fmt(nz.stake,2)}<br>
+      raw weight = base × modulator = <b>${fmt(rw[SEL],4)}</b></div>`;
+  } else {
+    neuronHtml=nu("competence",pt.competence)+nu("reasoning",pt.reasoning_survival)+nu("stake_bal",Math.min(1,(pt.stake_balance||0)/15));
+    aggHtml=`<div class="agg">Neuron decomposition (calibration/trust) is computed by the engine and not stored in
+      real round-logs yet — showing raw participant state. Weight/cap below are the engine's precomputed values.</div>`;
+  }
+  // topic trust
+  const tv=pt.topic_vouches||{}; const tvItems=Object.entries(tv).flatMap(([tp,e])=>Object.entries(e).map(([t,w])=>`${t}·${tp} ${fmt(w,1)}`));
+  // vote/outcome history (this round)
+  const votes=(r&&r.votes||[]).filter(v=>v.voter===SEL);
+  const cmeta=(r&&r.candidates)? Object.fromEntries(r.candidates.map(c=>[c.candidate_id,c])):{};
+  const acts=votes.length? votes.map(v=>{const c=cmeta[v.candidate];
+    return `<div style="display:flex;justify-content:space-between;gap:8px;border-bottom:1px dashed var(--grid);padding:3px 0;font-family:var(--mono);font-size:11.5px">
+      <span>${c?c.title.slice(0,34):v.candidate}</span><span>conf ${fmt(v.confidence,2)}${v.outcome!=null?` · out ${fmt(v.outcome,2)}`:""}</span></div>`;}).join("")
+    : `<div style="font-family:var(--mono);font-size:11px;color:var(--muted)">no votes this round</div>`;
+  d.innerHTML=`
+    <div class="dhead"><div class="dot" style="background:${col}"></div>
+      <div><div class="nm">${SEL}</div><div class="role">${kindOf(SEL)}${pt.is_founder?" · anchor":""}</div></div></div>
+    <div class="stats">
+      <div class="stat"><div class="k">raw weight</div><div class="v">${fmt(rw[SEL],3)}</div></div>
+      <div class="stat"><div class="k">voting share</div><div class="v">${pct(sh[SEL]||0)}</div></div>
+      <div class="stat"><div class="k">spend cap</div><div class="v">${fmt(cp[SEL],2)}</div></div></div>
+    <div><div class="sect-t">Neuron breakdown</div>${neuronHtml}</div>
+    ${aggHtml}
+    ${DS.rounds.length>1?`<div><div class="sect-t">Weight trajectory (round 1 → ${DS.rounds.length})</div>${sparkline(SEL)}</div>`:""}
+    ${tvItems.length?`<div><div class="sect-t">Topic trust</div><div class="moves">${tvItems.join(" · ")}</div></div>`:""}
+    <div><div class="sect-t">Votes this round</div>${acts}</div>`;
+}
+
+// ---------- tally ----------
+function drawTally(){
+  const r=curRound();
+  if(!r){ $("#tally thead").innerHTML=""; $("#tally tbody").innerHTML=`<tr><td style="text-align:left;color:var(--muted);font-family:var(--mono)">no rounds tallied yet</td></tr>`; return; }
+  const cmeta=(r.candidates)? Object.fromEntries(r.candidates.map(c=>[c.candidate_id,c])):{};
+  let cands=Object.keys(r.scores||{});
+  if(TOPIC) cands=cands.filter(c=>(r.candidate_topics||{})[c]===TOPIC);
+  const voters=[...new Set((r.votes||[]).map(v=>v.voter))].filter(v=>(shareW()[v]||0)>0.001).slice(0,8);
+  const mx=Math.max(...cands.map(c=>r.scores[c]),1e-6);
+  const vByCand={}; (r.votes||[]).forEach(v=>{(vByCand[v.candidate]=vByCand[v.candidate]||{})[v.voter]=v.confidence;});
+  $("#tally thead").innerHTML=`<tr><th class="cand">contribution</th><th>topic</th>`+
+    voters.map(v=>`<th>${v.length>7?v.slice(0,6)+"…":v}</th>`).join("")+`<th>score</th><th>paid</th></tr>`;
+  $("#tally tbody").innerHTML=cands.sort((a,b)=>r.scores[b]-r.scores[a]).map(c=>{
+    const cm=cmeta[c], paid=r.paid?.[c]||0, isW=paid>0, topic=(r.candidate_topics||{})[c]||"—";
+    const cells=voters.map(v=>`<td>${vByCand[c]?.[v]!=null?fmt(vByCand[c][v],2):"·"}</td>`).join("");
+    return `<tr class="${isW?'funded':''}"><td class="cand"><div class="t">${cm?cm.title:c}</div><div class="m">${cm?cm.author:""}${cm&&cm.true_quality!=null?` · q=${fmt(cm.true_quality,2)}`:""}</div></td>
+      <td><span class="tp">${topic}</span></td>${cells}
+      <td class="scorecell"><div class="scorebar" style="width:${(r.scores[c]/mx)*100}%"></div><span>${fmt(r.scores[c],3)}</span></td>
+      <td class="pay ${paid>0?'':'zero'}">${paid>0?fmt(paid,3):'—'}${r.clipped?.[c]?' ✂':''}</td></tr>`;
+  }).join("")||`<tr><td class="cand" style="color:var(--muted)">no candidates in this topic</td></tr>`;
+}
+
+// ---------- metrics (sim) ----------
+function drawMetrics(){
+  if(!DS.metrics){ $("#metricspanel").hidden=true; return; }
+  $("#metricspanel").hidden=false; const m=DS.metrics;
+  const ttt=Object.entries(m.time_to_trust||{}).filter(([,r])=>r).map(([p,r])=>`${p}:r${r}`).join(" · ")||"—";
+  const capWarn=(m.peak_adversarial_share||0)>=0.15;
+  $("#mgrid").innerHTML=`
+    <div class="metric"><div class="k">time-to-trust</div><div class="v" style="font-size:14px">${ttt}</div></div>
+    <div class="metric"><div class="k">peak adversary share</div><div class="v ${capWarn?'warn':'ok'}">${pct(m.peak_adversarial_share||0)}</div></div>
+    <div class="metric"><div class="k">adversary won a payout</div><div class="v ${m.adversary_committed_a_payout?'warn':'ok'}">${m.adversary_committed_a_payout?'yes':'no'}</div></div>
+    <div class="metric"><div class="k">rounds</div><div class="v">${m.rounds}</div></div>`;
+  let v=[];
+  if(m.adversarial_pids?.length){ v.push(capWarn
+    ? `⚠️ Adversaries (${m.adversarial_pids.join(", ")}) peaked at <b>${pct(m.peak_adversarial_share)}</b> share${m.adversary_committed_a_payout?" and committed a payout":""} — inspect the faucet + tether.`
+    : `✅ Capture resisted — adversaries peaked at ${pct(m.peak_adversarial_share)} and never committed a payout.`);}
+  const climbers=Object.entries(m.time_to_trust||{}).filter(([,r])=>r).map(([p])=>p);
+  if(climbers.length) v.push(`✅ Earned ascension — ${climbers.join(", ")} climbed past the delegate floor.`);
+  $("#verdict").innerHTML=v.join("<br>")||"—";
+}
+
+// ---------- draw all ----------
+function draw(){
+  const r=curRound();
+  $("#rndlabel").textContent = DS.rounds.length? `round ${RID} / ${DS.rounds.length}` : "no rounds";
+  drawStage(); drawDetail(); drawTally(); drawMetrics(); pushUrl();
+}
+
+$("#src").onchange=load;
+$("#reload").onclick=load;
+$("#scrub").oninput=e=>{RID=+e.target.value;draw();};
+
+(async()=>{ await loadSources(); await load(); })();
+</script>
+</body>
+</html>

@@ -143,6 +143,21 @@ tr.funded td{background:color-mix(in oklab,var(--earned) 6%,transparent)}
     </div>
   </section>
 
+  <section class="panel" id="whatif" hidden>
+    <div class="panel-h"><h2>What-if lab</h2><span class="sub">live · runs on the real engine — no drift</span></div>
+    <div class="srcbar" style="align-items:flex-end">
+      <div class="field"><label for="wi-preset">base preset</label><select id="wi-preset"></select></div>
+      <div class="field"><label>faucet stake <b id="wi-faucetv" style="color:var(--earned)">2.0</b></label><input type="range" id="wi-faucet" min="0" max="4" step="0.5" value="2" style="width:120px;accent-color:var(--signal)"></div>
+      <div class="field"><label>W_trust <b id="wi-wtrustv" style="color:var(--earned)">0.45</b></label><input type="range" id="wi-wtrust" min="0" max="0.8" step="0.05" value="0.45" style="width:120px;accent-color:var(--signal)"></div>
+      <div class="field"><label>rounds <b id="wi-roundsv" style="color:var(--earned)">8</b></label><input type="range" id="wi-rounds" min="2" max="20" step="1" value="8" style="width:110px;accent-color:var(--signal)"></div>
+      <div class="field"><label for="wi-topk">top-k</label><input type="number" id="wi-topk" min="1" max="8" value="2" style="width:58px"></div>
+      <div class="field"><label for="wi-pool">pool</label><input type="number" id="wi-pool" min="0.5" max="5" step="0.5" value="1" style="width:58px"></div>
+      <div class="field"><label for="wi-slash">slash</label><input type="checkbox" id="wi-slash" style="width:18px;height:18px;accent-color:var(--signal)"></div>
+      <button id="wi-run">▶ run on engine</button>
+      <span id="wi-status" class="sub"></span>
+    </div>
+  </section>
+
   <div class="split">
     <section class="panel">
       <div class="panel-h"><h2>Trust constellation</h2><span class="sub">size = weight · lines = vouches</span></div>
@@ -193,6 +208,14 @@ $("#themebtn").onclick=()=>{const r=document.documentElement;
 // ---------- state ----------
 let DS=null, SEL=null, TOPIC=null, RID=1, SOURCES=[];
 const Q=new URLSearchParams(location.search); let firstLoad=true;
+let SERVER=Q.get("server")||"", SERVER_OK=false;   // "" = same-origin (served by the sim server)
+async function probeServer(){
+  try{ const h=await fetch(SERVER+"/api/health",{cache:"no-store"}); SERVER_OK=h.ok; }
+  catch(e){ SERVER_OK=false; }
+  $("#whatif").hidden=!SERVER_OK;
+  if(SERVER_OK){ try{const j=await (await fetch(SERVER+"/api/health")).json();
+    $("#wi-preset").innerHTML=(j.presets||["baseline"]).map(p=>`<option>${p}</option>`).join("");}catch(e){} }
+}
 function pushUrl(){ const q=new URLSearchParams();
   q.set("src",$("#src").value); if(SEL)q.set("sel",SEL); if(TOPIC)q.set("topic",TOPIC);
   if(DS&&DS.rounds.length>1)q.set("round",RID);
@@ -228,18 +251,21 @@ async function loadReal(){
   return {kind:"real",label:"REAL · merit-state",rounds,participants,agents,
     topics:topics.length?topics:["general"],metrics:null,scenario:null,note:last?null:"no completed rounds in merit-state yet — round 1 is live on SafeMolt, pending tally"};
 }
-async function loadSim(file){
-  const t=await fetch("../results/"+file,{cache:"no-store"}).then(r=>r.json());
+function traceToDS(t){
   const participants={}; (t.participants_final||[]).forEach(p=>participants[p.pid]=p);
-  return {kind:"sim",label:"SIM · "+(t.scenario?.name||file),rounds:t.rounds,participants,
+  return {kind:"sim",label:"SIM · "+(t.scenario?.name||"what-if"),rounds:t.rounds,participants,
     agents:t.agents,topics:t.topics||["general"],metrics:t.metrics,scenario:t.scenario,trajectories:t.trajectories};
 }
+async function loadSim(file){ return traceToDS(await fetch("../results/"+file,{cache:"no-store"}).then(r=>r.json())); }
 
 async function load(){
   const id=$("#src").value, src=SOURCES.find(s=>s.id===id);
   $("#detail").innerHTML=`<div class="empty">loading…</div>`;
   try{ DS = src.kind==="real" ? await loadReal() : await loadSim(src.file); }
   catch(e){ $("#detail").innerHTML=`<div class="empty">failed to load: ${e.message}</div>`; return; }
+  applyDS();
+}
+function applyDS(){
   RID=Math.max(1,DS.rounds.length); TOPIC=null; SEL=null;
   const sc=$("#scrub"); sc.max=Math.max(1,DS.rounds.length); sc.value=RID; sc.disabled=DS.rounds.length<2;
   // badge + provenance
@@ -420,7 +446,26 @@ $("#src").onchange=load;
 $("#reload").onclick=load;
 $("#scrub").oninput=e=>{RID=+e.target.value;draw();};
 
-(async()=>{ await loadSources(); await load(); })();
+// ---------- what-if (live, authoritative) ----------
+[["wi-faucet","wi-faucetv",2],["wi-wtrust","wi-wtrustv",2],["wi-rounds","wi-roundsv",0]].forEach(([id,vid,dec])=>{
+  const el=$("#"+id); el.oninput=()=>$("#"+vid).textContent=(+el.value).toFixed(dec);});
+$("#wi-run").onclick=async()=>{
+  const preset=$("#wi-preset").value;
+  const params={faucet_stake:+$("#wi-faucet").value, W_TRUST:+$("#wi-wtrust").value,
+    rounds:+$("#wi-rounds").value, top_k:+$("#wi-topk").value, pool:+$("#wi-pool").value, slash:$("#wi-slash").checked};
+  $("#wi-status").textContent="running on the engine…";
+  try{
+    const t=await fetch(SERVER+"/api/sim",{method:"POST",headers:{"Content-Type":"application/json"},
+      body:JSON.stringify({preset,params})}).then(r=>r.json());
+    if(t.error) throw new Error(t.error);
+    t.scenario=Object.assign({},t.scenario,{name:"what-if: "+preset,
+      description:"live run · "+Object.entries(params).map(([k,v])=>k+"="+v).join(" · ")});
+    DS=traceToDS(t); applyDS();
+    $("#wi-status").textContent=`✓ ${DS.rounds.length} rounds · peak adv ${((t.metrics.peak_adversarial_share||0)*100).toFixed(1)}%`;
+  }catch(e){ $("#wi-status").textContent="error: "+e.message; }
+};
+
+(async()=>{ await loadSources(); await load(); probeServer(); })();
 </script>
 </body>
 </html>

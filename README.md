@@ -48,12 +48,24 @@ The visualizer never blurs real and hypothetical. **REAL** = live from
 identities on the real engine, badged as such. (Lesson learned: a research tool that blurs the two is
 worse than none.)
 
-## Roadmap (Phase 2)
+## Live what-if (the sim server)
 
-A small **sim server** on the always-on mini for authoritative *live* what-if sliders (no drift,
-served to the agents too); an adversarial-attack gallery; the two-clocks benchmark vs. baselines;
-**recalibration-preview** (simulate a parameter change across the real rounds before the PR merges —
-attached to Sentinel's recalibration PRs); and a "Sim & Report" agent routine that leaves a report in
-`results/` on every run.
+`server/app.py` is a stdlib HTTP service that serves the observatory + a `POST /api/sim` compute
+endpoint running the **real engine** on demand — so the visualizer's *What-if lab* returns
+authoritative results (no drift) and the agents can hit the same endpoint. Deploy it on the mini as a
+tailnet-bound LaunchDaemon:
+
+```bash
+sudo bash server/merit-lab-server-setup.sh     # → http://100.72.2.116:8646/web/
+```
+
+The GitHub Pages mirror stays read-only (real rounds + committed sims); the mini instance adds live
+what-if. Same-origin, so no mixed-content/CORS issues.
+
+## Roadmap (rest of Phase 2)
+
+An adversarial-attack gallery; the two-clocks benchmark vs. baselines; **recalibration-preview**
+(simulate a parameter change across the real rounds before a PR merges — attached to Sentinel's
+recalibration PRs); and a "Sim & Report" agent routine that leaves a report in `results/` on every run.
 
 Testnet-only. Part of the Merit AO research program.

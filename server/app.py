@@ -26,7 +26,7 @@ ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.insert(0, ROOT)
 sys.path.insert(0, os.path.join(ROOT, "engine"))
 
-from sim import metrics                     # noqa: E402
+from sim import metrics, report             # noqa: E402
 from sim.engine import run_scenario         # noqa: E402
 from sim.presets import PRESETS             # noqa: E402
 from sim.scenario import Overrides, Scenario  # noqa: E402
@@ -101,17 +101,28 @@ class Handler(SimpleHTTPRequestHandler):
             return self._json(200, {"ok": True, "presets": sorted(PRESETS)})
         return super().do_GET()
 
+    def _run(self, sc):
+        trace = run_scenario(sc)
+        trace["metrics"] = metrics.summarize(trace, delegate_floor=sc.delegate_floor_raw)
+        return trace
+
     def do_POST(self):
-        if self.path.split("?")[0] != "/api/sim":
-            return self._json(404, {"error": "not found"})
+        path = self.path.split("?")[0]
         try:
             n = int(self.headers.get("Content-Length", 0))
             payload = json.loads(self.rfile.read(n) or b"{}")
-            sc = build_scenario(payload)
-            with _lock:
-                trace = run_scenario(sc)
-                trace["metrics"] = metrics.summarize(trace, delegate_floor=sc.delegate_floor_raw)
-            return self._json(200, trace)
+            if path == "/api/sim":
+                with _lock:
+                    return self._json(200, self._run(build_scenario(payload)))
+            if path == "/api/diff":
+                # recalibration-preview: same base under current (a) vs proposed (b) params
+                base = {k: payload[k] for k in ("preset", "scenario") if k in payload}
+                with _lock:
+                    ta = self._run(build_scenario({**base, "params": payload.get("a") or {}}))
+                    tb = self._run(build_scenario({**base, "params": payload.get("b") or {}}))
+                return self._json(200, {"current": ta, "proposed": tb,
+                                        "report": report.diff_markdown(ta, tb)})
+            return self._json(404, {"error": "not found"})
         except Exception as e:
             return self._json(400, {"error": str(e)})
 

@@ -113,6 +113,30 @@ tr.funded td{background:color-mix(in oklab,var(--earned) 6%,transparent)}
 .tip{position:fixed;pointer-events:none;background:var(--ink);color:var(--plane);font-family:var(--mono);font-size:11px;padding:6px 9px;border-radius:7px;opacity:0;transition:opacity .1s;z-index:20;line-height:1.5;box-shadow:var(--shadow)}
 .foot{font-family:var(--mono);font-size:11px;color:var(--muted);padding:10px 0 2px;display:flex;flex-wrap:wrap;gap:6px 16px}
 .tglbtn{position:fixed;top:12px;right:12px;z-index:30}
+/* tabs */
+.tabs{display:flex;gap:5px;border-bottom:1px solid var(--rule);margin-bottom:-2px}
+.tab{font-family:var(--mono);font-size:12.5px;letter-spacing:.05em;padding:10px 18px;background:none;border:1px solid transparent;border-bottom:none;border-radius:10px 10px 0 0;color:var(--muted);cursor:pointer;display:flex;align-items:center;gap:8px;font-weight:600}
+.tab i{width:8px;height:8px;border-radius:50%;background:currentColor;display:inline-block;flex:0 0 auto}
+.tab[aria-selected=false] i{opacity:.35}
+.tab[aria-selected=false]:hover{color:var(--ink-2)}
+#tab-real[aria-selected=true]{color:var(--real);background:var(--surface);border-color:var(--border);border-bottom-color:var(--surface);box-shadow:var(--shadow)}
+#tab-sim[aria-selected=true]{color:var(--sim);background:var(--surface);border-color:var(--border);border-bottom-color:var(--surface);box-shadow:var(--shadow)}
+/* audit log */
+.auditbar{display:flex;gap:6px;flex-wrap:wrap;padding:11px 17px;align-items:center;border-bottom:1px solid var(--grid)}
+.auditlist{max-height:360px;overflow-y:auto}
+.aud{display:grid;grid-template-columns:120px 82px 1fr auto;gap:12px;align-items:baseline;padding:9px 17px;border-bottom:1px solid var(--grid);font-family:var(--mono);font-size:12px}
+.aud:hover{background:var(--sunken)}
+.aud .when{color:var(--ink-2);font-size:10.5px;white-space:nowrap}
+.aud .ev{font-size:9px;letter-spacing:.08em;text-transform:uppercase;font-weight:700;padding:2px 7px;border-radius:999px;justify-self:start;white-space:nowrap}
+.aud .ev.ballot{color:var(--human);background:color-mix(in oklab,var(--human) 15%,transparent)}
+.aud .ev.tally{color:var(--earned);background:color-mix(in oklab,var(--earned) 15%,transparent)}
+.aud .ev.integrity{color:var(--sim);background:color-mix(in oklab,var(--sim) 16%,transparent)}
+.aud .ev.settle{color:var(--signal);background:color-mix(in oklab,var(--signal) 15%,transparent)}
+.aud .ev.other{color:var(--muted);background:var(--sunken)}
+.aud .msg{color:var(--ink);white-space:normal;line-height:1.4}
+.aud .msg a{color:inherit;text-decoration:none}.aud .msg a:hover{text-decoration:underline}
+.aud .sha{color:var(--muted);font-size:10.5px;white-space:nowrap}
+@media(max-width:640px){.aud{grid-template-columns:1fr auto;gap:4px 10px}.aud .when{grid-column:1/-1}}
 @media (prefers-reduced-motion:reduce){*{transition:none!important}}
 </style>
 </head>
@@ -124,18 +148,42 @@ tr.funded td{background:color-mix(in oklab,var(--earned) 6%,transparent)}
     <h1>The constellation of earned trust</h1>
     <p class="lede">Every circle is a participant; its <b>size is earned NQG weight</b>. This renders the
       <b>real engine's output</b> — never a re-implementation — so what you see is what the mechanism
-      actually computed. Switch between <b>live merit-state rounds</b> and <b>simulations</b> (synthetic
-      identities on the same engine) to test what-ifs. Real and simulated are always labeled, never blurred.</p>
+      actually computed. Two modes, kept strictly apart: <b style="color:var(--real)">Real state</b> is the
+      live merit-state audit trail; <b style="color:var(--sim)">Simulation</b> is synthetic identities on the
+      same engine for what-ifs. Real and simulated are never blurred.</p>
   </header>
 
-  <section class="panel">
-    <div class="panel-h"><h2>Source</h2><span class="sub" id="srcsub"></span></div>
+  <div class="tabs" role="tablist" aria-label="Data source">
+    <button class="tab" id="tab-real" role="tab" aria-selected="true"><i></i>Real state</button>
+    <button class="tab" id="tab-sim" role="tab" aria-selected="false"><i></i>Simulation</button>
+  </div>
+
+  <!-- REAL mode: source + round filter -->
+  <section class="panel modreal" id="realsrc">
+    <div class="panel-h"><h2>Real state · live merit-state</h2><span class="sub" id="srcsub-real"></span></div>
     <div class="srcbar">
-      <div class="field"><label for="src">Dataset</label><select id="src"></select></div>
-      <div class="field"><label>Provenance</label><span id="badge" class="badge real">real</span></div>
+      <div class="field"><label>Source</label><span class="badge real">live audit trail</span></div>
+      <div class="field"><label for="roundsel">Round filter</label><select id="roundsel"></select></div>
+      <button id="reload-real">↻ reload</button>
+      <div class="field" style="margin-left:auto"><label>&nbsp;</label>
+        <a href="https://github.com/Merit-AO/merit-state" target="_blank" rel="noopener" style="font-family:var(--mono);font-size:11px">Merit-AO/merit-state ↗</a></div>
+    </div>
+    <div class="provenance real" id="prov"></div>
+  </section>
+
+  <!-- SIM mode: scenario dataset selector -->
+  <section class="panel modsim" id="simsrc" hidden>
+    <div class="panel-h"><h2>Simulation · synthetic identities on the real engine</h2><span class="sub" id="srcsub-sim"></span></div>
+    <div class="srcbar">
+      <div class="field"><label for="src">Scenario dataset</label><select id="src"></select></div>
       <button id="reload">↻ reload</button>
     </div>
-    <div class="provenance" id="prov"></div>
+    <div class="provenance sim" id="prov-sim"></div>
+  </section>
+
+  <!-- shared: round scrubber + topic lens + provenance badge -->
+  <section class="panel">
+    <div class="panel-h"><h2 id="viewh">View</h2><span id="badge" class="badge real">real</span></div>
     <div class="scrub">
       <span class="rnd" id="rndlabel">round —</span>
       <input type="range" id="scrub" min="1" max="1" value="1" step="1">
@@ -143,7 +191,21 @@ tr.funded td{background:color-mix(in oklab,var(--earned) 6%,transparent)}
     </div>
   </section>
 
-  <section class="panel" id="whatif" hidden>
+  <!-- REAL mode: audit log with event + round filters -->
+  <section class="panel modreal" id="auditpanel">
+    <div class="panel-h"><h2>Audit log</h2><span class="sub" id="auditsub">merit-state commit trail — every round-log write</span></div>
+    <div class="auditbar">
+      <button class="pill" data-af="" aria-pressed="true">all events</button>
+      <button class="pill" data-af="ballot" aria-pressed="false">ballot</button>
+      <button class="pill" data-af="tally" aria-pressed="false">tally</button>
+      <button class="pill" data-af="integrity" aria-pressed="false">integrity</button>
+      <button class="pill" data-af="settle" aria-pressed="false">settle</button>
+      <span class="sub" id="auditcount" style="margin-left:auto"></span>
+    </div>
+    <div class="auditlist" id="auditlist"></div>
+  </section>
+
+  <section class="panel modsim" id="whatif" hidden>
     <div class="panel-h"><h2>What-if lab</h2><span class="sub">live · runs on the real engine — no drift</span></div>
     <div class="srcbar" style="align-items:flex-end">
       <div class="field"><label for="wi-preset">base preset</label><select id="wi-preset"></select></div>
@@ -177,7 +239,7 @@ tr.funded td{background:color-mix(in oklab,var(--earned) 6%,transparent)}
     </section>
   </div>
 
-  <section class="panel" id="metricspanel" hidden>
+  <section class="panel modsim" id="metricspanel" hidden>
     <div class="panel-h"><h2>Research read-outs</h2><span class="sub">the two clocks</span></div>
     <div class="mgrid" id="mgrid"></div>
     <div class="verdict" id="verdict"></div>
@@ -211,32 +273,47 @@ $("#themebtn").onclick=()=>{const r=document.documentElement;
 
 // ---------- state ----------
 let DS=null, SEL=null, TOPIC=null, RID=1, SOURCES=[];
+let MODE=null;                       // "real" | "sim" — top-level tab
+let AUDIT=[], AFILTER="", AROUND=0;  // audit-log cache, event-type filter, round filter (0=all)
 const Q=new URLSearchParams(location.search); let firstLoad=true;
 const SERVER="";        // same-origin ONLY — a ?server= param would let a crafted link
 let SERVER_OK=false;    // point a viewer's browser at an attacker endpoint (XSS/exfil)
+const STATE_API="https://api.github.com/repos/Merit-AO/merit-state/commits?per_page=100";
 async function probeServer(){
   try{ const h=await fetch(SERVER+"/api/health",{cache:"no-store"}); SERVER_OK=h.ok; }
   catch(e){ SERVER_OK=false; }
-  $("#whatif").hidden=!SERVER_OK;
+  $("#whatif").hidden = !(SERVER_OK && MODE==="sim");
   if(SERVER_OK){ try{const j=await (await fetch(SERVER+"/api/health")).json();
     $("#wi-preset").innerHTML=(j.presets||["baseline"]).map(p=>`<option>${esc(p)}</option>`).join("");}catch(e){} }
 }
-function pushUrl(){ const q=new URLSearchParams();
-  q.set("src",$("#src").value); if(SEL)q.set("sel",SEL); if(TOPIC)q.set("topic",TOPIC);
+function pushUrl(){ const q=new URLSearchParams(); q.set("mode",MODE);
+  if(MODE==="sim") q.set("src",$("#src").value);
+  if(SEL)q.set("sel",SEL); if(TOPIC)q.set("topic",TOPIC);
   if(DS&&DS.rounds.length>1)q.set("round",RID);
   history.replaceState(null,"","?"+q.toString()); }
 
-// ---------- source list ----------
+// ---------- mode / tabs ----------
+function setMode(m){
+  MODE=m; SEL=null; TOPIC=null;
+  $("#tab-real").setAttribute("aria-selected", m==="real");
+  $("#tab-sim").setAttribute("aria-selected", m==="sim");
+  document.querySelectorAll(".modreal").forEach(el=>el.hidden=(m!=="real"));
+  document.querySelectorAll(".modsim").forEach(el=>el.hidden=(m!=="sim"));
+  if(m==="sim") $("#whatif").hidden=!SERVER_OK;         // still gated on the sim server
+  $("#viewh").textContent = m==="real" ? "Live round view" : "Scenario view";
+  load();
+}
+
+// ---------- source list (SIM datasets only; real is the fixed live trail) ----------
 async function loadSources(){
-  SOURCES=[{id:"real",label:"REAL · live merit-state",kind:"real"}];
+  SOURCES=[];
   try{
     const idx=await (await fetch("../results/index.json",{cache:"no-store"})).json();
     for(const s of idx) SOURCES.push({id:s.file,label:"SIM · "+s.name,kind:"sim",desc:s.description,file:s.file});
   }catch(e){/* no results dir yet */}
-  const sel=$("#src");sel.innerHTML=SOURCES.map(s=>`<option value="${s.id}">${s.label}</option>`).join("");
-  // default to the first sim if present (real is currently sparse), else real; ?src overrides
-  const firstSim=SOURCES.find(s=>s.kind==="sim"), want=Q.get("src");
-  sel.value=(want && SOURCES.some(s=>s.id===want)) ? want : (firstSim?firstSim.id:"real");
+  const sel=$("#src");
+  sel.innerHTML=SOURCES.map(s=>`<option value="${esc(s.id)}">${esc(s.label)}</option>`).join("")||`<option value="">no sim results yet</option>`;
+  const want=Q.get("src"); if(want && SOURCES.some(s=>s.id===want)) sel.value=want;
 }
 
 // ---------- loaders (produce the common shape DS) ----------
@@ -264,23 +341,41 @@ function traceToDS(t){
 async function loadSim(file){ return traceToDS(await fetch("../results/"+file,{cache:"no-store"}).then(r=>r.json())); }
 
 async function load(){
-  const id=$("#src").value, src=SOURCES.find(s=>s.id===id);
   $("#detail").innerHTML=`<div class="empty">loading…</div>`;
-  try{ DS = src.kind==="real" ? await loadReal() : await loadSim(src.file); }
+  try{
+    if(MODE==="real"){ DS=await loadReal(); }
+    else if(!SOURCES.length){
+      DS={kind:"sim",label:"no sims",rounds:[],participants:{},agents:[],topics:["general"],metrics:null,
+        scenario:{name:"no scenario",description:"run a what-if below, or commit a sim to results/"}};
+    } else {
+      const id=$("#src").value, src=SOURCES.find(s=>s.id===id)||SOURCES[0];
+      DS=await loadSim(src.file);
+    }
+  }
   catch(e){ $("#detail").innerHTML=`<div class="empty">failed to load: ${esc(e.message)}</div>`; return; }
   applyDS();
+  if(MODE==="real") loadAuditLog();
 }
 function applyDS(){
   RID=Math.max(1,DS.rounds.length); TOPIC=null; SEL=null;
   const sc=$("#scrub"); sc.max=Math.max(1,DS.rounds.length); sc.value=RID; sc.disabled=DS.rounds.length<2;
-  // badge + provenance
+  // badge + provenance (route to the active mode's provenance strip)
   const isSim=DS.kind==="sim";
   $("#badge").className="badge "+(isSim?"sim":"real"); $("#badge").textContent=isSim?"simulated":"real";
-  const prov=$("#prov"); prov.className="provenance "+(isSim?"sim":"real");
-  prov.innerHTML=isSim
-    ? `<span class="badge sim">simulated</span> Synthetic identities on the <b>real engine</b> — not live state. <b>${esc(DS.scenario?.name)}</b>: ${esc(DS.scenario?.description||"")}`
-    : `<span class="badge real">real</span> Live from <a href="https://github.com/Merit-AO/merit-state" target="_blank" rel="noopener">Merit-AO/merit-state</a>. ${DS.note?("<b>"+esc(DS.note)+"</b>"):""}`;
-  $("#srcsub").textContent=`${DS.rounds.length} round${DS.rounds.length!==1?"s":""} · ${DS.agents.length} participants`;
+  const prov=isSim?$("#prov-sim"):$("#prov");
+  if(prov){ prov.className="provenance "+(isSim?"sim":"real");
+    prov.innerHTML=isSim
+      ? `<span class="badge sim">simulated</span> Synthetic identities on the <b>real engine</b> — not live state. <b>${esc(DS.scenario?.name)}</b>: ${esc(DS.scenario?.description||"")}`
+      : `<span class="badge real">real</span> Live from <a href="https://github.com/Merit-AO/merit-state" target="_blank" rel="noopener">Merit-AO/merit-state</a>. ${DS.note?("<b>"+esc(DS.note)+"</b>"):""}`;
+  }
+  const summ=`${DS.rounds.length} round${DS.rounds.length!==1?"s":""} · ${DS.agents.length} participants`;
+  if($("#srcsub-real")) $("#srcsub-real").textContent=summ;
+  if($("#srcsub-sim")) $("#srcsub-sim").textContent=summ;
+  // round filter dropdown (real mode)
+  const rsel=$("#roundsel");
+  if(rsel){ rsel.innerHTML=`<option value="0">All rounds</option>`+
+      DS.rounds.map((r,i)=>`<option value="${i+1}">round ${i+1}</option>`).join("");
+    rsel.value=String(AROUND||0); }
   $("#footsrc").textContent=isSim?("sim seed "+(DS.scenario?.seed)):("merit-state · "+DS.rounds.length+" rounds");
   $("#metricspanel").hidden=!isSim || !DS.metrics;
   // topics
@@ -440,6 +535,38 @@ function drawMetrics(){
   $("#verdict").innerHTML=v.join("<br>")||"—";
 }
 
+// ---------- audit log (real mode) ----------
+function evType(msg){ const m=(msg||"").toLowerCase();
+  if(m.startsWith("ballot"))return"ballot";
+  if(m.startsWith("tally")||m.startsWith("settle & tally")||m.includes("tally & settle"))return"tally";
+  if(m.startsWith("integrity")||m.includes("integrity")||m.includes("recalib")||m.includes("benchmark"))return"integrity";
+  if(m.startsWith("settle")||m.includes("payout"))return"settle";
+  return"other"; }
+function roundOf(msg){ const m=(msg||"").match(/round[ -]?(\d+)/i); return m?+m[1]:null; }
+async function loadAuditLog(){
+  const list=$("#auditlist"); if(!list) return;
+  list.innerHTML=`<div class="aud"><span class="when">·</span><span></span><span class="msg" style="color:var(--muted)">loading audit trail…</span><span></span></div>`;
+  try{
+    const commits=await (await fetch(STATE_API,{cache:"no-store"})).json();
+    if(!Array.isArray(commits)) throw new Error(commits&&commits.message?commits.message:"unavailable");
+    AUDIT=commits.map(c=>{ const msg=(c.commit.message||"").split("\n")[0];
+      return {sha:c.sha.slice(0,7), url:c.html_url, msg, when:c.commit.author.date, type:evType(msg), round:roundOf(msg)}; });
+  }catch(e){ AUDIT=[]; list.innerHTML=`<div class="aud"><span class="when">·</span><span></span><span class="msg" style="color:var(--muted)">audit trail unavailable — ${esc(e.message)}</span><span></span></div>`; $("#auditcount").textContent=""; return; }
+  renderAudit();
+}
+function renderAudit(){
+  const list=$("#auditlist"); if(!list) return;
+  const rows=AUDIT.filter(a=> (!AFILTER||a.type===AFILTER) && (!AROUND||a.round===AROUND));
+  $("#auditcount").textContent = `${rows.length} event${rows.length!==1?"s":""}`+(AROUND?` · round ${AROUND}`:"")+(AFILTER?` · ${AFILTER}`:"");
+  list.innerHTML = rows.map(a=>{
+    const when=a.when.slice(0,16).replace("T"," ")+"Z";
+    return `<div class="aud"><span class="when">${esc(when)}</span>
+      <span class="ev ${a.type}">${esc(a.type)}</span>
+      <span class="msg"><a href="${esc(a.url)}" target="_blank" rel="noopener">${esc(a.msg)}</a></span>
+      <span class="sha">${esc(a.sha)}${a.round?` · r${a.round}`:""}</span></div>`;
+  }).join("") || `<div class="aud"><span class="when">·</span><span></span><span class="msg" style="color:var(--muted)">no events match this filter</span><span></span></div>`;
+}
+
 // ---------- draw all ----------
 function draw(){
   const r=curRound();
@@ -447,9 +574,25 @@ function draw(){
   drawStage(); drawDetail(); drawTally(); drawMetrics(); pushUrl();
 }
 
+// tabs
+$("#tab-real").onclick=()=>{ if(MODE!=="real")setMode("real"); };
+$("#tab-sim").onclick=()=>{ if(MODE!=="sim")setMode("sim"); };
+// sim dataset
 $("#src").onchange=load;
 $("#reload").onclick=load;
-$("#scrub").oninput=e=>{RID=+e.target.value;draw();};
+$("#reload-real").onclick=load;
+// round filter (real) — also narrows the audit log to that round
+$("#roundsel").onchange=e=>{ AROUND=+e.target.value; RID = AROUND || Math.max(1,DS.rounds.length);
+  $("#scrub").value=RID; renderAudit(); draw(); };
+// scrubber — moves the viewed round; syncs the filter unless "All rounds" is chosen
+$("#scrub").oninput=e=>{ RID=+e.target.value;
+  if(AROUND){ AROUND=RID; if($("#roundsel"))$("#roundsel").value=String(RID); renderAudit(); }
+  draw(); };
+// audit event-type filter
+$("#auditpanel").querySelectorAll(".auditbar .pill").forEach(b=>b.onclick=()=>{
+  AFILTER=b.dataset.af||"";
+  $("#auditpanel").querySelectorAll(".auditbar .pill").forEach(x=>x.setAttribute("aria-pressed",x===b));
+  renderAudit(); });
 
 // ---------- what-if (live, authoritative) ----------
 [["wi-faucet","wi-faucetv",2],["wi-wtrust","wi-wtrustv",2],["wi-rounds","wi-roundsv",0]].forEach(([id,vid,dec])=>{
@@ -470,7 +613,7 @@ $("#wi-run").onclick=async()=>{
   }catch(e){ $("#wi-status").textContent="error: "+e.message; }
 };
 
-(async()=>{ await loadSources(); await load(); probeServer(); })();
+(async()=>{ await loadSources(); await probeServer(); setMode(Q.get("mode")==="sim"?"sim":"real"); })();
 </script>
 </body>
 </html>

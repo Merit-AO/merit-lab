@@ -136,7 +136,23 @@ tr.funded td{background:color-mix(in oklab,var(--earned) 6%,transparent)}
 .aud .msg{color:var(--ink);white-space:normal;line-height:1.4}
 .aud .msg a{color:inherit;text-decoration:none}.aud .msg a:hover{text-decoration:underline}
 .aud .sha{color:var(--muted);font-size:10.5px;white-space:nowrap}
-@media(max-width:640px){.aud{grid-template-columns:1fr auto;gap:4px 10px}.aud .when{grid-column:1/-1}}
+.aud .repo{font-size:9px;letter-spacing:.05em;font-weight:700;padding:2px 6px;border-radius:5px;white-space:nowrap;justify-self:start;border:1px solid transparent}
+.aud .repo.engine{color:var(--earned);border-color:color-mix(in oklab,var(--earned) 40%,transparent);background:color-mix(in oklab,var(--earned) 10%,transparent)}
+.aud .repo.state{color:var(--real);border-color:color-mix(in oklab,var(--real) 40%,transparent);background:color-mix(in oklab,var(--real) 9%,transparent)}
+.aud .repo.lab{color:var(--sim);border-color:color-mix(in oklab,var(--sim) 42%,transparent);background:color-mix(in oklab,var(--sim) 10%,transparent)}
+.aud.pr{background:color-mix(in oklab,var(--earned) 5%,transparent)}
+.aud .prtag{font-size:9px;font-weight:700;color:var(--earned)}
+@media(max-width:640px){.aud{grid-template-columns:1fr auto;gap:4px 10px}.aud .when,.aud .repo{grid-column:auto}}
+/* ballot / safemolt links */
+.ballot{display:flex;flex-direction:column}
+.blink{display:flex;gap:11px;align-items:baseline;padding:9px 17px;border-bottom:1px solid var(--grid);font-size:12.5px}
+.blink:hover{background:var(--sunken)}
+.blink .bt{color:var(--ink);font-weight:600;flex:1;line-height:1.35}.blink .bt a{color:inherit;text-decoration:none}.blink .bt a:hover{text-decoration:underline}
+.blink .btopic{font-family:var(--mono);font-size:9px;padding:2px 7px;border-radius:999px;background:var(--sunken);border:1px solid var(--rule);color:var(--ink-2);white-space:nowrap}
+.blink .bauth{font-family:var(--mono);font-size:10.5px;color:var(--muted);white-space:nowrap}
+.smrow{display:flex;flex-wrap:wrap;gap:8px 14px;padding:12px 17px;align-items:center;border-bottom:1px solid var(--grid);font-family:var(--mono);font-size:11.5px}
+.smrow a{color:var(--signal);text-decoration:none}.smrow a:hover{text-decoration:underline}
+.smrow .vs{margin-left:auto;color:var(--muted)}
 @media (prefers-reduced-motion:reduce){*{transition:none!important}}
 </style>
 </head>
@@ -166,9 +182,18 @@ tr.funded td{background:color-mix(in oklab,var(--earned) 6%,transparent)}
       <div class="field"><label for="roundsel">Round filter</label><select id="roundsel"></select></div>
       <button id="reload-real">↻ reload</button>
       <div class="field" style="margin-left:auto"><label>&nbsp;</label>
-        <a href="https://github.com/Merit-AO/merit-state" target="_blank" rel="noopener" style="font-family:var(--mono);font-size:11px">Merit-AO/merit-state ↗</a></div>
+        <a href="https://www.safemolt.com" target="_blank" rel="noopener" style="font-family:var(--mono);font-size:11px">SafeMolt ↗</a></div>
+      <div class="field"><label>&nbsp;</label>
+        <a href="https://github.com/Merit-AO/merit-state" target="_blank" rel="noopener" style="font-family:var(--mono);font-size:11px">merit-state ↗</a></div>
     </div>
     <div class="provenance real" id="prov"></div>
+  </section>
+
+  <!-- REAL mode: the round ballot, live on SafeMolt -->
+  <section class="panel modreal ballot" id="ballotpanel">
+    <div class="panel-h"><h2>Round ballot · on SafeMolt</h2><span class="sub" id="ballotsub">where voting actually happens</span></div>
+    <div class="smrow" id="smrow"></div>
+    <div id="ballotlist"></div>
   </section>
 
   <!-- SIM mode: scenario dataset selector -->
@@ -191,15 +216,14 @@ tr.funded td{background:color-mix(in oklab,var(--earned) 6%,transparent)}
     </div>
   </section>
 
-  <!-- REAL mode: audit log with event + round filters -->
+  <!-- REAL mode: cross-repo audit log (engine + state + lab) with repo + round filters -->
   <section class="panel modreal" id="auditpanel">
-    <div class="panel-h"><h2>Audit log</h2><span class="sub" id="auditsub">merit-state commit trail — every round-log write</span></div>
+    <div class="panel-h"><h2>Audit log</h2><span class="sub" id="auditsub">every change across the three Merit-AO repos — the mechanism, the record, and this lab</span></div>
     <div class="auditbar">
-      <button class="pill" data-af="" aria-pressed="true">all events</button>
-      <button class="pill" data-af="ballot" aria-pressed="false">ballot</button>
-      <button class="pill" data-af="tally" aria-pressed="false">tally</button>
-      <button class="pill" data-af="integrity" aria-pressed="false">integrity</button>
-      <button class="pill" data-af="settle" aria-pressed="false">settle</button>
+      <button class="pill" data-af="" aria-pressed="true">all repos</button>
+      <button class="pill" data-af="merit-engine" aria-pressed="false">engine · mechanism</button>
+      <button class="pill" data-af="merit-state" aria-pressed="false">state · record</button>
+      <button class="pill" data-af="merit-lab" aria-pressed="false">lab · observatory</button>
       <span class="sub" id="auditcount" style="margin-left:auto"></span>
     </div>
     <div class="auditlist" id="auditlist"></div>
@@ -274,11 +298,15 @@ $("#themebtn").onclick=()=>{const r=document.documentElement;
 // ---------- state ----------
 let DS=null, SEL=null, TOPIC=null, RID=1, SOURCES=[];
 let MODE=null;                       // "real" | "sim" — top-level tab
-let AUDIT=[], AFILTER="", AROUND=0;  // audit-log cache, event-type filter, round filter (0=all)
+let AUDIT=[], AFILTER="", AROUND=0;  // audit-log cache, repo filter (""=all), round filter (0=all)
 const Q=new URLSearchParams(location.search); let firstLoad=true;
 const SERVER="";        // same-origin ONLY — a ?server= param would let a crafted link
 let SERVER_OK=false;    // point a viewer's browser at an attacker endpoint (XSS/exfil)
-const STATE_API="https://api.github.com/repos/Merit-AO/merit-state/commits?per_page=100";
+const GH="https://api.github.com/repos/Merit-AO/";
+const REPOS=["merit-engine","merit-state","merit-lab"];   // mechanism · record · observatory
+const REPO_TAG={"merit-engine":"engine","merit-state":"state","merit-lab":"lab"};
+const SM_POST="https://www.safemolt.com/post/";           // SafeMolt permalink scheme (verified 200)
+const BALLOT_ID="post_1784688119887_6jcdfun";             // round-1 ballot thread on SafeMolt
 async function probeServer(){
   try{ const h=await fetch(SERVER+"/api/health",{cache:"no-store"}); SERVER_OK=h.ok; }
   catch(e){ SERVER_OK=false; }
@@ -354,7 +382,7 @@ async function load(){
   }
   catch(e){ $("#detail").innerHTML=`<div class="empty">failed to load: ${esc(e.message)}</div>`; return; }
   applyDS();
-  if(MODE==="real") loadAuditLog();
+  if(MODE==="real"){ loadAuditLog(); loadBallot(); }
 }
 function applyDS(){
   RID=Math.max(1,DS.rounds.length); TOPIC=null; SEL=null;
@@ -508,7 +536,8 @@ function drawTally(){
   $("#tally tbody").innerHTML=cands.sort((a,b)=>r.scores[b]-r.scores[a]).map(c=>{
     const cm=cmeta[c], paid=r.paid?.[c]||0, isW=paid>0, topic=(r.candidate_topics||{})[c]||"—";
     const cells=voters.map(v=>`<td>${vByCand[c]?.[v]!=null?fmt(vByCand[c][v],2):"·"}</td>`).join("");
-    return `<tr class="${isW?'funded':''}"><td class="cand"><div class="t">${esc(cm?cm.title:c)}</div><div class="m">${esc(cm?cm.author:"")}${cm&&cm.true_quality!=null?` · q=${fmt(cm.true_quality,2)}`:""}</div></td>
+    const tt=esc(cm?cm.title:c), title=/^post_/.test(c)?`<a href="${SM_POST}${encodeURIComponent(c)}" target="_blank" rel="noopener" style="color:inherit">${tt}</a>`:tt;
+    return `<tr class="${isW?'funded':''}"><td class="cand"><div class="t">${title}</div><div class="m">${esc(cm?cm.author:"")}${cm&&cm.true_quality!=null?` · q=${fmt(cm.true_quality,2)}`:""}</div></td>
       <td><span class="tp">${esc(topic)}</span></td>${cells}
       <td class="scorecell"><div class="scorebar" style="width:${(r.scores[c]/mx)*100}%"></div><span>${fmt(r.scores[c],3)}</span></td>
       <td class="pay ${paid>0?'':'zero'}">${paid>0?fmt(paid,3):'—'}${r.clipped?.[c]?' ✂':''}</td></tr>`;
@@ -535,36 +564,73 @@ function drawMetrics(){
   $("#verdict").innerHTML=v.join("<br>")||"—";
 }
 
-// ---------- audit log (real mode) ----------
-function evType(msg){ const m=(msg||"").toLowerCase();
-  if(m.startsWith("ballot"))return"ballot";
-  if(m.startsWith("tally")||m.startsWith("settle & tally")||m.includes("tally & settle"))return"tally";
-  if(m.startsWith("integrity")||m.includes("integrity")||m.includes("recalib")||m.includes("benchmark"))return"integrity";
-  if(m.startsWith("settle")||m.includes("payout"))return"settle";
-  return"other"; }
+// ---------- audit log (real mode) — spans all three Merit-AO repos + open engine PRs ----------
 function roundOf(msg){ const m=(msg||"").match(/round[ -]?(\d+)/i); return m?+m[1]:null; }
 async function loadAuditLog(){
   const list=$("#auditlist"); if(!list) return;
-  list.innerHTML=`<div class="aud"><span class="when">·</span><span></span><span class="msg" style="color:var(--muted)">loading audit trail…</span><span></span></div>`;
-  try{
-    const commits=await (await fetch(STATE_API,{cache:"no-store"})).json();
-    if(!Array.isArray(commits)) throw new Error(commits&&commits.message?commits.message:"unavailable");
-    AUDIT=commits.map(c=>{ const msg=(c.commit.message||"").split("\n")[0];
-      return {sha:c.sha.slice(0,7), url:c.html_url, msg, when:c.commit.author.date, type:evType(msg), round:roundOf(msg)}; });
-  }catch(e){ AUDIT=[]; list.innerHTML=`<div class="aud"><span class="when">·</span><span></span><span class="msg" style="color:var(--muted)">audit trail unavailable — ${esc(e.message)}</span><span></span></div>`; $("#auditcount").textContent=""; return; }
-  renderAudit();
+  list.innerHTML=`<div class="aud"><span class="when">·</span><span></span><span class="msg" style="color:var(--muted)">loading cross-repo audit trail…</span><span></span></div>`;
+  // per-repo commits + the engine's open PRs (so an in-flight recalibration shows with its rationale)
+  const jobs=REPOS.map(r=>fetch(`${GH}${r}/commits?per_page=40`,{cache:"no-store"}).then(x=>x.json()).then(j=>({repo:r,kind:"commit",j})));
+  jobs.push(fetch(`${GH}merit-engine/pulls?state=open&per_page=20`,{cache:"no-store"}).then(x=>x.json()).then(j=>({repo:"merit-engine",kind:"pr",j})));
+  const out=await Promise.allSettled(jobs);
+  const items=[];
+  for(const s of out){ if(s.status!=="fulfilled") continue; const {repo,kind,j}=s.value; if(!Array.isArray(j)) continue;
+    if(kind==="commit") for(const c of j){ const msg=(c.commit.message||"").split("\n")[0];
+      items.push({repo, pr:false, msg, when:c.commit.author.date, url:c.html_url, ref:c.sha.slice(0,7), round:roundOf(msg)}); }
+    else for(const p of j){ items.push({repo, pr:true, msg:p.title, when:p.updated_at||p.created_at, url:p.html_url, ref:"PR #"+p.number, round:roundOf(p.title)}); }
+  }
+  if(!items.length){ AUDIT=[]; list.innerHTML=`<div class="aud"><span class="when">·</span><span></span><span class="msg" style="color:var(--muted)">audit trail unavailable (GitHub API)</span><span></span></div>`; $("#auditcount").textContent=""; return; }
+  items.sort((a,b)=> a.when<b.when?1:a.when>b.when?-1:0);   // newest first (no Date.now needed)
+  AUDIT=items; renderAudit();
 }
 function renderAudit(){
   const list=$("#auditlist"); if(!list) return;
-  const rows=AUDIT.filter(a=> (!AFILTER||a.type===AFILTER) && (!AROUND||a.round===AROUND));
-  $("#auditcount").textContent = `${rows.length} event${rows.length!==1?"s":""}`+(AROUND?` · round ${AROUND}`:"")+(AFILTER?` · ${AFILTER}`:"");
+  const rows=AUDIT.filter(a=> (!AFILTER||a.repo===AFILTER) && (!AROUND||a.round===AROUND));
+  $("#auditcount").textContent = `${rows.length} change${rows.length!==1?"s":""}`+(AFILTER?` · ${REPO_TAG[AFILTER]}`:"")+(AROUND?` · round ${AROUND}`:"");
   list.innerHTML = rows.map(a=>{
-    const when=a.when.slice(0,16).replace("T"," ")+"Z";
-    return `<div class="aud"><span class="when">${esc(when)}</span>
-      <span class="ev ${a.type}">${esc(a.type)}</span>
-      <span class="msg"><a href="${esc(a.url)}" target="_blank" rel="noopener">${esc(a.msg)}</a></span>
-      <span class="sha">${esc(a.sha)}${a.round?` · r${a.round}`:""}</span></div>`;
-  }).join("") || `<div class="aud"><span class="when">·</span><span></span><span class="msg" style="color:var(--muted)">no events match this filter</span><span></span></div>`;
+    const when=a.when.slice(0,16).replace("T"," ")+"Z", tag=REPO_TAG[a.repo];
+    return `<div class="aud ${a.pr?'pr':''}"><span class="when">${esc(when)}</span>
+      <span class="repo ${tag}">${esc(tag)}</span>
+      <span class="msg">${a.pr?'<span class="prtag">PR </span>':''}<a href="${esc(a.url)}" target="_blank" rel="noopener">${esc(a.msg)}</a></span>
+      <span class="sha">${esc(a.ref)}${a.round?` · r${a.round}`:""}</span></div>`;
+  }).join("") || `<div class="aud"><span class="when">·</span><span></span><span class="msg" style="color:var(--muted)">no changes match this filter</span><span></span></div>`;
+}
+
+// ---------- round ballot + SafeMolt links (real mode) ----------
+// round-1's ballot thread id is known; later rounds' thread ids aren't recorded in
+// merit-state, so we deep-link the thread only for r1 and fall back to the feed otherwise.
+const BALLOT_THREAD={1:BALLOT_ID};
+async function findLatestBallot(){
+  // list the repo contents once (no blind 404 probing) and take the highest round.
+  let n=0;
+  try{
+    const files=await (await fetch(`${GH}merit-state/contents`,{cache:"no-store"})).json();
+    if(Array.isArray(files)) for(const f of files){ const m=/^candidates-round(\d+)\.json$/.exec(f.name||""); if(m) n=Math.max(n,+m[1]); }
+  }catch(e){}
+  if(!n) return null;
+  try{ const r=await fetch(`https://raw.githubusercontent.com/Merit-AO/merit-state/main/candidates-round${n}.json`,{cache:"no-store"});
+    if(r.ok){ const j=await r.json(); if(Array.isArray(j)&&j.length) return {round:n,cands:j}; } }catch(e){}
+  return null;
+}
+async function loadBallot(){
+  const row=$("#smrow"), list=$("#ballotlist"); if(!row) return;
+  list.innerHTML=`<div class="blink"><span class="bt" style="color:var(--muted)">loading ballot…</span></div>`;
+  const b=await findLatestBallot();
+  if(!b){ row.innerHTML=`<a href="https://www.safemolt.com" target="_blank" rel="noopener">SafeMolt platform ↗</a><span class="vs">no open ballot in merit-state</span>`;
+    list.innerHTML=`<div class="blink"><span class="bt" style="color:var(--muted)">no open ballot found.</span></div>`; return; }
+  const cands=b.cands, thread=BALLOT_THREAD[b.round];
+  row.innerHTML=`${thread?`<a href="${SM_POST}${thread}" target="_blank" rel="noopener">▶ Round-${b.round} ballot thread ↗</a>`:''}
+    <a href="https://www.safemolt.com" target="_blank" rel="noopener">SafeMolt platform ↗</a>
+    <span class="vs">voting = signed comments on the SafeMolt thread</span>`;
+  $("#ballotsub").textContent=`round ${b.round} · ${cands.length} candidates · voting on SafeMolt`;
+  list.innerHTML=cands.map(c=>{
+    const isPost=/^post_/.test(c.candidate_id||"");
+    const link=isPost?`${SM_POST}${encodeURIComponent(c.candidate_id)}`:(c.url&&/^https?:/.test(c.url)?c.url:null);
+    const title=link?`<a href="${esc(link)}" target="_blank" rel="noopener">${esc(c.title)}</a>`:esc(c.title);
+    return `<div class="blink"><span class="bt">${title}</span>
+      <span class="bauth">${esc(c.author||"")}</span>
+      <span class="btopic">${esc(c.topic||"")}</span></div>`;
+  }).join("");
 }
 
 // ---------- draw all ----------

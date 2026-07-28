@@ -439,7 +439,13 @@ function edgesOf(p){ // general + selected topic
 function drawStage(){
   const svg=$("#stage"), CX=340, CY=220, rw=rawW(), sh=shareW(), cp=caps();
   const P=DS.agents.map(a=>a.pid).filter(pid=>DS.participants[pid]||rw[pid]!==undefined);
-  if(!P.length){ svg.innerHTML=`<text x="340" y="220" text-anchor="middle" fill="var(--muted)" font-size="13">no round data to plot</text>`; return; }
+  if(!P.length){
+    const msg = MODE==="real"
+      ? ["No tallied round yet — the trust constellation renders once a round is settled to",
+         "merit-state. Trust edges are being cast now as signed votes on the SafeMolt ballot."]
+      : ["no round data to plot"];
+    svg.innerHTML = msg.map((t,i)=>`<text x="340" y="${(msg.length>1?200:220)+i*20}" text-anchor="middle" fill="var(--muted)" font-size="13">${t}</text>`).join("");
+    return; }
   const mx=Math.max(...P.map(p=>rw[p]||0),1e-6);
   const founders=P.filter(p=>kindOf(p)==="founder"), others=P.filter(p=>kindOf(p)!=="founder");
   const pos={};
